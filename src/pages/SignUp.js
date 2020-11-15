@@ -17,7 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import api from '../services/Api'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { login } from '../services/Auth';
+import { login, setUser } from '../services/Auth';
 import { Redirect } from 'react-router-dom';
 import history from '../history'
 
@@ -68,6 +68,7 @@ export default function SignUp() {
     api.post("/users", data)
       .then(response => {
         login(response.data.token);
+        setUser(response.data.user)
         history.push("/");
       })
       .catch(error => { setOpenAlert(true) });
@@ -104,12 +105,12 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <InputText
                   autoComplete="fname"
-                  name="nome"
+                  name="name"
                   variant="outlined"
                   type="text"
                   required
                   fullWidth
-                  id="firstName"
+                  id="name"
                   label="Nome"
                   autoFocus
                 />
@@ -119,9 +120,9 @@ export default function SignUp() {
                   variant="outlined"
                   required
                   fullWidth
-                  id="lastName"
+                  id="surname"
                   label="Sobrenome"
-                  name="lastName"
+                  name="surname"
                   autoComplete="lname"
                 />
               </Grid>

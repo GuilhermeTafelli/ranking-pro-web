@@ -1,12 +1,14 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { BrowserRouter, Switch, Route, Redirect, Router } from "react-router-dom"
 import Main from "./pages/Main"
 import SignUp from "./pages/SignUp"
 import SignIn from "./pages/SignIn"
+import RegisterOnEvent from "./pages/RegisterOnEvent"
 import UserProfile from "./pages/UserProfile"
 import history from './history';
 import { isAuthenticated } from "./services/Auth";
-
+import { useDispatch, useSelector } from 'react-redux'
+import Profile from './pages/Profile'
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -20,14 +22,25 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const Routes = () => (
-  <Router history={history}>
-    <Switch>
-      <Route exact path="/" component={Main} />
-      <Route exact path="/signIn" component={SignIn} />
-      <Route exact path="/signUp" component={SignUp} />
-    </Switch>
-  </Router>
-)
+function Routes() { 
+ 
+  const dispatch = useDispatch()
+  const isAuth = useSelector(state => state.isAuthenticated)
+  useEffect(() => {  
+      dispatch({ type: "SET_SESSION", isAuthenticated: isAuthenticated() })
+  });
+
+ 
+  return (
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/" component={Profile} />
+        <Route exact path="/signIn" component={SignIn} />
+        <Route exact path="/signUp" component={SignUp} />
+        <PrivateRoute exact path="/mentoria3ls" component={RegisterOnEvent} />
+      </Switch>
+    </Router>
+  )
+}
 
 export default Routes

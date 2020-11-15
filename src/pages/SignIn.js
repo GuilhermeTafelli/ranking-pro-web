@@ -18,8 +18,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import api from '../services/Api'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { login } from '../services/Auth'
+import { login, setUser } from '../services/Auth'
 import history from '../history'
+import { useDispatch } from 'react-redux'
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -62,15 +64,23 @@ export default function SignIn() {
 
   const [submitLoading, setSubmitLoading] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
+  const dispatch = useDispatch()
 
-  function handleSubmit(data) {
+  async function handleSubmit(data) {
     setSubmitLoading(true)
-    api.post("/auth", data)
-      .then(response => {
-        login(response.data.token);
-        history.push("/");
-      })
-      .catch(error => { setOpenAlert(true) });
+    
+    try {
+      const response = await api.post("/auth", data)
+      
+      await login(response.data.token);
+      await setUser(response.data)
+      await dispatch({ type: 'LOGIN'})
+      await history.push("/");
+    }
+    catch(error){
+      setOpenAlert(true) 
+    };
+
     setSubmitLoading(false)
   }
 

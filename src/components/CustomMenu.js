@@ -22,27 +22,31 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { isAuthenticated, logout } from '../services/Auth'
 import history from '../history'
+import { useSelector, useDispatch } from 'react-redux'
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(4)
+  },
+  menuListItem: {
+    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(0),
   },
   title: {
-    display: "none",
     [theme.breakpoints.up("sm")]: {
-      display: "block"
+      marginRight: "80px"
     }
   },
   inputRoot: {
     color: "inherit"
   },
   sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("lg")]: {
-      display: "flex"
+    display: "flex",
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
     }
   },
   sectionMobile: {
@@ -50,14 +54,20 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       display: "none"
     }
+  },
+  appBar:{
   }
-});
+}));
 
 function CustomMenu() {
 
   const [anchorEl, setAchorEl] = useState(false)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false)
-  const [isAuth, setIsAuth ] = useState(isAuthenticated)
+
+  const isAuth = useSelector(state => state.isAuthenticated)
+  const state = useSelector(state => state)
+  console.log(state, "menu")
+  const dispatch = useDispatch()
 
   function handleProfileMenuOpen(event){
       setAchorEl(event.currentTarget)
@@ -73,37 +83,48 @@ function CustomMenu() {
   };
 
   function handleMobileMenuOpen(event) {
-      setMobileMoreAnchorEl(event.currentTarget)
+    setMobileMoreAnchorEl(event.currentTarget)
   };
 
   function handleSessionClick() {
+    console.log(state)
+
     if (isAuth) {
       logout();
-      setIsAuth(false)
+      dispatch({ type: 'LOGOUT'})
+      console.log(state)
     }
     else history.push("/signIn");
   }
 
+  function handleSignUpClick() {
+      history.push("/signUp");
+  }
 
-    const classes = styles;
+  function toPage(pagePath){
+    history.push(pagePath)
+  }
+
+    const classes = useStyles();
     const isMenuOpen = Boolean(anchorEl);
+    
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const menuId = "primary-search-account-menu";
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      </Menu>
-    );
+    // const menuId = "primary-search-account-menu";
+    // const renderMenu = (
+    //   <Menu
+    //     anchorEl={anchorEl}
+    //     anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    //     id={menuId}
+    //     keepMounted
+    //     transformOrigin={{ vertical: "top", horizontal: "right" }}
+    //     open={isMenuOpen}
+    //     onClose={handleMenuClose}
+    //   >
+    //     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+    //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    //   </Menu>
+    // );
 
     const mobileMenuId = "primary-search-account-menu-mobile";
     const renderMobileMenu = (
@@ -113,23 +134,26 @@ function CustomMenu() {
         onClose={handleMobileMenuClose}
         onOpen={handleMobileMenuOpen}
       >
+
         <List>
-          <ListItem button key="Menu">
+          {!isAuth &&
+          <ListItem className={classes.menuListItem} button key="Menu">
+            <Button
+                  variant="outlined"
+                  className={classes.button}
+                  endIcon={<AccountCircle />}
+                  onClick={handleSignUpClick}
+                  disableElevation
+                >
+                  Criar conta
+            </Button>
+          </ListItem>
+          }         
+          <ListItem className={classes.menuListItem} button key="Menu">
             <ListItemIcon><MailIcon /></ListItemIcon>
             <ListItemText primary="Competição" />
           </ListItem>
-          <ListItem button key="Menu">
-            <ListItemIcon><MailIcon /></ListItemIcon>
-            <ListItemText primary="Competição" />
-          </ListItem>
-          <ListItem button key="Menu">
-            <ListItemIcon><MailIcon /></ListItemIcon>
-            <ListItemText primary="Competição" />
-          </ListItem>
-          <ListItem button key="Menu">
-            <ListItemIcon><MailIcon /></ListItemIcon>
-            <ListItemText primary="Competição" />
-          </ListItem>
+        
         </List>
         <Divider />
       </SwipeableDrawer>
@@ -138,7 +162,7 @@ function CustomMenu() {
 
     return (
       <div className={classes.grow}>
-        <AppBar position="static">
+        <AppBar elevation={0} className={classes.appBar} position="static">
           <Toolbar>
             <div className={classes.sectionMobile}>
               <IconButton
@@ -152,11 +176,42 @@ function CustomMenu() {
               </IconButton>
             </div>
             <Typography className={classes.title} variant="h6" noWrap>
-              Material-UI
+              MARATONA 3L'S
             </Typography>
-            <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+
+            <Button
+                variant="contained"
+                color="primary"
+                className={classes.menuButton}
+                endIcon={<AccountCircle />}
+                onClick={(event) => toPage("/mentoria3ls")}
+                disableElevation
+              >
+                Cadastro Treinamento 3L's
+             </Button>
+             <Button
+                variant="contained"
+                color="primary"
+                className={classes.menuButton}
+                endIcon={<AccountCircle />}
+                onClick={handleSessionClick}
+                disableElevation
+              >
+                Button
+             </Button>
+             <Button
+                variant="contained"
+                color="primary"
+                className={classes.menuButton}
+                endIcon={<AccountCircle />}
+                onClick={handleSessionClick}
+                disableElevation
+              >
+                Button
+             </Button>
             </div>
+            <div className={classes.grow} />
             {isAuth &&
               <Button
                 variant="contained"
@@ -164,6 +219,7 @@ function CustomMenu() {
                 className={classes.button}
                 endIcon={<AccountCircle />}
                 onClick={handleSessionClick}
+                disableElevation
               >
                 Sair
              </Button>
@@ -175,17 +231,30 @@ function CustomMenu() {
                 className={classes.button}
                 endIcon={<AccountCircle />}
                 onClick={handleSessionClick}
+                disableElevation
               >
                 Entrar
              </Button>
             }
-
+            {!isAuth &&
+              <div className={classes.sectionDesktop}>
+              <Button
+                variant="outlined"
+                className={classes.button}
+                endIcon={<AccountCircle />}
+                onClick={handleSignUpClick}
+                disableElevation
+              >
+                Criar conta
+             </Button>
+            </div>
+            }
+            
           </Toolbar>
         </AppBar>
         {renderMobileMenu}
-        {renderMenu}
       </div>
     );
 }
 
-export default withStyles(styles)(CustomMenu);
+export default withStyles(useStyles)(CustomMenu);
