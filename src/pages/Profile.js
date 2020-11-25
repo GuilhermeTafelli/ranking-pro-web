@@ -1,4 +1,4 @@
-import React, { useState } from  'react'
+import React, { useState, useEffect } from  'react'
 import { Grid } from "@material-ui/core";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Footer from '../components/Footer';
@@ -20,18 +20,18 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import { ReactComponent as BronzeMedalIcon } from '../static/teste.svg';
+import { ReactComponent as SilverMedalIcon } from '../static/silver-medal.svg';
+import { ReactComponent as GoldMedalIcon } from '../static/gold-medal.svg';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+import api from '../services/Api'
 const useStyles = makeStyles((theme) => ({
     container: {
-      marginBottom: theme.spacing(8),
       flexDirection: 'row',
       backgroundColor: "#BEB6AE",
       justifyContent: 'center',
-    },
-    banner: {
-        height: '15vh', 
-        width: '100vw',
-        backgroundColor: "#FFFFFF"
     },
     profileContainer: {
         backgroundColor: "#BEB6AE",
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: "10px",
         marginLeft: "10px",
         marginBottom: "15px",
-        borderRadius: "6px",
+        borderRadius: "7px",
         padding: "10px",
         width: "100%"
     },
@@ -137,45 +137,66 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: "5px",
         marginRight: "5px"
     },
+    medalsItemBodyTypography: {
+        fontSize: "13px",
+        textAlign: "center"
+    },
     profilDescriptionSocialNetworksButtonItem: {
         marginTop: "25px",
         
     },
+    profilDescriptionSocialNetworksButtonContainerItem:{
+        marginTop: "25px"
+    },
+
     profilDescriptionSocialNetworksButtonContainer: {
-        justifyContent: "space-between",
-        marginTop: "10px"
+        marginTop: "5px",
     },
     socialNetworksButton: {
         textTransform: "none",
-        fullWidth: true
+        fullWidth: true,
+        size: "large",
+
+
+    },
+    medalsContainerItem: {
+        justifyContent: "center",
+        padding: "10px"
     }
 }));
 
 export default function Profile() {
 
-    const [file, setFile] = useState(null);
+    const [content, setContent] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-
-    const handleChange = function loadFile(event) {
-        if (event.target.files.length > 0) {
-            const file = URL.createObjectURL(event.target.files[0]);
-            setFile(file);
-        }
-    }
+    useEffect(async () => {
+        setLoading(true)
+        const response =  await api.get("/users/socials-media/f78c7692-e028-4539-8c51-c23e44885634")
+        await new Promise((resolve) => setTimeout(resolve, 500))
+        await setContent(response.data)
+        await setLoading(false)
+    });
 
     const classes = useStyles()
 
     return (
         <React.Fragment>
             <CssBaseline/>
-            <Grid container className={classes.container}>
-                <Grid container className={classes.profileContainer} xs={12} lg={8} >
+            <CustomMenu/>
+
+            <Backdrop className={classes.backdrop} open={loading}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
+
+            {content && <Grid container className={classes.container}>
+                <Grid container className={classes.profileContainer} xs={12} md={8} >
                     <Grid item  className={classes.mainItemContainer} xs={12} lg={3}>
                         <Grid container>
                             <Grid item className={classes.profileItem} xs={12} lg={12}>
                                 <Grid container className={classes.profilePhotoContainer}>
-                                    <Avatar className={classes.avatar} id="avatar" src="https://ranking-pro-files.s3-sa-east-1.amazonaws.com/profile-photo-Joao-cc8736ee9dc3b41d"/>
-                                    <Typography className={classes.nameTitleTypography}>Guilherme Tafelli</Typography>
+                                    <Avatar className={classes.avatar} id="avatar" src={content.profilePhotoLink ? content.profilePhotoLink : ""}/>
+                                    <Typography className={classes.nameTitleTypography}>{content.name+" "+content.surname}</Typography>
                                     <Typography className={classes.socialMediaTitleTypography}>Social Media</Typography>
                                 </Grid>
                             </Grid>
@@ -185,8 +206,12 @@ export default function Profile() {
                         <Grid container  lg={12}>
                             <Grid item className={classes.profileItem} xs={12} lg={12}>
                                 <Grid container className={classes.profilDescriptionContainer}>
-                                <Typography className={classes.itemTitleTypography}>Sobre mim</Typography>
-                                <Typography className={classes.itemBodyTypography}>Meu nome é Guilherme Tafelli, tenho 19 anos e sou social media a mais de um ano. Aprendi tudo com a maior gestora de social media do Brasil. Hoje vivo disso e sustento minha familia.</Typography>
+                                    <Grid item xs={12}>
+                                        <Typography className={classes.itemTitleTypography}>Sobre mim</Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                    <   Typography className={classes.itemBodyTypography}>{content.aboutMe}</Typography>
+                                    </Grid>
                                 
                                 </Grid>
                            </Grid>
@@ -194,71 +219,83 @@ export default function Profile() {
                                 <Grid container className={classes.profilDescriptionContainer}>
                                     <Grid item className={classes.profilDescriptionContainerItem} xs={12} sm={4} lg={3}>
                                         <Typography className={classes.itemSubTitleTypography}>Cidade</Typography>
-                                        <Typography className={classes.itemBodyTypography}>Uberlândia/MG</Typography>
+                                        <Typography className={classes.itemBodyTypography}>{content.city+"/"+content.state}</Typography>
                                     </Grid>
                                     <Grid item className={classes.profilDescriptionContainerItem} xs={12} sm={4} lg={3}>
                                         <Typography className={classes.itemSubTitleTypography}>Idade</Typography>
-                                        <Typography className={classes.itemBodyTypography}>19 anos</Typography>
+                                        <Typography className={classes.itemBodyTypography}>{content.age+" anos"}</Typography>
                                     </Grid>
                                     <Grid item className={classes.profilDescriptionContainerItem} xs={12} sm={4} lg={3}>
                                         <Typography className={classes.itemSubTitleTypography}>Telefone</Typography>
-                                        <Typography className={classes.itemBodyTypography}>(34) 99669-9548</Typography>
+                                        <Typography className={classes.itemBodyTypography}>{content.phone}</Typography>
                                     </Grid>
                                     <Grid item className={classes.profilDescriptionContainerItem} xs={12} sm={4} lg={3}>
                                         <Typography className={classes.itemSubTitleTypography}>WhatsApp</Typography>
-                                        <Typography className={classes.itemBodyTypography}>(34) 99669-9548</Typography>
+                                        <Typography className={classes.itemBodyTypography}>{content.whatsApp}</Typography>
                                     </Grid>
                                     <Grid item className={classes.profilDescriptionSocialNetworksButtonContainerItem} xs={12}>
                                         <Typography className={classes.itemSubTitleTypography}>Redes Sociais</Typography>
 
                                         <Grid container spacing={2} className={classes.profilDescriptionSocialNetworksButtonContainer} >
-                                            <Grid item xs={6} sm={2}>
-                                                <Button
+                                        <Grid item xs={6} sm={3}>
+                                                {content.instagram  && <Button
                                                     className={classes.socialNetworksButton}
                                                     disableElevation
-                                                    fullWidth
+                                                    size="large"
                                                     variant="contained"
+                                                    fullWidth
                                                     color="default"
+                                                    onClick={() => {window.open(content.instagram)}}
                                                     startIcon={<InstagramIcon />}
                                                     >
                                                         Instagram
                                                 </Button>
+                                                }   
                                             </Grid>
-                                            <Grid item xs={6} sm={2}>
-                                                <Button
+                                            <Grid item xs={6} sm={3}>
+                                                {content.facebook  && <Button
                                                     className={classes.socialNetworksButton}
                                                     disableElevation
-                                                    fullWidth
+                                                    size="large"
                                                     variant="contained"
+                                                    fullWidth
                                                     color="default"
+                                                    onClick={() => {window.open(content.facebook)}}
                                                     startIcon={<FacebookIcon />}
                                                     >
                                                         Facebook
                                                 </Button>
+                                                }   
                                             </Grid>
-                                            <Grid item xs={6} sm={2}>
-                                                <Button
+                                            <Grid item xs={6} sm={3}>
+                                                {content.youtube  && <Button
                                                     className={classes.socialNetworksButton}
                                                     disableElevation
-                                                    fullWidth
+                                                    size="large"
                                                     variant="contained"
+                                                    fullWidth
                                                     color="default"
+                                                    onClick={() => {window.open(content.youtube)}}
                                                     startIcon={<YouTubeIcon />}
                                                     >
-                                                        YouTube
+                                                        Youtube
                                                 </Button>
+                                                }   
                                             </Grid>
-                                            <Grid item xs={6} sm={2}>
-                                                <Button
+                                            <Grid item xs={6} sm={3}>
+                                                {content.linkedin  && <Button
                                                     className={classes.socialNetworksButton}
                                                     disableElevation
-                                                    fullWidth
+                                                    size="large"
                                                     variant="contained"
+                                                    fullWidth
                                                     color="default"
+                                                    onClick={() => {window.open(content.linkedin)}}
                                                     startIcon={<LinkedInIcon />}
                                                     >
-                                                        LinkedIn
+                                                        Facebook
                                                 </Button>
+                                                }   
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -267,15 +304,58 @@ export default function Profile() {
                            <Grid item className={classes.profileItem2}>
                                 <Grid container className={classes.profilDescriptionContainer}>
                                     <Typography className={classes.itemSubTitleTypography}>Faturamento mensal: </Typography>
-                                    <Typography className={classes.itemSubTitleTypography}>R$ 3000,00</Typography>
+                                    <Typography className={classes.itemSubTitleTypography}>{"R$ "+content.monthlyInvoicing} </Typography>
                                 </Grid>
                             </Grid>
                             <Grid item className={classes.profileItem2}>
                                 <Grid container className={classes.profilDescriptionContainer}>
                                     <Typography className={classes.itemSubTitleTypography}>Cliente ativos:</Typography>
-                                    <Typography className={classes.itemSubTitleTypography}>2</Typography>
+                                    <Typography className={classes.itemSubTitleTypography}>{content.currentContracts}</Typography>
                                 </Grid>
                             </Grid>
+                            <Grid item className={classes.profileItem} xs={12} lg={12}>
+                                <Grid container className={classes.profilDescriptionContainer}>
+                                    <Grid item xs={12}>
+                                        <Typography className={classes.itemTitleTypography}>Medalhas</Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={4} lg={2}>
+                                                <Grid container className={classes.medalsContainerItem}>
+                                                    <GoldMedalIcon/>
+                                                    <Grid item xs={12}>
+                                                        <Typography className={classes.medalsItemBodyTypography}>Faturamento acima de 3 mil</Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid item xs={4} lg={2}>
+                                                <Grid container className={classes.medalsContainerItem}>
+                                                    <SilverMedalIcon/>
+                                                    <Grid item xs={12}>
+                                                        <Typography className={classes.medalsItemBodyTypography}>Faturamento acima de 3 mil</Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid item xs={4} lg={2}>
+                                                <Grid container className={classes.medalsContainerItem}>
+                                                    <BronzeMedalIcon/>
+                                                    <Grid item xs={12}>
+                                                        <Typography className={classes.medalsItemBodyTypography}>Faturamento acima de 3 mil</Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid item xs={4} lg={2}>
+                                                <Grid container className={classes.medalsContainerItem}>
+                                                    <GoldMedalIcon/>
+                                                    <Grid item xs={12}>
+                                                        <Typography className={classes.medalsItemBodyTypography}>Faturamento acima de 3 mil</Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                           </Grid>
                             <Grid item className={classes.profileItem} xs={12} lg={12}>
                                 <Grid container className={classes.profilDescriptionContainer}>
                                     <Grid item xs={12}>
@@ -283,41 +363,21 @@ export default function Profile() {
                                     </Grid>
                                     <Grid item>
                                         <Grid container spacing={2}>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Comunicação"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Copy"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Comunicação"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Comunicação"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Comunicação"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Comunicação"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Comunicação"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Comunicação"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Chip icon={<FaceIcon />} label="Comunicação"/>
-                                            </Grid>
+                                            {content.skills.map(item => 
+                                                <Grid item>
+                                                    <Chip icon={<FaceIcon />} label={item}/>
+                                                </Grid>
+                                            )}
                                         </Grid>
                                     </Grid>
                                 </Grid>
                            </Grid>
+
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
+        }     
         </React.Fragment>
     )
 }

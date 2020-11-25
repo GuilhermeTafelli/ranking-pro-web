@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Form } from '@unform/web';
-import InputText from '../components/input/InputText'
+import InputText from '../components/CustomButton/InputText'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import api from '../services/Api'
 import Snackbar from '@material-ui/core/Snackbar';
@@ -22,7 +22,7 @@ import { login, setUser } from '../services/Auth'
 import history from '../history'
 import { useDispatch } from 'react-redux'
 import { Height } from '@material-ui/icons'; 
-import CustomInput from '../components/input/CustomInput'
+import CustomInput from '../components/CustomButton/CustomInput'
 
 function Copyright() {
   return (

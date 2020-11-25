@@ -1,10 +1,17 @@
 import React, { ChangeEvent, useRef, useEffect, useCallback, useState }  from 'react';
 
 import { useField } from '@unform/core';
+import { makeStyles } from '@material-ui/core';
 
+const useStyles = makeStyles((theme) => ({       
+  error: {
+    color: "red",
+    opacity:"70%"
+  }
+}))
 const FileInput = ({ name, ...rest }) => {
   const inputRef = useRef(null);
-
+  const classes = useStyles()
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [preview, setPreview] = useState(defaultValue);
 
@@ -44,6 +51,8 @@ const FileInput = ({ name, ...rest }) => {
         onChange={handlePreview}
         {...rest}
       />
+      { error && <span className={classes.error}>{error}</span> }
+
     </>
   );
 };

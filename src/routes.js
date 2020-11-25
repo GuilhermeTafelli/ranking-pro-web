@@ -9,6 +9,7 @@ import history from './history';
 import { isAuthenticated } from "./services/Auth";
 import { useDispatch, useSelector } from 'react-redux'
 import Profile from './pages/Profile'
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -29,7 +30,6 @@ function Routes() {
   useEffect(() => {  
       dispatch({ type: "SET_SESSION", isAuthenticated: isAuthenticated() })
   });
-
  
   return (
     <Router history={history}>
