@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="32" viewBox="0 0 60 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_186" data-name="Retângulo 186" width="22.092" height="21.116" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="LINKEDIN" transform="translate(0.339 -0.202)">
+    <rect id="Retângulo_184" data-name="Retângulo 184" width="60" height="32" rx="16" transform="translate(-0.339 0.202)" fill="#0275b4"/>
+    <g id="LIKEDIN" transform="translate(29.819 15.65)">
+      <g id="Grupo_174" data-name="Grupo 174" transform="translate(-11.046 -10.558)" clip-path="url(#clip-path)">
+        <path id="Caminho_1289" data-name="Caminho 1289" d="M2.678,0A2.472,2.472,0,0,0,0,2.464a2.431,2.431,0,0,0,2.616,2.46h.031A2.469,2.469,0,1,0,2.678,0" transform="translate(0 0)" fill="#fff"/>
+        <rect id="Retângulo_185" data-name="Retângulo 185" width="4.737" height="14.248" transform="translate(0.28 6.869)" fill="#fff"/>
+        <path id="Caminho_1290" data-name="Caminho 1290" d="M230,189.1c-2.553,0-4.267,2.4-4.267,2.4v-2.066H221v14.245h4.737v-7.954a3.255,3.255,0,0,1,.155-1.154,2.594,2.594,0,0,1,2.429-1.731c1.714,0,2.4,1.306,2.4,3.22v7.619h4.737v-8.168c0-4.378-2.336-6.413-5.452-6.413" transform="translate(-213.364 -182.566)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>
