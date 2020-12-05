@@ -143,7 +143,7 @@ export default function SignIn() {
         </Snackbar>
         <CssBaseline />
         <div className={classes.paper}>
-          <h1 className={classes.title}>Login</h1>
+          <h1 className={classes.title}>{process.env.REACT_APP_RANKING_API_URL}</h1>
             
           <Form className={classes.form} onSubmit={handleSubmit} >
             <Grid container className={classes.formContainer}>
