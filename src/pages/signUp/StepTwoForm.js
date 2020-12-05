@@ -140,7 +140,6 @@ export default function StepTwoForm(){
                     label="Número*"
                     autoComplete="number"
                     defaultValue={state.number}
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={6} sm={4}>
@@ -149,7 +148,6 @@ export default function StepTwoForm(){
                     label="CEP*"
                     autoComplete="cep"
                     defaultValue={state.postalCode}
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={5}>
@@ -158,7 +156,6 @@ export default function StepTwoForm(){
                     label="Complemento"
                     defaultValue={state.complement}
                     autoComplete="complemento"
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={6}>
@@ -167,7 +164,6 @@ export default function StepTwoForm(){
                     label="Cidade*"
                     autoComplete="city"
                     defaultValue={state.city}
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={6}>
@@ -176,7 +172,6 @@ export default function StepTwoForm(){
                     label="Estado*"
                     autoComplete="estado"
                     defaultValue={state.addressState}
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={5}>
@@ -185,7 +180,6 @@ export default function StepTwoForm(){
                     label="País*"
                     defaultValue={state.country}
                     autoComplete="country"
-                    autoFocus
                     />
                 </Grid>
             </Grid>
