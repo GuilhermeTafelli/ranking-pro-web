@@ -102,6 +102,16 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: "10px",
         boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)"
     },
+    submitMobile: {
+        fontFamily: "branding-bold",
+        fontSize: "20px",
+        color: "#FFF",
+        backgroundImage: "linear-gradient(#4E95FF, #0D2DFF)",
+        borderRadius: "31px",
+        border: "none",
+        padding: "10px 26px",
+        boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)"
+    },
     createAccount: {
         fontFamily: "branding-medium",
         fontSize: "18px",
@@ -114,6 +124,9 @@ const useStyles = makeStyles((theme) => ({
         width: "60px",
         borderRadius: "21px",
     },
+    containerAuthMobile: {
+        padding: "20px"
+    }
 }));
 
 function CustomMenu() {
@@ -172,7 +185,30 @@ function CustomMenu() {
             onClose={handleMobileMenuClose}
             onOpen={handleMobileMenuOpen}
         >
-
+            <Grid className={classes.containerAuthMobile}>
+            {!isAuth &&
+                (
+                    <div>
+                        <button onClick={() => history.push("/signIn")} className={classes.submitMobile}>Entrar</button>
+                        <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
+                    </div>
+                )
+            }
+            {isAuth &&
+                <div className="dropdown" style={{float:"right"}}>
+                    
+                    <div className="dropbtn">
+                        <img className={classes.profilePhoto} src={user.profilePhotoLink}/>
+                    </div>
+                    <div className="dropDownContent">
+                        <a>Perfil</a>
+                        <a href="/orders">Solicitações</a>
+                        <a onClick={handleSessionClick}>Sair</a>
+                    </div>
+                </div>
+            }
+            </Grid>
+                            
             <List>
                 <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
                     <ListItemIcon><img src={HomeIcon} /></ListItemIcon>
@@ -261,7 +297,7 @@ function CustomMenu() {
                             </a>
                         </Grid>
                         
-                        <Grid item className={classes.grow}>
+                        <Grid item className={classes.sectionDesktop}>
                             {!isAuth &&
                                 (
                                     <div>
