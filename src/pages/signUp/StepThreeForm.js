@@ -142,7 +142,6 @@ export default function StepThreeForm(){
                     label="Instagram*"
                     autoComplete="instagram"
                     defaultValue={state.instagram}
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={12} sm={6}>
@@ -151,7 +150,6 @@ export default function StepThreeForm(){
                     label="LinkedIn"
                     autoComplete="linkedin"
                     defaultValue={state.linkedin}
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={12} sm={6}>
@@ -160,7 +158,6 @@ export default function StepThreeForm(){
                     label="Twitter"
                     defaultValue={state.twitter}
                     autoComplete="twitter"
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={12} sm={6}>
@@ -169,7 +166,6 @@ export default function StepThreeForm(){
                         label="Youtube"
                         autoComplete="youtube"
                         defaultValue={state.youtube}
-                        autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={12} sm={6}>
@@ -178,7 +174,6 @@ export default function StepThreeForm(){
                         label="Tik Tok"
                         autoComplete="tiktok"
                         defaultValue={state.tiktok}
-                        autoFocus
                     />
                 </Grid>
             </Grid>
