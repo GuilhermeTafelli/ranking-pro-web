@@ -177,7 +177,6 @@ export default function StepOneForm(){
                 label="Nome Completo*"
                 autoComplete="name"
                 defaultValue={state.name}
-                autoFocus
                 />
             </Grid>
             <Grid item className={classes.input} xs={12} sm={5}>
@@ -202,7 +201,6 @@ export default function StepOneForm(){
                 autoComplete="sex"
                 options={[{name: "Masculino", value: 1}, {name: "Feminino", value: 2}]}
                 defaultValue={state.sex}
-                autoFocus
                 />
             </Grid>
             <Grid item className={classes.input} xs={12} sm={6}>
@@ -218,7 +216,6 @@ export default function StepOneForm(){
                 label="CPF*"
                 autoComplete="cpf"
                 defaultValue={state.cpf}
-                autoFocus
                 />}
             </InputMask>
             </Grid>
@@ -235,7 +232,6 @@ export default function StepOneForm(){
                 label="WhatsApp*"
                 autoComplete="whatsapp"
                 defaultValue={state.whatsApp}
-                autoFocus
                 />}
             </InputMask>
             </Grid>
@@ -245,7 +241,6 @@ export default function StepOneForm(){
                 label="E-mail*"
                 autoComplete="email"
                 defaultValue={state.email}
-                autoFocus
                 />
             </Grid>
             </Grid>
