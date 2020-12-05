@@ -20,15 +20,16 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { isAuthenticated, logout } from '../services/Auth'
-import history from '../history'
+import { getUser, logout } from '../../services/Auth'
+import history from '../../history'
 import { useSelector, useDispatch } from 'react-redux'
-import HomeIcon from '../static/home.svg'
-import RankIcon from '../static/rank.svg'
-import ClassIcon from '../static/class.svg'
-import ForumIcon from '../static/forum.svg'
+import HomeIcon from '../../static/home.svg'
+import RankIcon from '../../static/rank.svg'
+import ClassIcon from '../../static/class.svg'
+import ForumIcon from '../../static/forum.svg'
 import { Home } from "@material-ui/icons";
-
+import classNames from 'classnames';
+import './style.css'
 const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(4)
@@ -42,13 +43,13 @@ const useStyles = makeStyles((theme) => ({
     },
     sectionDesktop: {
         display: "flex",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             display: "none"
         }
     },
     sectionMobile: {
         display: "flex",
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up("md")]: {
             display: "none"
         }
     },
@@ -63,7 +64,10 @@ const useStyles = makeStyles((theme) => ({
     },
     menuItem: {
         textDecoration: "none",
-        padding: "20px 30px"
+        padding: "20px 30px",
+        [theme.breakpoints.down("sm")]: {
+            padding: "20px 15px",
+        }
     },
     menuItemContainer: {
         alignItems: "center"
@@ -79,8 +83,37 @@ const useStyles = makeStyles((theme) => ({
     mainContainer: {
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0px 20px"
-    }
+        padding: "2px 80px",
+        [theme.breakpoints.down("md")]: {
+            padding: "5px 20px",
+        },
+        [theme.breakpoints.down("sm")]: {
+            padding: "5px 10px",
+        },
+    },
+    submit: {
+        fontFamily: "branding-bold",
+        fontSize: "20px",
+        color: "#FFF",
+        backgroundImage: "linear-gradient(#4E95FF, #0D2DFF)",
+        borderRadius: "31px",
+        border: "none",
+        padding: "10px 26px",
+        marginLeft: "10px",
+        boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)"
+    },
+    createAccount: {
+        fontFamily: "branding-medium",
+        fontSize: "18px",
+        color: "#373737",
+        marginLeft: "5px",
+        textDecoration: "none"
+    },
+    profilePhoto: {
+        height: "60px",
+        width: "60px",
+        borderRadius: "21px",
+    },
 }));
 
 function CustomMenu() {
@@ -89,8 +122,10 @@ function CustomMenu() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false)
 
     const isAuth = useSelector(state => state.auth.isAuthenticated)
+    const user = getUser()
     const dispatch = useDispatch()
-
+    console.log(user)
+    
     function handleProfileMenuOpen(event) {
         setAchorEl(event.currentTarget)
     };
@@ -139,20 +174,20 @@ function CustomMenu() {
         >
 
             <List>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")}key="Menu">
-                    <ListItemIcon><img src={HomeIcon}/></ListItemIcon>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+                    <ListItemIcon><img src={HomeIcon} /></ListItemIcon>
                     <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")}key="Menu">
-                    <ListItemIcon><img src={ClassIcon}/></ListItemIcon>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+                    <ListItemIcon><img src={ClassIcon} /></ListItemIcon>
                     <ListItemText primary="Cursos" />
                 </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")}key="Menu">
-                    <ListItemIcon><img src={RankIcon}/></ListItemIcon>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")} key="Menu">
+                    <ListItemIcon><img src={RankIcon} /></ListItemIcon>
                     <ListItemText primary="Rank" />
                 </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")}key="Menu">
-                    <ListItemIcon><img src={ForumIcon}/></ListItemIcon>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+                    <ListItemIcon><img src={ForumIcon} /></ListItemIcon>
                     <ListItemText primary="Forúm" />
                 </ListItem>
             </List>
@@ -225,50 +260,35 @@ function CustomMenu() {
                                 </Grid>
                             </a>
                         </Grid>
+                        
                         <Grid item className={classes.grow}>
+                            {!isAuth &&
+                                (
+                                    <div>
+                                        <button onClick={() => history.push("/signIn")} className={classes.submit}>Entrar</button>
+                                        <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
+                                    </div>
+                                )
+                            }
                             {isAuth &&
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                    endIcon={<AccountCircle />}
-                                    // onClick={handleSessionClick}
-                                    disableElevation
-                                >
-                                    Sair
-                                </Button>
-                            }
-                            {!isAuth &&
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                    endIcon={<AccountCircle />}
-                                    // onClick={handleSessionClick}
-                                    disableElevation
-                                >
-                                    Entrar
-                            </Button>
-                            }
-                            {!isAuth &&
-                                <div className={classes.sectionDesktop}>
-                                    <Button
-                                        variant="outlined"
-                                        className={classes.button}
-                                        endIcon={<AccountCircle />}
-                                        // onClick={handleSignUpClick}
-                                        disableElevation
-                                    >
-                                        Criar conta
-                                </Button>
+                                <div className="dropdown" style={{float:"right"}}>
+                                    
+                                    <div className="dropbtn">
+                                        <img className={classes.profilePhoto} src={user.profilePhotoLink}/>
+                                    </div>
+                                    <div className="dropDownContent">
+                                        <a>Perfil</a>
+                                        <a href="/orders">Solicitações</a>
+                                        <a onClick={handleSessionClick}>Sair</a>
+                                    </div>
                                 </div>
                             }
+                        </Grid>
                     </Grid>
-            </Grid>
-          </Toolbar>
-        </AppBar>
-        { renderMobileMenu }
-      </div >
+                </Toolbar>
+            </AppBar>
+            { renderMobileMenu}
+        </div >
     );
 }
 
