@@ -1,4 +1,4 @@
-import React, {  useRef } from 'react'
+import React, { useRef } from 'react'
 import { Form } from '@unform/web';
 import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from '../../components/input/CustomInput'
@@ -15,45 +15,47 @@ import Avatar from '@material-ui/core/Avatar'
 import * as Yup from 'yup';
 import { fileToBase64 } from '../../services/Utils'
 import moment from 'moment'
+import api from '../../services/Api'
+
 const useStyles = makeStyles((theme) => ({
- 
+
     form: {
-      width: '100%',
+        width: '100%',
     },
     submit: {
-      fontFamily: "branding-bold",
-      fontSize: "20px",
-      color: "#FFF",
-      backgroundImage: "linear-gradient(#4E95FF, #0D2DFF)",
-      borderRadius: "31px",
-      border: "none",
-      padding: "10px 26px",
-      marginLeft: "10px",
-      boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)"
+        fontFamily: "branding-bold",
+        fontSize: "20px",
+        color: "#FFF",
+        backgroundImage: "linear-gradient(#4E95FF, #0D2DFF)",
+        borderRadius: "31px",
+        border: "none",
+        padding: "10px 26px",
+        marginLeft: "10px",
+        boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)"
     },
-    buttonsContainer:{
-      justifyContent: "center",
-      margin: theme.spacing(4, 0, 2),
+    buttonsContainer: {
+        justifyContent: "center",
+        margin: theme.spacing(4, 0, 2),
     },
     input: {
-      paddingLeft: "10px",
-      paddingRight: "10px",
-      alignSelf: "center"
+        paddingLeft: "10px",
+        paddingRight: "10px",
+        alignSelf: "center"
     },
     profilePhotoContainer: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      marginBottom: "30px"
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        marginBottom: "30px"
     },
     avatar: {
-      width: "230px",
-      height: "230px",
-      color: "#808080",
-      [theme.breakpoints.up("sm")]: {
-          width: "267px",
-          height: "267px"
-      },
+        width: "230px",
+        height: "230px",
+        color: "#808080",
+        [theme.breakpoints.up("sm")]: {
+            width: "267px",
+            height: "267px"
+        },
     },
     editAvatar: {
         width: "53px",
@@ -73,9 +75,11 @@ const useStyles = makeStyles((theme) => ({
             height: "40px"
         },
     }
-  }));
+}));
 
-export default function StepOneForm(){
+export default function StepOneForm(props) {
+
+    const { handleAlertOpen } = props
 
     const dispatch = useDispatch()
     const classes = useStyles()
@@ -97,7 +101,7 @@ export default function StepOneForm(){
             formRef.current.setErrors({});
 
 
-              const schema = Yup.object().shape({
+            const schema = Yup.object().shape({
                 foto: Yup.string().required(),
                 "data de nascimento": Yup.date().transform((value, rawValue) => { let correctDate = moment(rawValue, ['DD/MM/YYYY']).toDate(); return correctDate }).max(moment(new Date(2005, 1, 1)).toDate()),
                 sexo: Yup.string().required(),
@@ -108,14 +112,20 @@ export default function StepOneForm(){
             });
 
             await schema.validate(data, {
-              abortEarly: false,
+                abortEarly: false,
             });
-
+            const response = await api.get("/users/email/"+data.email)
+            console.log(response)
+            if (response.data.exists) {
+                console.log("enter 1")
+                handleAlertOpen("E-mail já cadastrado, entre em contato com o suporte.")
+                return 
+            }
             const imageBase64 = await fileToBase64(data.foto)
 
             await dispatch(
                 {
-                    type: "REGISTRY_STEP_ONE",                 
+                    type: "REGISTRY_STEP_ONE",
                     name: data.nome,
                     bday: data["data de nascimento"],
                     sex: data.sexo,
@@ -126,7 +136,7 @@ export default function StepOneForm(){
                     photo: imageBase64,
                 }
             )
-       
+
         } catch (err) {
             const validationErrors = {};
             if (err instanceof Yup.ValidationError) {
@@ -135,123 +145,123 @@ export default function StepOneForm(){
                 });
                 formRef.current.setErrors(validationErrors);
             }
-          }
+        }
     }
-    
+
     return (
-        
+
         <Form ref={formRef} className={classes.form} onSubmit={handleSubmit}>
             <Grid container>
-            <Grid container className={classes.profilePhotoContainer}>
-                <Grid item className={classes.input}>
-                    <label htmlFor="upload">
-                        <IconButton color="primary" aria-label="upload picture" component="span">
-                        <Badge
-                        overlap="circle"
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                        }}
-                        badgeContent={
-                            <Avatar className={classes.editAvatar}>
-                                <EditIcon className={classes.editIcon}/>
-                            </Avatar>
-                        } 
-                        >
-                            <Avatar className={classes.avatar} id="avatar" src={file}/>
-                        </Badge>
-                        </IconButton>
-                    </label>
+                <Grid container className={classes.profilePhotoContainer}>
+                    <Grid item className={classes.input}>
+                        <label htmlFor="upload">
+                            <IconButton color="primary" aria-label="upload picture" component="span">
+                                <Badge
+                                    overlap="circle"
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'right',
+                                    }}
+                                    badgeContent={
+                                        <Avatar className={classes.editAvatar}>
+                                            <EditIcon className={classes.editIcon} />
+                                        </Avatar>
+                                    }
+                                >
+                                    <Avatar className={classes.avatar} id="avatar" src={file} />
+                                </Badge>
+                            </IconButton>
+                        </label>
+                    </Grid>
+                    <Grid item className={classes.input}>
+                        <FileInput name="foto" type="file" value={teste} onChange={handleChange} id="upload" accept="image/*" style={{ display: "none" }} />
+                    </Grid>
                 </Grid>
-                <Grid item className={classes.input}>
-                    <FileInput name="foto" type="file" value={teste} onChange={handleChange} id="upload" accept="image/*" style={{display: "none"}}/>
+                <Grid item className={classes.input} xs={12}>
+                    <CustomInput
+                        name="nome"
+                        label="Nome Completo*"
+                        autoComplete="name"
+                        maxLength="40"
+                        defaultValue={state.name}
+                    />
                 </Grid>
-            </Grid>
-            <Grid item className={classes.input} xs={12}>
-                <CustomInput 
-                name="nome"
-                label="Nome Completo*"
-                autoComplete="name"
-                maxLength="40"
-                defaultValue={state.name}
-                />
-            </Grid>
-            <Grid item className={classes.input} xs={12} sm={5}>
-                <InputMask
-                mask="99/99/9999"
-                maskChar=" "
-                defaultValue={state.bday}
-                disabled={false}
-                >
-                {() => <CustomInput 
-                    name="data de nascimento"
-                    label="Nascimento*"
-                    autoComplete="bday"
-                    autoFocus
-                />}
-                </InputMask>
-            </Grid>
-            <Grid item className={classes.input} xs={12} sm={7}>
-                <CustomSelect
-                name="sexo"
-                label="Sexo*"
-                autoComplete="sex"
-                options={[{name: "Masculino", value: 1}, {name: "Feminino", value: 2}]}
-                defaultValue={state.sex}
-                />
-            </Grid>
-            <Grid item className={classes.input} xs={12} sm={6}>
-            <InputMask
-                mask="999.999.999-99"
-                maskChar=" "
-                defaultValue={state.bday}
-                disabled={false}
-                >
-                {() => 
-                <CustomInput 
-                name="cpf"
-                label="CPF*"
-                autoComplete="cpf"
-                defaultValue={state.cpf}
-                />}
-            </InputMask>
-            </Grid>
-            <Grid item className={classes.input} xs={12} sm={6}>
-            <InputMask
-                mask="(99) 9 9999-9999"
-                maskChar=" "
-                defaultValue={state.bday}
-                disabled={false}
-                >
-                {() => 
-                <CustomInput 
-                name="whatsApp"
-                label="WhatsApp*"
-                autoComplete="whatsapp"
-                defaultValue={state.whatsApp}
-                />}
-            </InputMask>
-            </Grid>
-            <Grid item className={classes.input} xs={12}>
-                <CustomInput 
-                name="email"
-                label="E-mail*"
-                autoComplete="email"
-                defaultValue={state.email}
-                />
-            </Grid>
+                <Grid item className={classes.input} xs={12} sm={5}>
+                    <InputMask
+                        mask="99/99/9999"
+                        maskChar=" "
+                        defaultValue={state.bday}
+                        disabled={false}
+                    >
+                        {() => <CustomInput
+                            name="data de nascimento"
+                            label="Nascimento*"
+                            autoComplete="bday"
+                            autoFocus
+                        />}
+                    </InputMask>
+                </Grid>
+                <Grid item className={classes.input} xs={12} sm={7}>
+                    <CustomSelect
+                        name="sexo"
+                        label="Sexo*"
+                        autoComplete="sex"
+                        options={[{ name: "Masculino", value: 1 }, { name: "Feminino", value: 2 }]}
+                        defaultValue={state.sex}
+                    />
+                </Grid>
+                <Grid item className={classes.input} xs={12} sm={6}>
+                    <InputMask
+                        mask="999.999.999-99"
+                        maskChar=" "
+                        defaultValue={state.bday}
+                        disabled={false}
+                    >
+                        {() =>
+                            <CustomInput
+                                name="cpf"
+                                label="CPF*"
+                                autoComplete="cpf"
+                                defaultValue={state.cpf}
+                            />}
+                    </InputMask>
+                </Grid>
+                <Grid item className={classes.input} xs={12} sm={6}>
+                    <InputMask
+                        mask="(99) 9 9999-9999"
+                        maskChar=" "
+                        defaultValue={state.bday}
+                        disabled={false}
+                    >
+                        {() =>
+                            <CustomInput
+                                name="whatsApp"
+                                label="WhatsApp*"
+                                autoComplete="whatsapp"
+                                defaultValue={state.whatsApp}
+                            />}
+                    </InputMask>
+                </Grid>
+                <Grid item className={classes.input} xs={12}>
+                    <CustomInput
+                        name="email"
+                        label="E-mail*"
+                        autoComplete="email"
+                        defaultValue={state.email}
+                    />
+                </Grid>
             </Grid>
             <Grid container item className={classes.buttonsContainer}>
-            <Grid item>
-                <button
-                    type="submit"
-                    className={classes.submit}
-                >
-                    Continuar
+                <Grid item>
+                    <button
+                        type="submit"
+                        className={classes.submit}
+                    >
+                        Continuar
                 </button>
+                </Grid>
             </Grid>
-            </Grid>
-      </Form>
+        </Form>
 
     )
 }

@@ -77,10 +77,10 @@ export default function CustomInputAdornment({ name, label, adornment, ...rest }
         </div>
         <div className={classes.inputContainer}>
           <input id="input" className={classes.input} ref={inputRef} defaultValue={defaultValue} {...rest} />
-          {error && <span className={classes.error}>{error}</span>}
         </div>
-
       </div>
+      {error && <span className={classes.error}>{error}</span>}
+
     </div>
   )
 }

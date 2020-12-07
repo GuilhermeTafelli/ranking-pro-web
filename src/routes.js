@@ -20,6 +20,8 @@ import AdminHome from "./pages/admin/Home"
 import Home from "./pages/Home"
 
 import Order from "./pages/admin/Order"
+import Privacy from "./pages/politics/Privacy"
+import Terms from "./pages/politics/Terms"
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -68,6 +70,9 @@ function Routes() {
         <AdminPrivateRoute exact path="/admin/orders/:orderId" component={Order} />
         <AdminPrivateRoute exact path="/admin" component={AdminHome} />
         <Route exact path="/signIn" component={SignIn} />
+        <Route exact path="/privacy" component={Privacy} />
+        <Route exact path="/terms" component={Terms} />
+
         <Route exact path="/socials-media/:socialMediaId" component={Profile} />
         <Route exact path="/ranking" component={Ranking} />
         <Route exact path="/" component={Home} />
