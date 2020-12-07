@@ -180,9 +180,8 @@ export default function Ranking() {
         history.push("/socials-media/" + item.id)
     }
 
-    function formatMonthlyInvoicing(value){
-        return "R$ "+value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-
+    function formatMonthlyInvoicing(value) {
+        return "R$ " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     }
 
     return (
@@ -194,50 +193,50 @@ export default function Ranking() {
             {content && <div className={classes.main}>
                 <Grid container className={classes.mainContainer} md={8}>
                     {mySocialMedia &&
-                    <Grid container xs={12}>
-                    <Grid item xs={12}>
-                        <h1 className={classes.title}>Sua posição</h1>
-                    </Grid>
-                     <Grid container className={classes.rankingItem} onClick={() => (handleClickItem(mySocialMedia))} xs={12}>
+                        <Grid container xs={12}>
+                            <Grid item xs={12}>
+                                <h1 className={classes.title}>Sua posição</h1>
+                            </Grid>
+                            <Grid container className={classes.rankingItem} onClick={() => (handleClickItem(mySocialMedia))} xs={12}>
 
-                        <Grid item className={classes.itemInfos} >
-                            <Grid container className={classes.itemInfosContainer}>
-                                <Grid item>
-                                    <h2 className={classes.rankingPosition}>{mySocialMedia.position}</h2>
+                                <Grid item className={classes.itemInfos} >
+                                    <Grid container className={classes.itemInfosContainer}>
+                                        <Grid item>
+                                            <h2 className={classes.rankingPosition}>{mySocialMedia.position}</h2>
+                                        </Grid>
+                                        <Grid item className={classes.item}>
+                                            <img className={classes.profilePhoto} src={mySocialMedia.profilePhotoLink} />
+                                        </Grid>
+                                        <Grid item className={classes.rankingItemNameContainer}>
+                                            <h3 className={classes.rankingItemName}>{mySocialMedia.fullName.split(" ")[0]}</h3>
+                                            <h4 className={classes.rankingItemLocation}>{mySocialMedia.city ? mySocialMedia.city : "-"}</h4>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-                                <Grid item className={classes.item}>
-                                    <img className={classes.profilePhoto} src={mySocialMedia.profilePhotoLink} />
+                                <Grid item className={classes.rankingItemRevenuesContainer}>
+                                    <Grid item >
+                                        <h4 className={classes.rankingItemTitle}>Faturamento</h4>
+                                        <h2 className={classes.rankingItemRevenuesText}>{mySocialMedia.monthlyInvoicing ? formatMonthlyInvoicing(mySocialMedia.monthlyInvoicing) : "-"}</h2>
+                                    </Grid>
                                 </Grid>
-                                <Grid item className={classes.rankingItemNameContainer}>
-                                    <h3 className={classes.rankingItemName}>{mySocialMedia.fullName.split(" ")[0]}</h3>
-                                    <h4 className={classes.rankingItemLocation}>{mySocialMedia.city ? mySocialMedia.city : "-"}</h4>
+                                <Grid item className={classes.sectionDesktop}>
+                                    <Grid container className={classes.sectionDesktopContainer}>
+                                        <Grid item className={classes.infosContainer}>
+                                            <h4 className={classes.rankingItemInfoTitle}>Clientes Ativos</h4>
+                                            <h2 className={classes.rankingItemInfoText}>{mySocialMedia.currentContracts ? mySocialMedia.currentContracts : "-"}</h2>
+                                        </Grid>
+                                        <Grid item className={classes.infosContainer}>
+                                            <h4 className={classes.rankingItemInfoTitle}>Trabalhos Feitos</h4>
+                                            <h2 className={classes.rankingItemInfoText}>{mySocialMedia.worksDone ? mySocialMedia.worksDone : "-"}</h2>
+                                        </Grid>
+                                        <Grid item className={classes.infosContainer}>
+                                            <h4 className={classes.rankingItemInfoTitle}>Medalhas</h4>
+                                            <h2 className={classes.rankingItemInfoText}>{mySocialMedia.medals ? mySocialMedia.medals : "-"}</h2>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item className={classes.rankingItemRevenuesContainer}>
-                            <Grid item >
-                                <h4 className={classes.rankingItemTitle}>Faturamento</h4>
-                                <h2 className={classes.rankingItemRevenuesText}>{mySocialMedia.monthlyInvoicing ? formatMonthlyInvoicing(mySocialMedia.monthlyInvoicing) : "-"}</h2>
-                            </Grid>
-                        </Grid>
-                        <Grid item className={classes.sectionDesktop}>
-                            <Grid container className={classes.sectionDesktopContainer}>
-                                <Grid item className={classes.infosContainer}>
-                                    <h4 className={classes.rankingItemInfoTitle}>Clientes Ativos</h4>
-                                    <h2 className={classes.rankingItemInfoText}>{mySocialMedia.currentContracts ? mySocialMedia.currentContracts : "-"}</h2>
-                                </Grid>
-                                <Grid item className={classes.infosContainer}>
-                                    <h4 className={classes.rankingItemInfoTitle}>Trabalhos Feitos</h4>
-                                    <h2 className={classes.rankingItemInfoText}>{mySocialMedia.worksDone ? mySocialMedia.worksDone : "-"}</h2>
-                                </Grid>
-                                <Grid item className={classes.infosContainer}>
-                                    <h4 className={classes.rankingItemInfoTitle}>Medalhas</h4>
-                                    <h2 className={classes.rankingItemInfoText}>{mySocialMedia.medals ? mySocialMedia.medals : "-"}</h2>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    </Grid>
                     }
                     <Grid item xs={12}>
                         <h1 className={classes.title}>Ranking</h1>

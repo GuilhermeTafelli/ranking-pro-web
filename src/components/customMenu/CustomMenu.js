@@ -129,7 +129,7 @@ function CustomMenu() {
     const isAuth = useSelector(state => state.auth.isAuthenticated)
     const user = getUser()
     const dispatch = useDispatch()
-    
+
     function handleProfileMenuOpen(event) {
         setAchorEl(event.currentTarget)
     };
@@ -177,16 +177,16 @@ function CustomMenu() {
             onOpen={handleMobileMenuOpen}
         >
             <Grid className={classes.containerAuthMobile}>
-            {!isAuth &&
-                (
-                    <div>
-                        <button onClick={() => history.push("/signIn")} className={classes.submitMobile}>Entrar</button>
-                        <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
-                    </div>
-                )
-            }
+                {!isAuth &&
+                    (
+                        <div>
+                            <button onClick={() => history.push("/signIn")} className={classes.submitMobile}>Entrar</button>
+                            <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
+                        </div>
+                    )
+                }
             </Grid>
-                            
+
             <List>
                 <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
                     <ListItemIcon><img src={HomeIcon} /></ListItemIcon>
@@ -274,31 +274,30 @@ function CustomMenu() {
                                 </Grid>
                             </a>
                         </Grid>
-                        
-                        <Grid item className={classes.sectionDesktop}>
-                            {!isAuth &&
-                                (
-                                    <div>
-                                        <button onClick={() => history.push("/signIn")} className={classes.submit}>Entrar</button>
-                                        <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
-                                    </div>
-                                )
-                            }
-                           
-                        </Grid>
-                        {isAuth &&
-                                <div className="dropdown" style={{float:"right"}}>
-                                    
-                                    <div className="dropbtn">
-                                        <img className={classes.profilePhoto} src={user.profilePhotoLink}/>
-                                    </div>
-                                    <div className="dropDownContent">
-                                        <a>Perfil</a>
-                                        <a href="/orders">Solicitações</a>
-                                        <a onClick={handleSessionClick}>Sair</a>
-                                    </div>
+
+                        {!isAuth &&
+                            <Grid item className={classes.sectionDesktop}>
+
+
+                                <div>
+                                    <button onClick={() => history.push("/signIn")} className={classes.submit}>Entrar</button>
+                                    <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
                                 </div>
-                            }
+                            </Grid>
+                        }
+                        {isAuth &&
+                            <div className="dropdown" style={{ float: "right" }}>
+
+                                <div className="dropbtn">
+                                    <img className={classes.profilePhoto} src={user.profilePhotoLink} />
+                                </div>
+                                <div className="dropDownContent">
+                                    <a>Perfil</a>
+                                    <a href="/orders">Solicitações</a>
+                                    <a onClick={handleSessionClick}>Sair</a>
+                                </div>
+                            </div>
+                        }
                     </Grid>
                 </Toolbar>
             </AppBar>

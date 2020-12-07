@@ -2,6 +2,7 @@ import React, {  useRef } from 'react'
 import { Form } from '@unform/web';
 import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from '../../components/input/CustomInput'
+import CustomInputAdornment from '../../components/input/CustomInputAdornment'
 import CustomSelect from '../../components/input/CustomSelect'
 import InputMask from 'react-input-mask'
 import IconButton from '@material-ui/core/IconButton'
@@ -13,7 +14,7 @@ import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import * as Yup from 'yup';
 import { fileToBase64 } from '../../services/Utils'
-
+import moment from 'moment'
 const useStyles = makeStyles((theme) => ({
  
     form: {
@@ -91,19 +92,19 @@ export default function StepOneForm(){
     }
 
     async function handleSubmit(data) {
-
         try {
 
             formRef.current.setErrors({});
 
+
               const schema = Yup.object().shape({
                 foto: Yup.string().required(),
-                "data de nascimento": Yup.string().required(),
+                "data de nascimento": Yup.date().transform((value, rawValue) => { let correctDate = moment(rawValue, ['DD/MM/YYYY']).toDate(); return correctDate }).max(moment(new Date(2005, 1, 1)).toDate()),
                 sexo: Yup.string().required(),
                 cpf: Yup.string().required(),
                 whatsApp: Yup.string().required(),
                 nome: Yup.string().required(),
-                email: Yup.string().required(),
+                email: Yup.string().required().email(),
             });
 
             await schema.validate(data, {
@@ -171,6 +172,7 @@ export default function StepOneForm(){
                 name="nome"
                 label="Nome Completo*"
                 autoComplete="name"
+                maxLength="40"
                 defaultValue={state.name}
                 />
             </Grid>

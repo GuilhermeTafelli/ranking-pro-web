@@ -16,7 +16,9 @@ import CustomVerticalMenu from "./components/customMenu/CustomVerticalMenu"
 import SubmitOrder from "./pages/SubmitOrder"
 import MyOrders from './pages/MyOrders'
 import Orders from "./pages/admin/Orders"
-import Home from "./pages/admin/Home"
+import AdminHome from "./pages/admin/Home"
+import Home from "./pages/Home"
+
 import Order from "./pages/admin/Order"
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -64,10 +66,12 @@ function Routes() {
       <Switch>
         <AdminPrivateRoute exact path="/admin/orders" component={Orders} />
         <AdminPrivateRoute exact path="/admin/orders/:orderId" component={Order} />
-        <AdminPrivateRoute exact path="/admin" component={Home} />
+        <AdminPrivateRoute exact path="/admin" component={AdminHome} />
         <Route exact path="/signIn" component={SignIn} />
         <Route exact path="/socials-media/:socialMediaId" component={Profile} />
         <Route exact path="/ranking" component={Ranking} />
+        <Route exact path="/" component={Home} />
+
         <Route exact path="/resetPassword" component={ResetPassword} />
 
         <Route exact path="/signUp" component={SignUp} />

@@ -57,7 +57,10 @@ export default function StepFiveForm(){
             formRef.current.setErrors({});
 
               const schema = Yup.object().shape({
-                senha: Yup.string().required(),
+                senha: Yup.string().required().matches(
+                    /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,}))/,
+                    "Deve conter no minimo 8 caracteres, sendo no minimo uma letra maiuscula, uma letra miniscula e um número"
+                  ),
             });
 
             await schema.validate(data, {
@@ -93,12 +96,12 @@ export default function StepFiveForm(){
 
             const requestSocialMedia = {
                 userId: response.data.user.id,
-                instagram: state.instagram,
-                facebook: state.facebook,
-                youtube: state.youtube,
-                linkedin: state.linkedin,
-                twitter: state.twitter,
-                tiktok: state.tiktok,
+                instagram: state.instagram ? "instagram.com/"+state.instagram : null,
+                facebook: state.facebook ? "facebook.com/"+state.facebook : null,
+                youtube: state.youtube ? "youtube.com/user/"+state.youtube : null,
+                linkedin: state.linkedin ? "linkedin.com/in/"+state.linkedin : null,
+                twitter: state.twitter ? "twitter.com/"+state.twitter : null,
+                tiktok: state.tiktok ? "tiktok.com/"+state.tiktok : null,
                 aboutMe: state.aboutMe,
                 skills: state.skills.values,
                 niches: state.niches.values
