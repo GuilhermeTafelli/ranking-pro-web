@@ -134,7 +134,6 @@ export default function StepThreeForm() {
                         adornment="facebook.com/"
                         autoComplete="facebook"
                         defaultValue={state.facebook}
-                        autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={12}>

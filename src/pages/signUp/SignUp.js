@@ -207,7 +207,7 @@ export default function SignUp() {
       </Grid>
       <div className={classes.footer}>
         <div>
-          <a className={classes.footerText}>{"Termos & Condições"}</a><a className={classes.footerText} >{"Políticas de Privacidade"}</a>
+        <a href="/terms" className={classes.footerText}>{"Termos & Condições"}</a><a href="privacy" className={classes.footerText} >{"Políticas de Privacidade"}</a>
         </div>
       </div>
     </React.Fragment>

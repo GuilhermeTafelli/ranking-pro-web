@@ -129,7 +129,6 @@ export default function StepTwoForm(){
                     label="Endereço*"
                     autoComplete="address"
                     defaultValue={state.address}
-                    autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input} xs={6} sm={3}>

@@ -147,7 +147,6 @@ export default function StepFiveForm() {
                         name="senha"
                         label="Senha"
                         autoComplete="password"
-                        autoFocus
                     />
                 </Grid>
                 <Grid item className={classes.input}>

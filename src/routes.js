@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, {  useEffect } from "react"
 import { BrowserRouter, Switch, Route, Redirect, Router } from "react-router-dom"
 import SignUp from "./pages/signUp/SignUp"
 import SignIn from "./pages/SignIn"
 import RegisterOnEvent from "./pages/RegisterOnEvent"
 import history from './history';
 import { isAuthenticated, getUser } from "./services/Auth";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Ranking from './pages/Ranking'
 import Profile from './pages/Profile'
 
 import ResetPassword from "./pages/ResetPassword"
-import CustomMenu from "./components/customMenu/CustomMenu"
-import CustomVerticalMenu from "./components/customMenu/CustomVerticalMenu"
 
 import SubmitOrder from "./pages/SubmitOrder"
 import MyOrders from './pages/MyOrders'
@@ -20,8 +18,8 @@ import AdminHome from "./pages/admin/Home"
 import Home from "./pages/Home"
 
 import Order from "./pages/admin/Order"
-import Privacy from "./pages/politics/Privacy"
-import Terms from "./pages/politics/Terms"
+import Privacy from "./pages/policies/Privacy"
+import Terms from "./pages/policies/Terms"
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route

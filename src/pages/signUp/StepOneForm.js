@@ -197,7 +197,6 @@ export default function StepOneForm(props) {
                             name="data de nascimento"
                             label="Nascimento*"
                             autoComplete="bday"
-                            autoFocus
                         />}
                     </InputMask>
                 </Grid>
