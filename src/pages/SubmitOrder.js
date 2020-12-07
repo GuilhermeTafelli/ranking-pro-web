@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import CustomSelect from '../components/input/CustomSelect'
 import FileInputMult from '../components/input/FileInputMult'
+import CustomInput from '../components/input/CustomInput'
 import { fileToBase64 } from '../services/Utils'
 import api from '../services/Api'
 import CustomTextAreaWithLabel from '../components/input/CustomTextAreaWithLabel'
@@ -59,9 +60,22 @@ export default function SubmitOrder() {
 
     const classes = useStyles()
     const formRef = useRef(null);
+    const [type, setType] = useState(null)
 
 
-    const orderTypes = [{ name: "Solicitar Medalha 3 mil", value: "Solicitar Medalha faturamento acima de 3 mil" }, { name: "Feminino", value: 2 }]
+    const orderTypes = [
+        { name: "Solicitar Medalha 3 mil", value: "MEDAL_3_REVENUES" },
+        { name: "Solicitar Medalha 5 mil", value: "MEDAL_5_REVENUES" },
+        { name: "Solicitar Medalha 10 mil", value: "MEDAL_10_REVENUES" },
+        { name: "Solicitar Medalha 20 mil", value: "MEDAL_20_REVENUES" },
+        { name: "Solicitar Medalha 30 mil", value: "MEDAL_30_REVENUES" },
+        { name: "Solicitar Medalha Primeiro Parceiro", value: "MEDAL_FIRST_PARTNER" },
+        { name: "Solicitar Medalha Primeiro Contrato", value: "MEDAL_FIRST_CONTRACT" },
+        { name: "Solicitar Medalha Primeiro Feedback em video", value: "MEDAL_FIRST_VIDEO_FEEDBACK" },
+        { name: "Solicitar Registro de novo cliente", value: "REGISTRY_NEW_CLIENT" },
+        { name: "Solicitar Atualização de faturamento mensal", value: "UPDATE_MONTHLY_INVOICING" },
+
+    ]
 
     async function handleSubmit(data) {
 
@@ -87,10 +101,13 @@ export default function SubmitOrder() {
             const request = {
                 type: data["tipo da solicitação"],
                 description: data.descrição,
-                files: filesBase64
+                files: filesBase64,
+                customFields: {
+                    monthlyInvoicing: data.faturamento
+                }
             }
 
-            await api.post("/orders", request)
+            await api.post("users/orders", request)
 
             history.push("/orders")
         } catch (err) {
@@ -102,6 +119,10 @@ export default function SubmitOrder() {
                 formRef.current.setErrors(validationErrors);
             }
         }
+    }
+
+    function handleTypeChange(){
+        setType(formRef.current.getFieldValue('tipo da solicitação'))
     }
 
     return (
@@ -118,12 +139,20 @@ export default function SubmitOrder() {
                                     name="tipo da solicitação"
                                     label="Tipo da solicitação*"
                                     options={orderTypes}
+                                    onChange={() => handleTypeChange()}
                                     autoFocus
                                 />
                             </Grid>
                             <Grid item className={classes.input} xs={12}>
                                 <CustomTextAreaWithLabel label="Descrição" name="descrição" placeholder="Digite aqui..." rows="5" />
                             </Grid>
+                            {type === "UPDATE_MONTHLY_INVOICING" && <Grid item className={classes.input} xs={12}>
+                                <CustomInput
+                                    name="faturamento"
+                                    label="Faturamento Mensal*"
+                                />
+                            </Grid>
+                            }
                             <Grid item className={classes.input} xs={12}>
                                 <FileInputMult name="arquivos" label="Insira abaixo todos os documentos que comprovem a solicitação escolhida" />
                             </Grid>

@@ -6,6 +6,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import api from '../services/Api'
 import history from '../history'
 import CustomMenu from '../components/customMenu/CustomMenu';
+import { useDispatch } from 'react-redux'
 const useStyles = makeStyles((theme) => ({
     main: {
         background: "#F5F6FA",
@@ -154,6 +155,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Ranking() {
     const classes = useStyles();
 
+    const dispatch = useDispatch()
     const [content, setContent] = useState(false);
     const [mySocialMedia, setMySocialMedia] = useState(false);
 
@@ -170,8 +172,17 @@ export default function Ranking() {
     }, []);
 
     function handleClickItem(item) {
-        console.log(item)
+        dispatch(
+            {
+                type: "SOCIAL_MEDIA_POSITION",
+                position: item.position
+            })
         history.push("/socials-media/" + item.id)
+    }
+
+    function formatMonthlyInvoicing(value){
+        return "R$ "+value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+
     }
 
     return (
@@ -206,14 +217,14 @@ export default function Ranking() {
                         <Grid item className={classes.rankingItemRevenuesContainer}>
                             <Grid item >
                                 <h4 className={classes.rankingItemTitle}>Faturamento</h4>
-                                <h2 className={classes.rankingItemRevenuesText}>{mySocialMedia.monthlyInvoicing ? "R$ " + mySocialMedia.monthlyInvoicing.toFixed(2) : "-"}</h2>
+                                <h2 className={classes.rankingItemRevenuesText}>{mySocialMedia.monthlyInvoicing ? formatMonthlyInvoicing(mySocialMedia.monthlyInvoicing) : "-"}</h2>
                             </Grid>
                         </Grid>
                         <Grid item className={classes.sectionDesktop}>
                             <Grid container className={classes.sectionDesktopContainer}>
                                 <Grid item className={classes.infosContainer}>
                                     <h4 className={classes.rankingItemInfoTitle}>Clientes Ativos</h4>
-                                    <h2 className={classes.rankingItemInfoText}>{mySocialMedia.activeClients ? mySocialMedia.activeClients : "-"}</h2>
+                                    <h2 className={classes.rankingItemInfoText}>{mySocialMedia.currentContracts ? mySocialMedia.currentContracts : "-"}</h2>
                                 </Grid>
                                 <Grid item className={classes.infosContainer}>
                                     <h4 className={classes.rankingItemInfoTitle}>Trabalhos Feitos</h4>
@@ -254,22 +265,22 @@ export default function Ranking() {
                                         <Grid item className={classes.rankingItemRevenuesContainer}>
                                             <Grid item >
                                                 <h4 className={classes.rankingItemTitle}>Faturamento</h4>
-                                                <h2 className={classes.rankingItemRevenuesText}>{item.monthlyInvoicing ? "R$ " + item.monthlyInvoicing.toFixed(2) : "-"}</h2>
+                                                <h2 className={classes.rankingItemRevenuesText}>{item.monthlyInvoicing ? formatMonthlyInvoicing(item.monthlyInvoicing) : "-"}</h2>
                                             </Grid>
                                         </Grid>
                                         <Grid item className={classes.sectionDesktop}>
                                             <Grid container className={classes.sectionDesktopContainer}>
                                                 <Grid item className={classes.infosContainer}>
                                                     <h4 className={classes.rankingItemInfoTitle}>Clientes Ativos</h4>
-                                                    <h2 className={classes.rankingItemInfoText}>{content.activeClients ? content.activeClients : "-"}</h2>
+                                                    <h2 className={classes.rankingItemInfoText}>{item.currentContracts ? item.currentContracts : "-"}</h2>
                                                 </Grid>
                                                 <Grid item className={classes.infosContainer}>
                                                     <h4 className={classes.rankingItemInfoTitle}>Trabalhos Feitos</h4>
-                                                    <h2 className={classes.rankingItemInfoText}>{content.worksDone ? content.worksDone : "-"}</h2>
+                                                    <h2 className={classes.rankingItemInfoText}>{item.worksDone ? item.worksDone : "-"}</h2>
                                                 </Grid>
                                                 <Grid item className={classes.infosContainer}>
                                                     <h4 className={classes.rankingItemInfoTitle}>Medalhas</h4>
-                                                    <h2 className={classes.rankingItemInfoText}>{content.medals ? content.medals : "-"}</h2>
+                                                    <h2 className={classes.rankingItemInfoText}>{item.medals ? item.medals : "-"}</h2>
                                                 </Grid>
                                             </Grid>
                                         </Grid>

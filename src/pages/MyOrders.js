@@ -85,14 +85,13 @@ export default function Ranking() {
 
     useEffect(async () => {
         setLoading(true)
-        const response = await api.get("/orders")
+        const response = await api.get("/users/orders")
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(response.data)
         await setLoading(false)
     }, []);
 
     function handleClickItem(item) {
-        console.log(item)
         history.push("/socials-media/" + item.id)
     }
 

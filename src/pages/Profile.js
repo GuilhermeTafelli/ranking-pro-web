@@ -17,7 +17,20 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import AgeIcon from '../static/age.svg'
 import { useParams } from 'react-router-dom';
+import { ReactComponent as MedalOutline } from '../static/medals/medal-outline.svg'
+import Medal3Revenues from '../static/medals/medal-3-revenues.svg'
+import Medal5Revenues from '../static/medals/medal-5-revenues.svg'
+import Medal10Revenues from '../static/medals/medal-10-revenues.svg'
+import Medal20Revenues from '../static/medals/medal-20-revenues.svg'
+import Medal30Revenues from '../static/medals/medal-30-revenues.svg'
+import MedalFirstContract from '../static/medals/medal-first-contract.svg'
+import MedalFirstPartner from '../static/medals/medal-first-partner.svg'
+import MedalFirstVideoFeedback from '../static/medals/medal-first-video-feedback.svg'
+import Tooltip from '@material-ui/core/Tooltip';
+import { useSelector } from 'react-redux'
+
 import CustomMenu from '../components/customMenu/CustomMenu';
+
 const useStyles = makeStyles((theme) => ({
     main: {
         background: "#F5F6FA",
@@ -174,7 +187,7 @@ const useStyles = makeStyles((theme) => ({
     containerInformation: {
         marginTop: "10px",
         marginBottom: "15px"
-    }
+    },
 }));
 
 const content = {
@@ -183,7 +196,7 @@ const content = {
 
 export default function Profile() {
     const classes = useStyles();
-
+    const state = useSelector(state => state.socialMedia)
     const [content, setContent] = useState(null);
     const [loading, setLoading] = useState(false);
     const { socialMediaId } = useParams();
@@ -193,7 +206,6 @@ export default function Profile() {
         const response = await api.get("/users/socials-media/" + socialMediaId)
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(response.data)
-        console.log(response.data)
         await setLoading(false)
     }, []);
 
@@ -278,13 +290,13 @@ export default function Profile() {
                         <Grid container className={classes.cardItem} xs={4}>
                             <Grid item className={classes.cardPosition} xs={12}>
                                 <h3 className={classes.cardPositionTitle}>Posição</h3>
-                                <h4 className={classes.cardPositionValue}>{content.position ? content.position : "-"}</h4>
+                                <h4 className={classes.cardPositionValue}>{state.position ? state.position : "-"}</h4>
                             </Grid>
                         </Grid>
                         <Grid container className={classes.cardItem} xs={4}>
                             <Grid item className={classes.cardClients} xs={12}>
                                 <h3 className={classes.cardClientsTitle}>Clientes</h3>
-                                <h4 className={classes.cardClientsValue}>{content.activeClients ? content.activeClients : "-"}</h4>
+                                <h4 className={classes.cardClientsValue}>{content.currentContracts ? content.currentContracts : "-"}</h4>
                             </Grid>
                         </Grid>
                         <Grid container className={classes.cardItem} xs={4}>
@@ -293,10 +305,107 @@ export default function Profile() {
                                 <h4 className={classes.cardWorksValue}>{content.worksDone ? content.worksDone : "-"}</h4>
                             </Grid>
                         </Grid>
-                        <Grid container className={classes.profileItem}>
+                        <Grid container spacing={1} className={classes.profileItem}>
                             <Grid item xs={12}>
                                 <h3 className={classes.title}>Medalhas</h3>
                             </Grid>
+                            <Tooltip title="Primeiro parceiro" aria-label="primeiro parceiro">
+                                {content.medals && content.medals.includes("MEDAL_FIRST_PARTNER")
+                                    ?
+                                    <Grid item>
+                                        <img src={MedalFirstPartner} />
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <MedalOutline />
+                                    </Grid>
+                                }
+                            </Tooltip>
+                            <Tooltip title="Primeiro contrato" aria-label="Primeiro contrato">
+                                {content.medals && content.medals.includes("MEDAL_FIRST_CONTRACT")
+                                    ?
+                                    <Grid item>
+                                        <img src={MedalFirstContract} />
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <MedalOutline />
+                                    </Grid>
+                                }
+                            </Tooltip>
+                            <Tooltip title="Primeiro feedback em video" aria-label="Primeiro feedback em video">
+                                {content.medals && content.medals.includes("MEDAL_FIRST_VIDEO_FEEDBACK")
+                                    ?
+                                    <Grid item>
+                                        <img src={MedalFirstVideoFeedback} />
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <MedalOutline />
+                                    </Grid>
+                                }
+                            </Tooltip>
+                            <Tooltip title="Faturamento acima de 3 mil" aria-label="Faturamento acima de 3 mil">
+                                {content.medals && content.medals.includes("MEDAL_3_REVENUES")
+                                    ?
+                                    <Grid item>
+                                        <img src={Medal3Revenues} />
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <MedalOutline />
+                                    </Grid>
+                                }
+                            </Tooltip>
+                            <Tooltip title="Faturamento acima de 5 mil" aria-label="Faturamento acima de 5 mil">
+                                {content.medals && content.medals.includes("MEDAL_5_REVENUES")
+                                    ?
+                                    <Grid item>
+                                        <img src={Medal5Revenues} />
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <MedalOutline />
+                                    </Grid>
+                                }
+                            </Tooltip>
+                            <Tooltip title="Faturamento acima de 10 mil" aria-label="Faturamento acima de 10 mil">
+                                {content.medals && content.medals.includes("MEDAL_10_REVENUES")
+                                    ?
+                                    <Grid item>
+                                        <img src={Medal10Revenues} />
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <MedalOutline />
+                                    </Grid>
+                                }
+                            </Tooltip>
+                            <Tooltip title="Faturamento acima de 20 mil" aria-label="Faturamento acima de 20 mil">
+                                {content.medals && content.medals.includes("MEDAL_20_REVENUES")
+                                    ?
+                                    <Grid item>
+                                        <img src={Medal20Revenues} />
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <MedalOutline />
+                                    </Grid>
+                                }
+                            </Tooltip>
+                            <Tooltip title="Faturamento acima de 30 mil" aria-label="Faturamento acima de 30 mil">
+
+                                {content.medals && content.medals.includes("MEDAL_30_REVENUES")
+                                    ?
+                                    <Grid item>
+                                        <img src={Medal30Revenues} />
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <MedalOutline />
+                                    </Grid>
+                                }
+                            </Tooltip>
                         </Grid>
                         <Grid container className={classes.cardItem} xs={12}>
                             <Grid item className={classes.cardRevenues} xs={12}>

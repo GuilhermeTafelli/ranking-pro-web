@@ -94,7 +94,6 @@ export default function StepOneForm(){
 
         try {
 
-            console.log("eita")
             formRef.current.setErrors({});
 
               const schema = Yup.object().shape({
@@ -112,9 +111,6 @@ export default function StepOneForm(){
             });
 
             const imageBase64 = await fileToBase64(data.foto)
-
-
-            console.log(file)
 
             await dispatch(
                 {
@@ -141,7 +137,6 @@ export default function StepOneForm(){
           }
     }
     
-    console.log(state)
     return (
         
         <Form ref={formRef} className={classes.form} onSubmit={handleSubmit}>

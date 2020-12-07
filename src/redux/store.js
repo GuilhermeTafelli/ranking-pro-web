@@ -27,6 +27,9 @@ const REGISTRY_INITIAL_STATE = {
     niches: {values:[]}
 }
 
+const SOCIAL_MEDIA_INITIAL_STATE =  {
+    position: null
+}
 
 function auth(state = AUTH_INITIAL_STATE, action) {
     switch (action.type){
@@ -41,10 +44,18 @@ function auth(state = AUTH_INITIAL_STATE, action) {
     }
 }
 
+function socialMedia(state = SOCIAL_MEDIA_INITIAL_STATE, action) {
+    switch (action.type){
+        case 'SOCIAL_MEDIA_POSITION':
+            return {...state, position: action.position}
+        default: 
+            return state
+    }
+}
+
 function registry(state = REGISTRY_INITIAL_STATE, action) {
     switch (action.type){
         case 'REGISTRY_STEP_ONE':
-            console.log("2")
             return {
                 ...state,
                 name: action.name,
@@ -98,6 +109,6 @@ function registry(state = REGISTRY_INITIAL_STATE, action) {
     }
 }
 
-const store = createStore(combineReducers({auth, registry}))
+const store = createStore(combineReducers({auth, registry, socialMedia}))
 
 export default store;

@@ -90,7 +90,6 @@ export default function StepFiveForm(){
             await dispatch({ type: 'LOGIN'})
 
             setUser(response.data.user)
-            console.log(response)
 
             const requestSocialMedia = {
                 userId: response.data.user.id,
@@ -106,7 +105,6 @@ export default function StepFiveForm(){
             }
       
             const responseSocialMedia = await api.post("/users/socials-media", requestSocialMedia)
-            console.log(responseSocialMedia)
             history.push("/")
        
         } catch (err) {

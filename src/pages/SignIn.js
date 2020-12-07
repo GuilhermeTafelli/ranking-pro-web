@@ -106,7 +106,6 @@ export default function SignIn() {
   const dispatch = useDispatch()
 
   async function handleSubmit(data){
-    console.log("teste")
     setSubmitLoading(true)
     
     try {
@@ -115,7 +114,11 @@ export default function SignIn() {
       await login(response.data.token);
       await setUser(response.data.user)
       await dispatch({ type: 'LOGIN'})
-      await history.push("/");
+
+      if(response.data.user.roles.includes("ADMIN")){
+        await history.push("/admin");
+      }
+      else await history.push("/");
     }
     catch(error){
       setOpenAlert(true) 
@@ -143,7 +146,7 @@ export default function SignIn() {
         </Snackbar>
         <CssBaseline />
         <div className={classes.paper}>
-          <h1 className={classes.title}>{process.env.REACT_APP_RANKING_API_URL}</h1>
+          <h1 className={classes.title}>Login</h1>
             
           <Form className={classes.form} onSubmit={handleSubmit} >
             <Grid container className={classes.formContainer}>

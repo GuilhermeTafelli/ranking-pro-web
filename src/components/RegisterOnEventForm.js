@@ -195,7 +195,6 @@ export default function RegisterOnEvent() {
         setOpenAlert(false)
     };
     const handleSkillClick = function handleSkillClick(index){
-        console.log(index, skills)
         var newSkills = skills.skills
 
         if(newSkills[index].selected === true){
@@ -243,9 +242,7 @@ export default function RegisterOnEvent() {
               abortEarly: false,
             });
 
-            console.log("enter")
             const imageBase64 = await fileToBase64(data.foto)
-            console.log(imageBase64)
             const request = {
                 address: data.endereço,
                 addressNumber: data.número,
@@ -260,13 +257,12 @@ export default function RegisterOnEvent() {
                 profilePhoto: { base64: imageBase64 }
             }
 
-            console.log(request)
 
             const response = await api.put("/users", request)
 
 
             setUser(response.data)
-            console.log(response)
+
             history.push("/")
             const requestSocialMedia = {
                 userId: response.data.user,

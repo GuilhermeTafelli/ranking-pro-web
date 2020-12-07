@@ -1,25 +1,16 @@
 import React, { useState } from "react";
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
 import Grid from "@material-ui/core/Grid";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { getUser, logout } from '../../services/Auth'
 import history from '../../history'
 import { useSelector, useDispatch } from 'react-redux'
@@ -27,9 +18,10 @@ import HomeIcon from '../../static/home.svg'
 import RankIcon from '../../static/rank.svg'
 import ClassIcon from '../../static/class.svg'
 import ForumIcon from '../../static/forum.svg'
-import { Home } from "@material-ui/icons";
-import classNames from 'classnames';
+
 import './style.css'
+
+
 const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(4)
@@ -137,7 +129,6 @@ function CustomMenu() {
     const isAuth = useSelector(state => state.auth.isAuthenticated)
     const user = getUser()
     const dispatch = useDispatch()
-    console.log(user)
     
     function handleProfileMenuOpen(event) {
         setAchorEl(event.currentTarget)
@@ -193,19 +184,6 @@ function CustomMenu() {
                         <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
                     </div>
                 )
-            }
-            {isAuth &&
-                <div className="dropdown" style={{float:"right"}}>
-                    
-                    <div className="dropbtn">
-                        <img className={classes.profilePhoto} src={user.profilePhotoLink}/>
-                    </div>
-                    <div className="dropDownContent">
-                        <a>Perfil</a>
-                        <a href="/orders">Solicitações</a>
-                        <a onClick={handleSessionClick}>Sair</a>
-                    </div>
-                </div>
             }
             </Grid>
                             
@@ -306,7 +284,9 @@ function CustomMenu() {
                                     </div>
                                 )
                             }
-                            {isAuth &&
+                           
+                        </Grid>
+                        {isAuth &&
                                 <div className="dropdown" style={{float:"right"}}>
                                     
                                     <div className="dropbtn">
@@ -319,7 +299,6 @@ function CustomMenu() {
                                     </div>
                                 </div>
                             }
-                        </Grid>
                     </Grid>
                 </Toolbar>
             </AppBar>

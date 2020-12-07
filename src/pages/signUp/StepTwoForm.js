@@ -95,8 +95,6 @@ export default function StepTwoForm(){
               abortEarly: false,
             });
 
-            console.log(data)
-
             await dispatch(
                 {
                     type: "REGISTRY_STEP_TWO",                 
@@ -144,7 +142,7 @@ export default function StepTwoForm(){
                 </Grid>
                 <Grid item className={classes.input} xs={6} sm={4}>
                     <CustomInput 
-                    name="cep"
+                    name="cep"CustomInput
                     label="CEP*"
                     autoComplete="cep"
                     defaultValue={state.postalCode}
