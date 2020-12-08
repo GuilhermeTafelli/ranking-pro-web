@@ -123,12 +123,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomMenu() {
 
-    // const [anchorEl, setAchorEl] = useState(false)
-    // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false)
+    const [anchorEl, setAchorEl] = useState(false)
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false)
 
-    // const isAuth = false//useSelector(state => state.auth.isAuthenticated)
-    // const user = null
-    // const dispatch = useDispatch()
+    const isAuth = false//useSelector(state => state.auth.isAuthenticated)
+    const user = null
+    const dispatch = useDispatch()
 
     // function handleProfileMenuOpen(event) {
     //     setAchorEl(event.currentTarget)
