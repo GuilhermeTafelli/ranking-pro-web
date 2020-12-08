@@ -3,8 +3,8 @@ import './style.css'
 export default function Privacy() {
 
     return (
-        <div className="main">
-            <div className="mainContainer">
+        <div className="mainPolicies">
+            <div className="mainPoliciesContainer">
 
 
                 <h2>Política Privacidade</h2>

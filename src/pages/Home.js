@@ -4,29 +4,92 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import api from '../services/Api'
-import history from '../history'
+import DepositionImage from '../static/depositions.jpg'
 import CustomMenu from '../components/customMenu/CustomMenu';
 import { useDispatch } from 'react-redux'
-
+import HomeImage from '../static/home.png'
 const useStyles = makeStyles((theme) => ({
     main: {
         background: "#F5F6FA",
         flexDirection: "column",
+        alignItems: "center"
     },
     rankingTitle: {
-        [theme.breakpoints.down("xs")]: {
-            fontSize: "40px",
-        },
-        [theme.breakpoints.down("sm")]: {
-            fontSize: "50px",
-        },
         [theme.breakpoints.down("md")]: {
             fontSize: "60px",
         },
+        [theme.breakpoints.down("sm")]: {
+            fontSize: "60px",
+        },
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "35px",
+        },
+        marginTop: "20px",
         fontSize: "80px",
         fontFamily: "branding-bold",
         color: "#244CF4",
         textAlign: "center"
+    },
+    depositionsTitle: {
+        [theme.breakpoints.down("md")]: {
+            fontSize: "60px",
+        },
+        [theme.breakpoints.down("sm")]: {
+            fontSize: "60px",
+        },
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "30px",
+        },
+        margin: "50px 0px",
+        fontSize: "45px",
+        fontFamily: "branding-bold",
+        textAlign: "center"
+    },
+    depositionsContainer: {
+        alignItems: "center",
+        flexDirection: "column",
+        padding: "0px 10px",
+    },
+    depositionsItem: {
+        background: "#FFF",
+        borderRadius: "32px",
+        padding: "30px 100px 30px 30px",
+        margin: "15px 0px",
+        boxShadow: "0 0 1em rgba(0, 0, 0, 0.09)",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+
+        },
+
+    },
+    depositionsItemName: {
+        fontSize: "34px",
+        fontFamily: "branding-bold",
+        color: "#244CF4",
+        [theme.breakpoints.down("sm")]: {
+            textAlign: "center",
+        },
+    },
+    depositionsItemImage: {
+        borderRadius: "25px",
+        height: "130px",
+        width: "130px",
+        marginRight: "25px",
+        [theme.breakpoints.down("sm")]: {
+            marginRight: "0px",
+        },
+    },
+    depositionsItemDescription: {
+        fontFamily: "branding-medium",
+        fontSize: "23px",
+        textAlign: "justify"
+    },
+    depositionTextContainer: {
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "center"
+        },
     },
     rankingContainer: {
         alignItems: "center",
@@ -35,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rankingItem: {
         padding: "0px 20px",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             paddingRight: "0px",
         },
         backgroundColor: "#FFF",
@@ -81,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rankingItemRevenuesContainer: {
         background: "transparent linear-gradient(301deg, #16FF67 0%, #23CDD9 100%) 0% 0% no-repeat padding-box",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("")]: {
             padding: "2px 10px",
         },
         padding: "2px 20px",
@@ -108,14 +171,15 @@ const useStyles = makeStyles((theme) => ({
     },
     rankingListContainer: {
         background: "#FFF",
-        padding: "20px 20px",
+        padding: "20px 20px 50px 20px",
         borderRadius: "30px",
         marginTop: "30px",
         marginBottom: "20px",
         overflowY: "auto",
+        justifyContent: "center"
     },
     sectionDesktop: {
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             display: "none"
         },
         flexGrow: 1,
@@ -123,7 +187,8 @@ const useStyles = makeStyles((theme) => ({
     },
     rankingList: {
         listStyleType: "none",
-        width: "100%"
+        width: "100%",
+        marginBottom: "30px"
     },
     itemInfos: {
         flexGrow: 1,
@@ -158,51 +223,89 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "31px",
         border: "none",
         padding: "10px 26px",
-        marginLeft: "10px",
         boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)",
-        textDecoration: "none"
+        textDecoration: "none",
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "18px",
+        },
     },
     homeContainer: {
-        height: "92vh",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column"
+        height: "91vh",
+        background: "#FFF",
+        padding: "40px 70px",
+        [theme.breakpoints.down("xs")]: {
+            padding: "20px 30px",
+            flexDirection: "row-reverse"
+        },
     },
     homeContainerItem: {
         alignItems: "center",
         flexDirection: "column"
     },
     welcomeTitle: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "35px",
+        },
         fontFamily: "branding-bold",
-        fontSize: "140px",
-        color: "#0B38F2",
-        textAlign: "center"
+        fontSize: "85px",
+        color: "#4B4B4B",
+        lineHeight: "90%"
     },
     welcomeSubTitle: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "20px",
+        },
         fontFamily: "branding-bold",
-        fontSize: "70px",
+        fontSize: "30px",
         color: "#4B4B4B",
-        textAlign: "center",
-        marginTop: "-15px"
     },
     studentsText: {
-        marginTop: "60px",
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "18px",
+        },
+        marginTop: "30px",
         fontFamily: "branding-medium",
-        fontSize: "35px",
+        fontSize: "25px",
         color: "#4B4B4B",
-        textAlign: "center"
     },
     studentsStrong: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "28px",
+        },
         fontFamily: "branding-bold",
-        fontSize: "55px",
+        fontSize: "35px",
         color: "#244CF4",
-        textAlign: "center"
     },
     invoicing: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "37px",
+        },
         fontFamily: "branding-bold",
-        fontSize: "130px",
+        fontSize: "65px",
         color: "#244CF4",
-        textAlign: "center"
+    },
+    homeImage: {
+        height: "100%",
+        width: "100%",
+        marginTop: "-90px"
+    },
+    homeTextContainer: {
+        paddingTop: "20px",
+        alignContent: "flex-start"
+    },
+    submitClean: {
+        fontFamily: "branding-semibold",
+        fontSize: "30px",
+        color: "#FFF",
+        background: "#4B4B4B",
+        borderRadius: "31px",
+        border: "none",
+        padding: "10px 26px",
+        boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)",
+        textDecoration: "none"
+    },
+    submitCleanContainer: {
+        marginTop: "70px"
     }
 }))
 
@@ -234,21 +337,22 @@ export default function Home() {
 
             {content && <CustomMenu />}
             {content && <Grid container className={classes.main} xs={12}>
-                <Grid container item className={classes.homeContainer} >
-                    <Grid container className={classes.homeContainerItem}>
-                        <Grid item md={5}>
-                            <h1 className={classes.welcomeTitle}>Bem-vindo</h1>
+                <Grid container className={classes.homeContainer} >
+                    <Grid item xs={12} md={5} className={classes.homeTextContainer}>
+                        <Grid item xs={12}>
+                            <h2 className={classes.welcomeSubTitle}>Bem-vinda(o) à</h2>
                         </Grid>
-                        <Grid item md={4}>
-                            <h2 className={classes.welcomeSubTitle}> a maior plataforma de social media</h2>
+                        <Grid item xs={12}>
+                            <h1 className={classes.welcomeTitle}>Maior plataforma de social media do Mundo</h1>
                         </Grid>
-                        <Grid item>
-                        <h3 className={classes.studentsText}> Nossos <strong className={classes.studentsStrong}>2.000 alunos</strong> já faturaram</h3>
-                        </Grid>
-                        <Grid item>
-                        <h1 className={classes.invoicing}>R$ 300,000,00</h1>
+                        <Grid item className={classes.submitCleanContainer}>
+                            <a href="/signUp" className={classes.submit}>Faça parte agora!</a>
                         </Grid>
                     </Grid>
+                    <Grid item xs={12} md={7}>
+                        <img className={classes.homeImage} src={HomeImage} />
+                    </Grid>
+
                 </Grid>
                 <Grid item container className={classes.rankingContainer}>
                     <Grid item>
@@ -300,24 +404,49 @@ export default function Home() {
                                     </li>
                                 )}
                             </ul>
+                            <Grid item>
+                                <a
+                                    href="/signUp"
+                                    type="submit"
+                                    className={classes.submit}
+                                >
+                                    Quero fazer parte
+                                </a>
+                            </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item>
-                        <a
-                            href="/signUp"
-                            type="submit"
-                            className={classes.submit}
-                        >
-                            Quero fazer parte
-                        </a>
-                    </Grid>
-                </Grid>
-                <Grid container item>
-                    <Grid item>
-                        <h1 className={classes.rankingTitle}>Veja os comentários dos nossos alunos</h1>
-                    </Grid>
-                    <Grid container item>
 
+                </Grid>
+                <Grid container className={classes.depositionsContainer} xs={10}>
+                    <Grid item>
+                        <h1 className={classes.depositionsTitle}>Veja os comentários dos nossos alunos</h1>
+                    </Grid>
+                    <Grid container item className={classes.depositionsItem}>
+                        <Grid item>
+                            <img className={classes.depositionsItemImage} src={DepositionImage}/>
+                        </Grid>
+                        <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
+                            <h2 className={classes.depositionsItemName}>@João silva</h2>
+                            <p className={classes.depositionsItemDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </Grid>
+                    </Grid>
+                    <Grid container item className={classes.depositionsItem}>
+                        <Grid item>
+                            <img className={classes.depositionsItemImage} src={DepositionImage}/>
+                        </Grid>
+                        <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
+                            <h2 className={classes.depositionsItemName}>@João silva</h2>
+                            <p className={classes.depositionsItemDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </Grid>
+                    </Grid>
+                    <Grid container item className={classes.depositionsItem}>
+                        <Grid item>
+                            <img className={classes.depositionsItemImage} src={DepositionImage}/>
+                        </Grid>
+                        <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
+                            <h2 className={classes.depositionsItemName}>@João silva</h2>
+                            <p className={classes.depositionsItemDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>

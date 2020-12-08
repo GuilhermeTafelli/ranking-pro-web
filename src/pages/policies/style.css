@@ -1,32 +1,32 @@
-h2 {
+.mainPoliciesContainer h2 {
   margin-top: 20px;
   font-family: "branding-semibold";
   color: "#576d96";
 }
 
-h3 {
+.mainPoliciesContainer h3 {
   margin-top: 20px;
   font-family: "branding-semibold";
   color: "#576d96";
 }
 
-li {
+.mainPoliciesContainer li {
   margin-left: 50px;
   padding: 10px;
 }
 
-p {
+.mainPoliciesContainer p {
   font-family: "branding-medium";
   color: "#576d96";
   text-align: justify;
 }
 
-.mainContainer {
+.mainPoliciesContainer {
   background-color: #FFF;
   border-radius: 30px;
   padding: 30px;
 }
 
-.main {
+.mainPolicies {
   padding: 30px;
 }
