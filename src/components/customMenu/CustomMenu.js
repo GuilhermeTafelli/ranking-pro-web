@@ -211,7 +211,7 @@ function CustomMenu() {
 
     return (
         <div>
-            <AppBar elevation={0} className={classes.appBar} position="relative">
+            {/* <AppBar elevation={0} className={classes.appBar} position="relative">
                 <Toolbar>
                     <Grid container className={classes.mainContainer}>
                         <div className={classes.sectionMobile}>
@@ -277,8 +277,6 @@ function CustomMenu() {
 
                         {!isAuth &&
                             <Grid item className={classes.sectionDesktop}>
-
-
                                 <div>
                                     <button onClick={() => history.push("/signIn")} className={classes.submit}>Entrar</button>
                                     <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
@@ -301,7 +299,8 @@ function CustomMenu() {
                     </Grid>
                 </Toolbar>
             </AppBar>
-            { renderMobileMenu}
+            { renderMobileMenu} */}
+            <h1>teste</h1>
         </div >
     );
 }
