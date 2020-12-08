@@ -340,7 +340,7 @@ export default function Home() {
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            {/* {content && <CustomMenu />} */}
+            {content && <CustomMenu />}
             {content && <Grid container className={classes.main} xs={12}>
                 <Grid container className={classes.homeContainer} >
                     <Grid item xs={12} md={5} className={classes.homeTextContainer}>

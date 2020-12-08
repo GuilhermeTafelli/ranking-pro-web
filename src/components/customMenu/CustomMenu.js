@@ -300,7 +300,6 @@ export default function CustomMenu() {
                 </Toolbar>
             </AppBar>
             { renderMobileMenu}
-            <h1>teste</h1>
         </div >
     );
 }
