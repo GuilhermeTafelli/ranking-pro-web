@@ -126,8 +126,8 @@ function CustomMenu() {
     const [anchorEl, setAchorEl] = useState(false)
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false)
 
-    const isAuth = useSelector(state => state.auth.isAuthenticated)
-    const user = getUser()
+    const isAuth = false//useSelector(state => state.auth.isAuthenticated)
+    const user = null
     const dispatch = useDispatch()
 
     function handleProfileMenuOpen(event) {
