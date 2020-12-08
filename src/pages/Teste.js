@@ -9,6 +9,308 @@ import CustomMenu from '../components/customMenu/CustomMenu';
 import DepositionImage from '../static/depositions.jpg'
 import { useDispatch } from 'react-redux'
 import HomeImage from '../static/home.png'
+
+const useStyles = makeStyles((theme) => ({
+    main: {
+        background: "#F5F6FA",
+        flexDirection: "column",
+        alignItems: "center"
+    },
+    rankingTitle: {
+        [theme.breakpoints.down("md")]: {
+            fontSize: "60px",
+        },
+        [theme.breakpoints.down("sm")]: {
+            fontSize: "60px",
+        },
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "35px",
+        },
+        marginTop: "20px",
+        fontSize: "80px",
+        fontFamily: "branding-bold",
+        color: "#244CF4",
+        textAlign: "center"
+    },
+    depositionsTitle: {
+        [theme.breakpoints.down("md")]: {
+            fontSize: "60px",
+        },
+        [theme.breakpoints.down("sm")]: {
+            fontSize: "60px",
+        },
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "30px",
+        },
+        margin: "50px 0px",
+        fontSize: "45px",
+        fontFamily: "branding-bold",
+        textAlign: "center"
+    },
+    depositionsContainer: {
+        alignItems: "center",
+        flexDirection: "column",
+        padding: "0px 10px",
+    },
+    depositionsItem: {
+        background: "#FFF",
+        borderRadius: "32px",
+        padding: "30px 100px 30px 30px",
+        margin: "15px 0px",
+        boxShadow: "0 0 1em rgba(0, 0, 0, 0.09)",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+
+        },
+
+    },
+    depositionsItemName: {
+        fontSize: "34px",
+        fontFamily: "branding-bold",
+        color: "#244CF4",
+        [theme.breakpoints.down("sm")]: {
+            textAlign: "center",
+        },
+    },
+    depositionsItemImage: {
+        borderRadius: "25px",
+        height: "130px",
+        width: "130px",
+        marginRight: "25px",
+        [theme.breakpoints.down("sm")]: {
+            marginRight: "0px",
+        },
+    },
+    depositionsItemDescription: {
+        fontFamily: "branding-medium",
+        fontSize: "23px",
+        textAlign: "justify"
+    },
+    depositionTextContainer: {
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "center"
+        },
+    },
+    rankingContainer: {
+        alignItems: "center",
+        flexDirection: "column",
+        padding: "0px 10px"
+    },
+    rankingItem: {
+        padding: "0px 20px",
+        [theme.breakpoints.down("sm")]: {
+            paddingRight: "0px",
+        },
+        backgroundColor: "#FFF",
+        margin: "30px 0px",
+        borderRadius: "30px",
+        alignItems: "center",
+        justifyContent: "space-between",
+        boxShadow: "7px 7px 1em rgba(0, 0, 0, 0.2)",
+    },
+    rankingPosition: {
+        fontSize: "28px",
+        fontFamily: "branding-medium",
+        color: "#3052DE"
+    },
+    rankingItemName: {
+        fontSize: "18px",
+        fontFamily: "branding-medium",
+        color: "#373737"
+    },
+    rankingItemNameContainer: {
+        margin: "0px 20px",
+        alignSelf: "flex-start"
+    },
+    rankingItemLocation: {
+        fontSize: "13px",
+        fontFamily: "branding-light",
+        color: "#373737"
+    },
+    rankingItemTitle: {
+        fontSize: "13px",
+        fontFamily: "branding-medium",
+        color: "#FFFFFF",
+        textAlign: "center"
+    },
+    rankingItemRevenuesText: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "20px",
+        },
+        fontSize: "40px",
+        fontFamily: "branding-bold",
+        color: "#FFFFFF",
+        textAlign: "center"
+    },
+    rankingItemRevenuesContainer: {
+        background: "transparent linear-gradient(301deg, #16FF67 0%, #23CDD9 100%) 0% 0% no-repeat padding-box",
+        [theme.breakpoints.down("xs")]: {
+            padding: "2px 10px",
+        },
+        padding: "2px 20px",
+        borderRadius: "31px",
+        justifyContent: "center",
+        [theme.breakpoints.up("sm")]: {
+            flexGrow: 1,
+        },
+    },
+    infosContainer: {
+        margin: "0px 10px",
+    },
+    rankingItemInfoTitle: {
+        fontSize: "8px",
+        fontFamily: "branding-medium",
+        color: "#373737",
+        textAlign: "center"
+    },
+    rankingItemInfoText: {
+        fontSize: "30px",
+        fontFamily: "branding-bold",
+        color: "#373737",
+        textAlign: "center"
+    },
+    rankingListContainer: {
+        background: "#FFF",
+        padding: "20px 20px 50px 20px",
+        borderRadius: "30px",
+        marginTop: "30px",
+        marginBottom: "20px",
+        overflowY: "auto",
+        justifyContent: "center"
+    },
+    sectionDesktop: {
+        [theme.breakpoints.down("sm")]: {
+            display: "none"
+        },
+        flexGrow: 1,
+        width: "20%"
+    },
+    rankingList: {
+        listStyleType: "none",
+        width: "100%",
+        marginBottom: "30px"
+    },
+    itemInfos: {
+        flexGrow: 1,
+        width: "20%"
+
+    },
+    sectionDesktopContainer: {
+        justifyContent: "flex-end",
+    },
+    profilePhoto: {
+        height: "45px",
+        width: "65px",
+        borderRadius: "57px",
+        marginLeft: "20px",
+        marginBottom: "0px",
+        [theme.breakpoints.down("xs")]: {
+            display: "none"
+        },
+    },
+    itemInfosContainer: {
+        alignItems: "center"
+    },
+    item: {
+        padding: "0px",
+        margin: "0px"
+    },
+    submit: {
+        fontFamily: "branding-bold",
+        fontSize: "30px",
+        color: "#FFF",
+        backgroundImage: "linear-gradient(#4E95FF, #0D2DFF)",
+        borderRadius: "31px",
+        border: "none",
+        padding: "10px 26px",
+        boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)",
+        textDecoration: "none",
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "18px",
+        },
+    },
+    homeContainer: {
+        height: "91vh",
+        background: "#FFF",
+        padding: "40px 70px",
+        [theme.breakpoints.down("xs")]: {
+            padding: "20px 30px",
+            flexDirection: "row-reverse"
+        },
+    },
+    homeContainerItem: {
+        alignItems: "center",
+        flexDirection: "column"
+    },
+    welcomeTitle: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "35px",
+        },
+        fontFamily: "branding-bold",
+        fontSize: "85px",
+        color: "#4B4B4B",
+        lineHeight: "90%"
+    },
+    welcomeSubTitle: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "20px",
+        },
+        fontFamily: "branding-bold",
+        fontSize: "30px",
+        color: "#4B4B4B",
+    },
+    studentsText: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "18px",
+        },
+        marginTop: "30px",
+        fontFamily: "branding-medium",
+        fontSize: "25px",
+        color: "#4B4B4B",
+    },
+    studentsStrong: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "28px",
+        },
+        fontFamily: "branding-bold",
+        fontSize: "35px",
+        color: "#244CF4",
+    },
+    invoicing: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "37px",
+        },
+        fontFamily: "branding-bold",
+        fontSize: "65px",
+        color: "#244CF4",
+    },
+    homeImage: {
+        height: "100%",
+        width: "100%",
+        marginTop: "-90px"
+    },
+    homeTextContainer: {
+        paddingTop: "20px",
+        alignContent: "flex-start"
+    },
+    submitClean: {
+        fontFamily: "branding-semibold",
+        fontSize: "30px",
+        color: "#FFF",
+        background: "#4B4B4B",
+        borderRadius: "31px",
+        border: "none",
+        padding: "10px 26px",
+        boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)",
+        textDecoration: "none"
+    },
+    submitCleanContainer: {
+        marginTop: "70px"
+    }
+}))
+
 export default function Teste() {
     const [count, setCount] = useState(0);
 
@@ -20,7 +322,7 @@ export default function Teste() {
 
     const [content, setContent] = useState([]);
     const [loading, setLoading] = useState(false);
-    const classes = {}
+    const classes = useStyles()
     useEffect(async () => {
         setLoading(true)
         const response = await api.get("/socials-media/ranking")
