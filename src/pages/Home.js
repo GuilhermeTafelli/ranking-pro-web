@@ -144,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rankingItemRevenuesContainer: {
         background: "transparent linear-gradient(301deg, #16FF67 0%, #23CDD9 100%) 0% 0% no-repeat padding-box",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("")]: {
             padding: "2px 10px",
         },
         padding: "2px 20px",
@@ -313,7 +313,7 @@ export default function Home() {
 
     const classes = useStyles()
 
-    const [content, setContent] = useState([]);
+    const [content, setContent] = useState(false);
 
     const [loading, setLoading] = useState(false);
 
@@ -321,12 +321,12 @@ export default function Home() {
         setLoading(true)
         const response = await api.get("/socials-media/ranking")
         console.log(response.data.socialsMedia.slice(0, 5))
-    await new Promise((resolve) => setTimeout(resolve, 500))
-        setContent(["as", "a"])
+        await new Promise((resolve) => setTimeout(resolve, 500))
+        await setContent(response.data.socialsMedia)
         console.log("1")
-        setLoading(false)
+        await setLoading(false)
         console.log("2")
-    });
+    }, []);
 
     function formatMonthlyInvoicing(value) {
         console.log("3")
@@ -340,10 +340,9 @@ export default function Home() {
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            <CustomMenu />
-            <Grid container className={classes.main} xs={12}>
-                <h1>teste</h1>
-                {/* <Grid container className={classes.homeContainer} >
+            {/* {content && <CustomMenu />} */}
+            {content && <Grid container className={classes.main} xs={12}>
+                <Grid container className={classes.homeContainer} >
                     <Grid item xs={12} md={5} className={classes.homeTextContainer}>
                         <Grid item xs={12}>
                             <h2 className={classes.welcomeSubTitle}>Bem-vinda(o) à</h2>
@@ -429,7 +428,7 @@ export default function Home() {
                     </Grid>
                     <Grid container item className={classes.depositionsItem}>
                         <Grid item>
-                            <img className={classes.depositionsItemImage} src={DepositionImage}/>
+                            <img className={classes.depositionsItemImage} src={DepositionImage} />
                         </Grid>
                         <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
                             <h2 className={classes.depositionsItemName}>@João silva</h2>
@@ -438,7 +437,7 @@ export default function Home() {
                     </Grid>
                     <Grid container item className={classes.depositionsItem}>
                         <Grid item>
-                            <img className={classes.depositionsItemImage} src={DepositionImage}/>
+                            <img className={classes.depositionsItemImage} src={DepositionImage} />
                         </Grid>
                         <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
                             <h2 className={classes.depositionsItemName}>@João silva</h2>
@@ -447,16 +446,16 @@ export default function Home() {
                     </Grid>
                     <Grid container item className={classes.depositionsItem}>
                         <Grid item>
-                            <img className={classes.depositionsItemImage} src={DepositionImage}/>
+                            <img className={classes.depositionsItemImage} src={DepositionImage} />
                         </Grid>
                         <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
                             <h2 className={classes.depositionsItemName}>@João silva</h2>
                             <p className={classes.depositionsItemDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                         </Grid>
                     </Grid>
-                </Grid> */}
+                </Grid>
             </Grid>
-            
+            }
         </React.Fragment>
     )
 }

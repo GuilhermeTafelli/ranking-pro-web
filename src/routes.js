@@ -74,7 +74,7 @@ function Routes() {
 
         <Route exact path="/socials-media/:socialMediaId" component={Profile} />
         <Route exact path="/ranking" component={Ranking} />
-        <Route exact path="/" component={Teste} />
+        <Route exact path="/" component={Home} />
 
         <Route exact path="/resetPassword" component={ResetPassword} />
 
