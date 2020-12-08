@@ -211,7 +211,7 @@ export default function CustomMenu() {
 
     return (
         <div>
-            {/* <AppBar elevation={0} className={classes.appBar} position="relative">
+            <AppBar elevation={0} className={classes.appBar} position="relative">
                 <Toolbar>
                     <Grid container className={classes.mainContainer}>
                         <div className={classes.sectionMobile}>
@@ -299,7 +299,7 @@ export default function CustomMenu() {
                     </Grid>
                 </Toolbar>
             </AppBar>
-            { renderMobileMenu} */}
+            { renderMobileMenu}
             <h1>teste</h1>
         </div >
     );
