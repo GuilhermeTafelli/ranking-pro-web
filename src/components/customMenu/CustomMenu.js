@@ -130,22 +130,22 @@ export default function CustomMenu() {
     const user = null
     const dispatch = useDispatch()
 
-    // function handleProfileMenuOpen(event) {
-    //     setAchorEl(event.currentTarget)
-    // };
+    function handleProfileMenuOpen(event) {
+        setAchorEl(event.currentTarget)
+    };
 
-    // function handleMobileMenuClose() {
-    //     setMobileMoreAnchorEl(null)
-    // };
+    function handleMobileMenuClose() {
+        setMobileMoreAnchorEl(null)
+    };
 
-    // function handleMenuClose() {
-    //     setMobileMoreAnchorEl(null)
-    //     setAchorEl(null)
-    // };
+    function handleMenuClose() {
+        setMobileMoreAnchorEl(null)
+        setAchorEl(null)
+    };
 
-    // function handleMobileMenuOpen(event) {
-    //     setMobileMoreAnchorEl(event.currentTarget)
-    // };
+    function handleMobileMenuOpen(event) {
+        setMobileMoreAnchorEl(event.currentTarget)
+    };
 
     // function handleSessionClick() {
 
