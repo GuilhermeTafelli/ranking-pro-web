@@ -169,45 +169,45 @@ export default function CustomMenu() {
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
     const mobileMenuId = "primary-search-account-menu-mobile";
-    // const renderMobileMenu = (
-    //     <SwipeableDrawer
-    //         anchor="left"
-    //         open={isMobileMenuOpen}
-    //         onClose={handleMobileMenuClose}
-    //         onOpen={handleMobileMenuOpen}
-    //     >
-    //         <Grid className={classes.containerAuthMobile}>
-    //             {!isAuth &&
-    //                 (
-    //                     <div>
-    //                         <button onClick={() => history.push("/signIn")} className={classes.submitMobile}>Entrar</button>
-    //                         <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
-    //                     </div>
-    //                 )
-    //             }
-    //         </Grid>
+    const renderMobileMenu = (
+        <SwipeableDrawer
+            anchor="left"
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+            onOpen={handleMobileMenuOpen}
+        >
+            <Grid className={classes.containerAuthMobile}>
+                {!isAuth &&
+                    (
+                        <div>
+                            <button onClick={() => history.push("/signIn")} className={classes.submitMobile}>Entrar</button>
+                            <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
+                        </div>
+                    )
+                }
+            </Grid>
 
-    //         <List>
-    //             <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
-    //                 <ListItemIcon><img src={HomeIcon} /></ListItemIcon>
-    //                 <ListItemText primary="Home" />
-    //             </ListItem>
-    //             <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
-    //                 <ListItemIcon><img src={ClassIcon} /></ListItemIcon>
-    //                 <ListItemText primary="Cursos" />
-    //             </ListItem>
-    //             <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")} key="Menu">
-    //                 <ListItemIcon><img src={RankIcon} /></ListItemIcon>
-    //                 <ListItemText primary="Rank" />
-    //             </ListItem>
-    //             <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
-    //                 <ListItemIcon><img src={ForumIcon} /></ListItemIcon>
-    //                 <ListItemText primary="Forúm" />
-    //             </ListItem>
-    //         </List>
-    //         <Divider />
-    //     </SwipeableDrawer>
-    // );
+            <List>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+                    <ListItemIcon><img src={HomeIcon} /></ListItemIcon>
+                    <ListItemText primary="Home" />
+                </ListItem>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+                    <ListItemIcon><img src={ClassIcon} /></ListItemIcon>
+                    <ListItemText primary="Cursos" />
+                </ListItem>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")} key="Menu">
+                    <ListItemIcon><img src={RankIcon} /></ListItemIcon>
+                    <ListItemText primary="Rank" />
+                </ListItem>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+                    <ListItemIcon><img src={ForumIcon} /></ListItemIcon>
+                    <ListItemText primary="Forúm" />
+                </ListItem>
+            </List>
+            <Divider />
+        </SwipeableDrawer>
+    );
 
     return (
         <div>
