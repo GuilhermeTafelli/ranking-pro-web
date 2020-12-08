@@ -317,16 +317,16 @@ export default function Home() {
 
     const [loading, setLoading] = useState(false);
 
-    // useEffect(async () => {
-    //     setLoading(true)
-    //     // const response = await api.get("/socials-media/ranking")
-    //     // console.log(response.data.socialsMedia.slice(0, 5))
-    // // await new Promise((resolve) => setTimeout(resolve, 500))
-    //     // await setContent(["as", ["a"]])
-    //     // console.log("1")
-    //     // await setLoading(false)
-    //     // console.log("2")
-    // }, []);
+    useEffect(async () => {
+        setLoading(false)
+        // const response = await api.get("/socials-media/ranking")
+        // console.log(response.data.socialsMedia.slice(0, 5))
+    // await new Promise((resolve) => setTimeout(resolve, 500))
+        // await setContent(["as", ["a"]])
+        // console.log("1")
+        // await setLoading(false)
+        // console.log("2")
+    }, []);
 
     function formatMonthlyInvoicing(value) {
         console.log("3")
@@ -340,7 +340,7 @@ export default function Home() {
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            {content && <CustomMenu />}
+            <CustomMenu />
             {content && <Grid container className={classes.main} xs={12}>
                 {/* <Grid container className={classes.homeContainer} >
                     <Grid item xs={12} md={5} className={classes.homeTextContainer}>
