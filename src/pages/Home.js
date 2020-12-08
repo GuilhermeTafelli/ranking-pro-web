@@ -323,11 +323,15 @@ export default function Home() {
         console.log(response.data.socialsMedia.slice(0, 5))
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(response.data.socialsMedia.slice(0, 5))
+        console.log("1")
         await setLoading(false)
+        console.log("2")
     }, []);
 
     function formatMonthlyInvoicing(value) {
+        console.log("3")
         return "R$ " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        console.log("4")
     }
 
     return (
