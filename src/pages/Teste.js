@@ -23,7 +23,7 @@ export default function Teste() {
         console.log("1")
         setLoading(false)
         console.log("2")
-    });
+    }, []);
 
     return (
         <div>
