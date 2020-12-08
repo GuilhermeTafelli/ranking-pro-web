@@ -365,7 +365,7 @@ export default function Home() {
                     </Grid>
                     <Grid container item xs={12} md={10} lg={8}>
                         <Grid item container className={classes.rankingListContainer} xs={12}>
-                            <ul className={classes.rankingList} xs={12}>
+                            {/* <ul className={classes.rankingList} xs={12}>
                                 {content && content.map((item) =>
                                     <li >
                                         <Grid container className={classes.rankingItem}>
@@ -408,7 +408,7 @@ export default function Home() {
                                         </Grid>
                                     </li>
                                 )}
-                            </ul>
+                            </ul> */}
                             <Grid item>
                                 <a
                                     href="/signUp"
