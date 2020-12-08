@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
-import api from '../services/Api'
 import CustomMenu from '../components/customMenu/CustomMenu';
 
 export default function Teste() {
