@@ -319,8 +319,8 @@ export default function Home() {
 
     useEffect(async () => {
         setLoading(true)
-        const response = await api.get("/socials-media/ranking")
-        console.log(response.data.socialsMedia.slice(0, 5))
+        // const response = await api.get("/socials-media/ranking")
+        // console.log(response.data.socialsMedia.slice(0, 5))
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(["as", ["a"]])
         console.log("1")
