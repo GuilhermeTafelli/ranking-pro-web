@@ -313,19 +313,19 @@ export default function Home() {
 
     const classes = useStyles()
 
-    // const [content, setContent] = useState([]);
+    const [content, setContent] = useState([]);
 
     const [loading, setLoading] = useState(false);
 
     useEffect(async () => {
-        // setLoading(true)
+        setLoading(true)
         const response = await api.get("/socials-media/ranking")
-        // console.log(response.data.socialsMedia.slice(0, 5))
-    // await new Promise((resolve) => setTimeout(resolve, 500))
-        // setContent(["as", "a"])
-        // console.log("1")
-        // setLoading(false)
-        // console.log("2")
+        console.log(response.data.socialsMedia.slice(0, 5))
+    await new Promise((resolve) => setTimeout(resolve, 500))
+        setContent(["as", "a"])
+        console.log("1")
+        setLoading(false)
+        console.log("2")
     });
 
     function formatMonthlyInvoicing(value) {
