@@ -1,13 +1,15 @@
 import React, { useRef, useState } from 'react'
 import { Form } from '@unform/web';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
-import CustomInput from '../../components/input/CustomInput'
 import * as Yup from 'yup';
 import api from '../../services/Api'
 import { setUser, login } from '../../services/Auth'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import CheckboxInput from '../../components/input/CheckboxInput'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+
 import history from '../../history'
 const useStyles = makeStyles((theme) => ({
 
@@ -39,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "branding-light",
         fontSize: "30px"
     },
+    subTitle: {
+        margin: "30px 0px",
+        fontFamily: "branding-semibold",
+        fontSize: "38px",
+    },
     terms: {
         fontFamily: "branding-medium",
         color: "#C1C1C1",
@@ -49,8 +56,26 @@ const useStyles = makeStyles((theme) => ({
         color: "#244CF4",
         textAlign: "justify",
         textDecoration: "none"
-    }
+    },
+    error: {
+        color: "red",
+        opacity:"70%",
+        marginLeft: "16px",
+        textAlign: "justify",
+        display: "block",
+      },
 }));
+
+
+const CustomCheckbox = withStyles({
+    root: {
+        color: "#0B38F2",
+        '&$checked': {
+            color: "#0B38F2",
+        },
+    },
+    checked: {},
+})((props) => <CheckboxInput color="default" {...props} />);
 
 export default function StepFiveForm() {
 
@@ -58,79 +83,33 @@ export default function StepFiveForm() {
     const classes = useStyles()
     const formRef = useRef(null);
     const state = useSelector(state => state.registry)
-    const [submitLoading, setSubmitLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [checkedNewHere, setCheckedNewHere] = useState(false);
+    const [checked12K, setChecked12K] = useState(false);
+    const [checked3Ls, setChecked3Ls] = useState(false);
 
     async function handleSubmit(data) {
 
         try {
 
-            setSubmitLoading(true)
-            formRef.current.setErrors({});
-
-            const schema = Yup.object().shape({
-                senha: Yup.string().required().matches(
-                    /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,}))/,
-                    "Deve conter no minimo 8 caracteres, sendo no minimo uma letra maiuscula, uma letra miniscula e um número"
-                ),
-            });
-
-            await schema.validate(data, {
-                abortEarly: false,
-            });
-
-
-            const request = {
-                fullName: state.name,
-                birthDate: state.bday,
-                sex: state.sex,
-                cpf: state.cpf,
-                email: state.email,
-                address: state.address,
-                addressNumber: state.number,
-                addressComplement: state.complement,
-                city: state.city,
-                state: state.addressState,
-                country: state.country,
-                postalCode: state.postalCode,
-                whatsApp: state.whatsApp,
-                profilePhoto: { base64: state.photo },
-                password: data.senha
+            if(!checked3Ls && !checked12K && !checkedNewHere) {
+                setError("Selecione pelo menos um")
+                return
             }
-
-
-            const response = await api.post("/users", request)
-
-            login(response.data.token);
-            await dispatch({ type: 'LOGIN' })
-
-            setUser(response.data.user)
-
-            const requestSocialMedia = {
-                userId: response.data.user.id,
-                instagram: state.instagram ? "instagram.com/" + state.instagram : null,
-                facebook: state.facebook ? "facebook.com/" + state.facebook : null,
-                youtube: state.youtube ? "youtube.com/user/" + state.youtube : null,
-                linkedin: state.linkedin ? "linkedin.com/in/" + state.linkedin : null,
-                twitter: state.twitter ? "twitter.com/" + state.twitter : null,
-                tiktok: state.tiktok ? "tiktok.com/" + state.tiktok : null,
-                aboutMe: state.aboutMe,
-                skills: state.skills.values,
-                niches: state.niches.values
-            }
-
-            const responseSocialMedia = await api.post("/users/socials-media", requestSocialMedia)
-            history.push("/")
+            await dispatch(
+                {
+                    type: "REGISTRY_STEP_FIVE",
+                    whereYouFrom: [
+                        checkedNewHere ? checkedNewHere: null,
+                        checked12K ? checked12K : null,
+                        checked3Ls ? checked3Ls : null
+                    ]
+                }
+            )
 
         } catch (err) {
-            const validationErrors = {};
-            if (err instanceof Yup.ValidationError) {
-                err.inner.forEach(error => {
-                    validationErrors[error.path] = error.message;
-                });
-                formRef.current.setErrors(validationErrors);
-            }
+            console.log(err)
         }
-        setSubmitLoading(false)
     }
 
 
@@ -139,31 +118,33 @@ export default function StepFiveForm() {
         <Form ref={formRef} className={classes.form} onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item xs={12}>
-                    <h2 className={classes.title}>Para finalizarmos, defina sua senha</h2>
+                    <h2 className={classes.title}>Estamos quase acabando, mas antes gostaríamos de saber:</h2>
+                    <h3 className={classes.subTitle}> Onde você nos conheceu ?</h3>
                 </Grid>
-                <Grid item className={classes.input} xs={12}>
-                    <CustomInput
-                        type="password"
-                        name="senha"
-                        label="Senha"
-                        autoComplete="password"
+                <Grid item xs={12}>
+                    <FormControlLabel
+                        inputProps={{ 'aria-label': 'decorative checkbox' }}
+                        control={<CustomCheckbox name="newHere" value={checkedNewHere} onChange={(event) => setCheckedNewHere(event.target.checked)} />}
+                        label="Sou nova(o) por aqui."
                     />
                 </Grid>
-                <Grid item className={classes.input}>
-                    <p className={classes.terms}>
-                        Ao clicar em Cadastre, você concorda com nossos <a href="/terms" className={classes.termsButton}>Termos de Uso</a> e <a href="/privacy" className={classes.termsButton}>Política de Dados</a>. Você poderá receber notificações por SMS, E-mail e WhatsApp e cancelar isso quando quiser.
-                    </p>
+                <Grid item xs={12}>
+                    <FormControlLabel
+                        control={<CustomCheckbox name="12KStudent" value={checked12K} onChange={(event) => setChecked12K(event.target.checked)} />}
+                        label="Sou aluna(o) 12K"
+                    />
                 </Grid>
+                <Grid item xs={12}>
+                    <FormControlLabel
+                        control={<CustomCheckbox name="3LsStudent" value={checked3Ls} onChange={(event) => setChecked3Ls(event.target.checked)} />}
+                        label="Sou aluna(o) 3L's"
+                    />
+                </Grid>
+                {error && <span className={classes.error}>{error}</span>}
             </Grid>
             <Grid container item className={classes.buttonsContainer}>
                 <Grid item>
-                    <button
-                        type="submit"
-                        className={classes.submit}
-                    >
-                        {!submitLoading && "Cadastrar"}
-                        {submitLoading && <CircularProgress color="inherit" />}
-                    </button>
+                    <button type="submit" className={classes.submit}>Continuar</button>
                 </Grid>
             </Grid>
         </Form>

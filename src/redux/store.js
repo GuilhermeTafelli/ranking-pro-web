@@ -99,6 +99,12 @@ function registry(state = REGISTRY_INITIAL_STATE, action) {
                 niches: action.niches,
                 step: 5
         }    
+        case 'REGISTRY_STEP_FIVE':
+            return {
+                ...state,
+                whereYouFrom: action.whereYouFrom,
+                step: 6
+        }   
         case 'BACK_STEP':
             return {
                 ...state,

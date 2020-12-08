@@ -196,14 +196,12 @@ export default function SignUp() {
             </a>
           </Grid>
           <Grid container item className={classes.mainContainer} xs={12} sm={10} md={7} lg={3}>
-            {state.step == 10 && <StepOneForm handleAlertOpen={handleAlertOpen}/>}
+            {state.step == 1 && <StepOneForm handleAlertOpen={handleAlertOpen}/>}
             {state.step == 2 && <StepTwoForm />}
             {state.step == 3 && <StepThreeForm />}
             {state.step == 4 && <StepFourForm />}
             {state.step == 5 && <StepFiveForm />}
-            {state.step == 1 && <StepSixForm />}
-
-
+            {state.step == 6 && <StepSixForm />}
           </Grid>
           <Grid container item className={classes.grow} sm={1}></Grid>
         </Grid>

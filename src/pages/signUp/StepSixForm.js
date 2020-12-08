@@ -3,13 +3,11 @@ import { Form } from '@unform/web';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
+import CustomInput from '../../components/input/CustomInput'
 import * as Yup from 'yup';
 import api from '../../services/Api'
 import { setUser, login } from '../../services/Auth'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import CheckboxInput from '../../components/input/CheckboxInput'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-
 import history from '../../history'
 const useStyles = makeStyles((theme) => ({
 
@@ -41,16 +39,6 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "branding-light",
         fontSize: "30px"
     },
-    checkbox: {
-        fontFamily: "branding-light",
-        fontSize: "18px",
-        color: "#373737"
-    },
-    subTitle: {
-        margin: "30px 0px",
-        fontFamily: "branding-semibold",
-        fontSize: "38px",
-    },
     terms: {
         fontFamily: "branding-medium",
         color: "#C1C1C1",
@@ -61,19 +49,18 @@ const useStyles = makeStyles((theme) => ({
         color: "#244CF4",
         textAlign: "justify",
         textDecoration: "none"
-    }
+    },
+    
 }));
 
-export default function StepFiveForm() {
+export default function StepSixForm() {
 
     const dispatch = useDispatch()
     const classes = useStyles()
     const formRef = useRef(null);
     const state = useSelector(state => state.registry)
     const [submitLoading, setSubmitLoading] = useState(false);
-    const [checkedNewHere, setCheckedNewHere] = useState(false);
-    const [checked12K, setChecked12K] = useState(false);
-    const [checked3Ls, setChecked3Ls] = useState(false);
+
     async function handleSubmit(data) {
 
         try {
@@ -129,7 +116,8 @@ export default function StepFiveForm() {
                 tiktok: state.tiktok ? "tiktok.com/" + state.tiktok : null,
                 aboutMe: state.aboutMe,
                 skills: state.skills.values,
-                niches: state.niches.values
+                niches: state.niches.values,
+                whereYouFrom: state.whereYouFrom
             }
 
             const responseSocialMedia = await api.post("/users/socials-media", requestSocialMedia)
@@ -153,27 +141,20 @@ export default function StepFiveForm() {
         <Form ref={formRef} className={classes.form} onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item xs={12}>
-                    <h2 className={classes.title}>Estamos quase acabando, mas antes gostaríamos de saber:</h2>
-                    <h3 className={classes.subTitle}> Onde você nos conheceu ?</h3>
+                    <h2 className={classes.title}>Para finalizarmos, defina sua senha</h2>
                 </Grid>
-                <Grid item xs={12}>
-                    <FormControlLabel
-                    className={classes.checkbox}
-                        control={<CheckboxInput  color="primary" name="newHere" value={checkedNewHere} onChange={(event) => setCheckedNewHere(event.target.checked)} />}
-                        label="Sou nova(o) por aqui."
+                <Grid item className={classes.input} xs={12}>
+                    <CustomInput
+                        type="password"
+                        name="senha"
+                        label="Senha"
+                        autoComplete="password"
                     />
                 </Grid>
-                <Grid item xs={12}>
-                    <FormControlLabel
-                        control={<CheckboxInput color="#244CF4" name="12KStudent" value={checked12K} onChange={(event) => setChecked12K(event.target.checked)} />}
-                        label="Sou aluna(o) 12K"
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControlLabel
-                        control={<CheckboxInput color="#244CF4" name="3LsStudent" value={checked3Ls} onChange={(event) => setChecked3Ls(event.target.checked)} />}
-                        label="Sou aluna(o) 3L's"
-                    />
+                <Grid item className={classes.input}>
+                    <p className={classes.terms}>
+                        Ao clicar em Cadastre, você concorda com nossos <a href="/terms" className={classes.termsButton}>Termos de Uso</a> e <a href="/privacy" className={classes.termsButton}>Política de Dados</a>. Você poderá receber notificações por SMS, E-mail e WhatsApp e cancelar isso quando quiser.
+                    </p>
                 </Grid>
             </Grid>
             <Grid container item className={classes.buttonsContainer}>
