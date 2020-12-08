@@ -342,7 +342,7 @@ export default function Home() {
 
             {content && <CustomMenu />}
             {content && <Grid container className={classes.main} xs={12}>
-                <Grid container className={classes.homeContainer} >
+                {/* <Grid container className={classes.homeContainer} >
                     <Grid item xs={12} md={5} className={classes.homeTextContainer}>
                         <Grid item xs={12}>
                             <h2 className={classes.welcomeSubTitle}>Bem-vinda(o) à</h2>
@@ -365,7 +365,7 @@ export default function Home() {
                     </Grid>
                     <Grid container item xs={12} md={10} lg={8}>
                         <Grid item container className={classes.rankingListContainer} xs={12}>
-                            {/* <ul className={classes.rankingList} xs={12}>
+                            <ul className={classes.rankingList} xs={12}>
                                 {content && content.map((item) =>
                                     <li >
                                         <Grid container className={classes.rankingItem}>
@@ -408,7 +408,7 @@ export default function Home() {
                                         </Grid>
                                     </li>
                                 )}
-                            </ul> */}
+                            </ul>
                             <Grid item>
                                 <a
                                     href="/signUp"
@@ -453,7 +453,7 @@ export default function Home() {
                             <p className={classes.depositionsItemDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                         </Grid>
                     </Grid>
-                </Grid>
+                </Grid> */}
             </Grid>
             }
         </React.Fragment>
