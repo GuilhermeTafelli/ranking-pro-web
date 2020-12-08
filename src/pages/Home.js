@@ -341,7 +341,7 @@ export default function Home() {
             </Backdrop>
 
             <CustomMenu />
-            {!loading && <Grid container className={classes.main} xs={12}>
+            <Grid container className={classes.main} xs={12}>
                 <h1>teste</h1>
                 {/* <Grid container className={classes.homeContainer} >
                     <Grid item xs={12} md={5} className={classes.homeTextContainer}>
@@ -456,7 +456,7 @@ export default function Home() {
                     </Grid>
                 </Grid> */}
             </Grid>
-            }
+            
         </React.Fragment>
     )
 }
