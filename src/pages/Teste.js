@@ -26,7 +26,7 @@ export default function Teste() {
         const response = await api.get("/socials-media/ranking")
         console.log(response.data.socialsMedia.slice(0, 5))
         await new Promise((resolve) => setTimeout(resolve, 500))
-        setContent(["as", "a"])
+        setContent(response.data.socialsMedia.slice(0, 5))
         console.log("1")
         setLoading(false)
         console.log("2")
