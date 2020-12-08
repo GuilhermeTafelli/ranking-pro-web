@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../services/Api'
 
 export default function Teste() {
     const [count, setCount] = useState(0);
