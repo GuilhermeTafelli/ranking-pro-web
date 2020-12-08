@@ -287,7 +287,10 @@ const useStyles = makeStyles((theme) => ({
     homeImage: {
         height: "100%",
         width: "100%",
-        marginTop: "-90px"
+        marginTop: "-90px",
+        [theme.breakpoints.down("xs")]: {
+            marginTop: "0px"
+        },
     },
     homeTextContainer: {
         paddingTop: "20px",
