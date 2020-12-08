@@ -121,93 +121,93 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function CustomMenu() {
+export default function CustomMenu() {
 
-    const [anchorEl, setAchorEl] = useState(false)
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false)
+    // const [anchorEl, setAchorEl] = useState(false)
+    // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false)
 
-    const isAuth = false//useSelector(state => state.auth.isAuthenticated)
-    const user = null
-    const dispatch = useDispatch()
+    // const isAuth = false//useSelector(state => state.auth.isAuthenticated)
+    // const user = null
+    // const dispatch = useDispatch()
 
-    function handleProfileMenuOpen(event) {
-        setAchorEl(event.currentTarget)
-    };
+    // function handleProfileMenuOpen(event) {
+    //     setAchorEl(event.currentTarget)
+    // };
 
-    function handleMobileMenuClose() {
-        setMobileMoreAnchorEl(null)
-    };
+    // function handleMobileMenuClose() {
+    //     setMobileMoreAnchorEl(null)
+    // };
 
-    function handleMenuClose() {
-        setMobileMoreAnchorEl(null)
-        setAchorEl(null)
-    };
+    // function handleMenuClose() {
+    //     setMobileMoreAnchorEl(null)
+    //     setAchorEl(null)
+    // };
 
-    function handleMobileMenuOpen(event) {
-        setMobileMoreAnchorEl(event.currentTarget)
-    };
+    // function handleMobileMenuOpen(event) {
+    //     setMobileMoreAnchorEl(event.currentTarget)
+    // };
 
-    function handleSessionClick() {
+    // function handleSessionClick() {
 
-        if (isAuth) {
-            logout();
-            dispatch({ type: 'LOGOUT' })
-        }
-        else history.push("/signIn");
-    }
+    //     if (isAuth) {
+    //         logout();
+    //         dispatch({ type: 'LOGOUT' })
+    //     }
+    //     else history.push("/signIn");
+    // }
 
-    function handleSignUpClick() {
-        history.push("/signUp");
-    }
+    // function handleSignUpClick() {
+    //     history.push("/signUp");
+    // }
 
-    function toPage(pagePath) {
-        history.push(pagePath)
-    }
+    // function toPage(pagePath) {
+    //     history.push(pagePath)
+    // }
 
-    const classes = useStyles();
-    const isMenuOpen = Boolean(anchorEl);
+    // const classes = useStyles();
+    // const isMenuOpen = Boolean(anchorEl);
 
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-    const mobileMenuId = "primary-search-account-menu-mobile";
-    const renderMobileMenu = (
-        <SwipeableDrawer
-            anchor="left"
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-            onOpen={handleMobileMenuOpen}
-        >
-            <Grid className={classes.containerAuthMobile}>
-                {!isAuth &&
-                    (
-                        <div>
-                            <button onClick={() => history.push("/signIn")} className={classes.submitMobile}>Entrar</button>
-                            <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
-                        </div>
-                    )
-                }
-            </Grid>
+    // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+    // const mobileMenuId = "primary-search-account-menu-mobile";
+    // const renderMobileMenu = (
+    //     <SwipeableDrawer
+    //         anchor="left"
+    //         open={isMobileMenuOpen}
+    //         onClose={handleMobileMenuClose}
+    //         onOpen={handleMobileMenuOpen}
+    //     >
+    //         <Grid className={classes.containerAuthMobile}>
+    //             {!isAuth &&
+    //                 (
+    //                     <div>
+    //                         <button onClick={() => history.push("/signIn")} className={classes.submitMobile}>Entrar</button>
+    //                         <a href="/signUp" className={classes.createAccount}>ou Criar conta</a>
+    //                     </div>
+    //                 )
+    //             }
+    //         </Grid>
 
-            <List>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
-                    <ListItemIcon><img src={HomeIcon} /></ListItemIcon>
-                    <ListItemText primary="Home" />
-                </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
-                    <ListItemIcon><img src={ClassIcon} /></ListItemIcon>
-                    <ListItemText primary="Cursos" />
-                </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")} key="Menu">
-                    <ListItemIcon><img src={RankIcon} /></ListItemIcon>
-                    <ListItemText primary="Rank" />
-                </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
-                    <ListItemIcon><img src={ForumIcon} /></ListItemIcon>
-                    <ListItemText primary="Forúm" />
-                </ListItem>
-            </List>
-            <Divider />
-        </SwipeableDrawer>
-    );
+    //         <List>
+    //             <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+    //                 <ListItemIcon><img src={HomeIcon} /></ListItemIcon>
+    //                 <ListItemText primary="Home" />
+    //             </ListItem>
+    //             <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+    //                 <ListItemIcon><img src={ClassIcon} /></ListItemIcon>
+    //                 <ListItemText primary="Cursos" />
+    //             </ListItem>
+    //             <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")} key="Menu">
+    //                 <ListItemIcon><img src={RankIcon} /></ListItemIcon>
+    //                 <ListItemText primary="Rank" />
+    //             </ListItem>
+    //             <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+    //                 <ListItemIcon><img src={ForumIcon} /></ListItemIcon>
+    //                 <ListItemText primary="Forúm" />
+    //             </ListItem>
+    //         </List>
+    //         <Divider />
+    //     </SwipeableDrawer>
+    // );
 
     return (
         <div>
@@ -305,4 +305,3 @@ function CustomMenu() {
     );
 }
 
-export default withStyles(useStyles)(CustomMenu);
