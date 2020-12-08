@@ -318,13 +318,13 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
 
     useEffect(async () => {
-        setLoading(false)
+        setLoading(true)
         const response = await api.get("/socials-media/ranking")
         // console.log(response.data.socialsMedia.slice(0, 5))
     // await new Promise((resolve) => setTimeout(resolve, 500))
-        setContent(["as", "a"])
+        // setContent(["as", "a"])
         // console.log("1")
-        // await setLoading(false)
+        await setLoading(false)
         // console.log("2")
     }, []);
 
@@ -341,7 +341,8 @@ export default function Home() {
             </Backdrop>
 
             <CustomMenu />
-            {content && <Grid container className={classes.main} xs={12}>
+            {!loading && <Grid container className={classes.main} xs={12}>
+                <h1>teste</h1>
                 {/* <Grid container className={classes.homeContainer} >
                     <Grid item xs={12} md={5} className={classes.homeTextContainer}>
                         <Grid item xs={12}>
