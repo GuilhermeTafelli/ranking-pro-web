@@ -96,14 +96,25 @@ export default function StepFiveForm() {
                 setError("Selecione pelo menos um")
                 return
             }
+
+            var whereYouFrom = []
+
+            if(checkedNewHere){
+                whereYouFrom.push("NEW_USER")
+            }
+
+            if(checked12K){
+                whereYouFrom.push("12K_USER")
+            }
+
+            if(checked3Ls){
+                whereYouFrom.push("3LS_USER")
+            }
+
             await dispatch(
                 {
                     type: "REGISTRY_STEP_FIVE",
-                    whereYouFrom: [
-                        checkedNewHere ? checkedNewHere: null,
-                        checked12K ? checked12K : null,
-                        checked3Ls ? checked3Ls : null
-                    ]
+                    whereYouFrom: whereYouFrom
                 }
             )
 
