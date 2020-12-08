@@ -41,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "branding-light",
         fontSize: "30px"
     },
+    checkbox: {
+        fontFamily: "branding-light",
+        fontSize: "18px",
+        color: "#373737"
+    },
+    subTitle: {
+        margin: "30px 0px",
+        fontFamily: "branding-semibold",
+        fontSize: "38px",
+    },
     terms: {
         fontFamily: "branding-medium",
         color: "#C1C1C1",
@@ -144,11 +154,12 @@ export default function StepFiveForm() {
             <Grid container>
                 <Grid item xs={12}>
                     <h2 className={classes.title}>Estamos quase acabando, mas antes gostaríamos de saber:</h2>
-                    <h3> Onde você nos conheceu ?</h3>
+                    <h3 className={classes.subTitle}> Onde você nos conheceu ?</h3>
                 </Grid>
                 <Grid item xs={12}>
                     <FormControlLabel
-                        control={<CheckboxInput color="primary" name="newHere" value={checkedNewHere} onChange={(event) => setCheckedNewHere(event.target.checked)} />}
+                    className={classes.checkbox}
+                        control={<CheckboxInput  color="primary" name="newHere" value={checkedNewHere} onChange={(event) => setCheckedNewHere(event.target.checked)} />}
                         label="Sou nova(o) por aqui."
                     />
                 </Grid>

@@ -322,7 +322,7 @@ export default function Home() {
         const response = await api.get("/socials-media/ranking")
         console.log(response.data.socialsMedia.slice(0, 5))
         await new Promise((resolve) => setTimeout(resolve, 500))
-        await setContent(response.data.socialsMedia.slice(0, 5))
+        await setContent(response.data.socialsMedia)
         console.log("1")
         await setLoading(false)
         console.log("2")
