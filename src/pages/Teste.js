@@ -17,7 +17,7 @@ export default function Teste() {
 
     const [content, setContent] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    const classes = {}
     useEffect(async () => {
         setLoading(true)
         const response = await api.get("/socials-media/ranking")
