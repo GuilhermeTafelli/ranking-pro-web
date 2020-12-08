@@ -35,7 +35,7 @@ export default function Teste() {
             <CircularProgress color="inherit" />
         </Backdrop>
 
-        <CustomMenu />
+        {/* <CustomMenu /> */}
     </React.Fragment>
     );
 }
