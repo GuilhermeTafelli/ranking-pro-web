@@ -313,7 +313,7 @@ export default function Home() {
 
     const classes = useStyles()
 
-    const [content, setContent] = useState([]);
+    // const [content, setContent] = useState([]);
 
     const [loading, setLoading] = useState(false);
 
@@ -324,9 +324,9 @@ export default function Home() {
     // await new Promise((resolve) => setTimeout(resolve, 500))
         // setContent(["as", "a"])
         // console.log("1")
-        await setLoading(false)
+        setLoading(false)
         // console.log("2")
-    }, []);
+    });
 
     function formatMonthlyInvoicing(value) {
         console.log("3")
