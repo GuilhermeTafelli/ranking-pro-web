@@ -144,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rankingItemRevenuesContainer: {
         background: "transparent linear-gradient(301deg, #16FF67 0%, #23CDD9 100%) 0% 0% no-repeat padding-box",
-        [theme.breakpoints.down("")]: {
+        [theme.breakpoints.down("xs")]: {
             padding: "2px 10px",
         },
         padding: "2px 20px",
@@ -317,16 +317,16 @@ export default function Home() {
 
     const [loading, setLoading] = useState(false);
 
-    useEffect(async () => {
-        setLoading(true)
-        // const response = await api.get("/socials-media/ranking")
-        // console.log(response.data.socialsMedia.slice(0, 5))
-        await new Promise((resolve) => setTimeout(resolve, 500))
-        await setContent(["as", ["a"]])
-        console.log("1")
-        await setLoading(false)
-        console.log("2")
-    }, []);
+    // useEffect(async () => {
+    //     setLoading(true)
+    //     // const response = await api.get("/socials-media/ranking")
+    //     // console.log(response.data.socialsMedia.slice(0, 5))
+    // // await new Promise((resolve) => setTimeout(resolve, 500))
+    //     // await setContent(["as", ["a"]])
+    //     // console.log("1")
+    //     // await setLoading(false)
+    //     // console.log("2")
+    // }, []);
 
     function formatMonthlyInvoicing(value) {
         console.log("3")
