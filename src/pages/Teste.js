@@ -31,7 +31,11 @@ export default function Teste() {
 
     return (
         <React.Fragment>
-            <h1>teste</h1>
+        <Backdrop className={classes.backdrop} open={loading}>
+            <CircularProgress color="inherit" />
+        </Backdrop>
+
+        <CustomMenu />
     </React.Fragment>
     );
 }
