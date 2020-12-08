@@ -164,11 +164,11 @@ export default function CustomMenu() {
         history.push(pagePath)
     }
 
-    // const classes = useStyles();
-    // const isMenuOpen = Boolean(anchorEl);
+    const classes = useStyles();
+    const isMenuOpen = Boolean(anchorEl);
 
-    // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-    // const mobileMenuId = "primary-search-account-menu-mobile";
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+    const mobileMenuId = "primary-search-account-menu-mobile";
     // const renderMobileMenu = (
     //     <SwipeableDrawer
     //         anchor="left"
