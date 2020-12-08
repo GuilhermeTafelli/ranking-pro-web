@@ -313,7 +313,7 @@ export default function Home() {
 
     const classes = useStyles()
 
-    const [content, setContent] = useState(false);
+    const [content, setContent] = useState([]);
 
     const [loading, setLoading] = useState(false);
 
