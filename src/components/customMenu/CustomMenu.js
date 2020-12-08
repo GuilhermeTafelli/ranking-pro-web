@@ -210,7 +210,7 @@ function CustomMenu() {
     );
 
     return (
-        <div className={classes.grow}>
+        <div>
             <AppBar elevation={0} className={classes.appBar} position="relative">
                 <Toolbar>
                     <Grid container className={classes.mainContainer}>
