@@ -320,7 +320,7 @@ export default function Home() {
     useEffect(async () => {
         setLoading(true)
         const response = await api.get("/socials-media/ranking")
-        console.log(response)
+        console.log(response.data.socialsMedia)
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(response.data.socialsMedia.slice(0, 5))
         await setLoading(false)
@@ -362,7 +362,7 @@ export default function Home() {
                     <Grid container item xs={12} md={10} lg={8}>
                         <Grid item container className={classes.rankingListContainer} xs={12}>
                             <ul className={classes.rankingList} xs={12}>
-                                {content.map((item) =>
+                                {content && content.map((item) =>
                                     <li >
                                         <Grid container className={classes.rankingItem}>
                                             <Grid item className={classes.itemInfos}>
