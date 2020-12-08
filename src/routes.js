@@ -8,7 +8,7 @@ import { isAuthenticated, getUser } from "./services/Auth";
 import { useDispatch } from 'react-redux'
 import Ranking from './pages/Ranking'
 import Profile from './pages/Profile'
-
+import CustomMenu from './components/customMenu/CustomMenu'
 import ResetPassword from "./pages/ResetPassword"
 
 import SubmitOrder from "./pages/SubmitOrder"
@@ -75,6 +75,7 @@ function Routes() {
         <Route exact path="/socials-media/:socialMediaId" component={Profile} />
         <Route exact path="/ranking" component={Ranking} />
         <Route exact path="/" component={Home} />
+        <Route exact path="/menu" component={CustomMenu} />
 
         <Route exact path="/resetPassword" component={ResetPassword} />
 
