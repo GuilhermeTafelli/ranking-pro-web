@@ -147,22 +147,22 @@ export default function CustomMenu() {
         setMobileMoreAnchorEl(event.currentTarget)
     };
 
-    // function handleSessionClick() {
+    function handleSessionClick() {
 
-    //     if (isAuth) {
-    //         logout();
-    //         dispatch({ type: 'LOGOUT' })
-    //     }
-    //     else history.push("/signIn");
-    // }
+        if (isAuth) {
+            logout();
+            dispatch({ type: 'LOGOUT' })
+        }
+        else history.push("/signIn");
+    }
 
-    // function handleSignUpClick() {
-    //     history.push("/signUp");
-    // }
+    function handleSignUpClick() {
+        history.push("/signUp");
+    }
 
-    // function toPage(pagePath) {
-    //     history.push(pagePath)
-    // }
+    function toPage(pagePath) {
+        history.push(pagePath)
+    }
 
     // const classes = useStyles();
     // const isMenuOpen = Boolean(anchorEl);
