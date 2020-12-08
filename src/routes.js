@@ -20,6 +20,7 @@ import Home from "./pages/Home"
 import Order from "./pages/admin/Order"
 import Privacy from "./pages/policies/Privacy"
 import Terms from "./pages/policies/Terms"
+import Teste from "./pages/Teste"
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -73,7 +74,7 @@ function Routes() {
 
         <Route exact path="/socials-media/:socialMediaId" component={Profile} />
         <Route exact path="/ranking" component={Ranking} />
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Teste} />
 
         <Route exact path="/resetPassword" component={ResetPassword} />
 
