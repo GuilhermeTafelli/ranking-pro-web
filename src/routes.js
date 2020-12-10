@@ -20,7 +20,6 @@ import Home from "./pages/Home"
 import Order from "./pages/admin/Order"
 import Privacy from "./pages/policies/Privacy"
 import Terms from "./pages/policies/Terms"
-import Teste from "./pages/Teste"
 import VerifyGamificationCode from "./pages/VerifyGamificationCode"
 import MyGamificationCodes from "./pages/MyGamificationCodes"
 

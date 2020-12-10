@@ -4,8 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import api from '../services/Api'
-import DepositionImage1 from '../static/deposition1.jpeg'
-import DepositionImage2 from '../static/deposition2.jpeg'
+import DepositionImage1 from '../static/depositions/deposition1.jpeg'
+import DepositionImage2 from '../static/depositions/deposition2.jpeg'
+import DepositionImage3 from '../static/depositions/deposition3.jpeg'
+import DepositionImage4 from '../static/depositions/deposition4.jpg'
 
 import CustomMenu from '../components/customMenu/CustomMenu';
 import { useDispatch } from 'react-redux'
@@ -447,6 +449,24 @@ export default function Home() {
                         <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
                             <h2 className={classes.depositionsItemName}>@Melissa Saravy</h2>
                             <p className={classes.depositionsItemDescription}>Pedi demissão! Encontrei a @keilaneves91, adquiri conhecimentos, coloquei em prática! Mais de 5K, mais clientes e sõ crescendo depois de ter entrado nesse mundo de Social Media! </p>
+                        </Grid>
+                    </Grid>
+                    <Grid container item className={classes.depositionsItem}>
+                        <Grid item>
+                            <img className={classes.depositionsItemImage} src={DepositionImage3} />
+                        </Grid>
+                        <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
+                            <h2 className={classes.depositionsItemName}>@Melissa Saravy</h2>
+                            <p className={classes.depositionsItemDescription}>A primeira mentoria a gente nunca esquece, foi uma honra pra mim ser mentorada pela Keila, pelo nível de transformação que eu vivi através da vida dela e da mentoria 3L's, não existe preço que possa pagar tudo que já conquistei até aqui e o que ainda há de vir, pois é só o começo, eu demorei um pouco a entender mas eu aprendi com a Keila que " não há transformação sem coração acelerado", depois que eu entendi isso, a frase passou a ser meu estilo de vida e me levou  a sair da zona de conforto, não ter medo de errar e ser livre para viver os sonhos, e assim conquistar os primeiros resultados! Posso dizer que muito mais que valor em espécie, o valor da transformação gerado pela Keila, vale uma vida! Gratidão sempre! Sou #TEAMKEILANEVES</p>
+                        </Grid>
+                    </Grid>
+                    <Grid container item className={classes.depositionsItem}>
+                        <Grid item>
+                            <img className={classes.depositionsItemImage} src={DepositionImage4} />
+                        </Grid>
+                        <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
+                            <h2 className={classes.depositionsItemName}>@Brena Gomes</h2>
+                            <p className={classes.depositionsItemDescription}>Meu nome é Brenda Gomes, eu tenho 19 anos e estou social media. Foi na mentoria com a Keila Neves que eu ativei a minha mente criativa e sai da zona de conforto. Perdi o medo e no meu primeiros mês como Social Media já estava com 4 clientes, ganhando mais de 5.000,00. A cada dia eu acordo e dou tudo de mim para trazer resultados para os meus clientes. O social media abriu as portas de um mundo que eu não conhecia, e hoje me proporciona liberdades que nunca achei que teria. Ser social media é dar o seu melhor, é ter uma mente criativa e aprender sobre pessoas. É amar resultados, amar problemas e amar resolver problemas.</p>
                         </Grid>
                     </Grid>
                 </Grid>
