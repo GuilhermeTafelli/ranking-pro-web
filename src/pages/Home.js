@@ -4,7 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import api from '../services/Api'
-import DepositionImage from '../static/depositions.jpg'
+import DepositionImage1 from '../static/deposition1.jpeg'
+import DepositionImage2 from '../static/deposition2.jpeg'
+
 import CustomMenu from '../components/customMenu/CustomMenu';
 import { useDispatch } from 'react-redux'
 import HomeImage from '../static/home.png'
@@ -231,7 +233,7 @@ const useStyles = makeStyles((theme) => ({
     },
     homeContainer: {
         height: "91vh",
-        background: "#FFF",
+        background: "#F5F6FA",
         padding: "40px 70px",
         [theme.breakpoints.down("xs")]: {
             padding: "20px 30px",
@@ -431,29 +433,20 @@ export default function Home() {
                     </Grid>
                     <Grid container item className={classes.depositionsItem}>
                         <Grid item>
-                            <img className={classes.depositionsItemImage} src={DepositionImage} />
+                            <img className={classes.depositionsItemImage} src={DepositionImage1} />
                         </Grid>
                         <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
-                            <h2 className={classes.depositionsItemName}>@João silva</h2>
-                            <p className={classes.depositionsItemDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <h2 className={classes.depositionsItemName}>@Elaine Moreira</h2>
+                            <p className={classes.depositionsItemDescription}>Gostaria de agracer a mentoria 3L's, hoje fechei meu cliente número 23. Estou muito feliz com a transformação que ocorreu em minha vida ter feito a mentoria foi muito importante para descobrir do que sou capaz é só o começo.</p>
                         </Grid>
                     </Grid>
                     <Grid container item className={classes.depositionsItem}>
                         <Grid item>
-                            <img className={classes.depositionsItemImage} src={DepositionImage} />
+                            <img className={classes.depositionsItemImage} src={DepositionImage2} />
                         </Grid>
                         <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
-                            <h2 className={classes.depositionsItemName}>@João silva</h2>
-                            <p className={classes.depositionsItemDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container item className={classes.depositionsItem}>
-                        <Grid item>
-                            <img className={classes.depositionsItemImage} src={DepositionImage} />
-                        </Grid>
-                        <Grid container className={classes.depositionTextContainer} xs={12} md={10}>
-                            <h2 className={classes.depositionsItemName}>@João silva</h2>
-                            <p className={classes.depositionsItemDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <h2 className={classes.depositionsItemName}>@Melissa Saravy</h2>
+                            <p className={classes.depositionsItemDescription}>Pedi demissão! Encontrei a @keilaneves91, adquiri conhecimentos, coloquei em prática! Mais de 5K, mais clientes e sõ crescendo depois de ter entrado nesse mundo de Social Media! </p>
                         </Grid>
                     </Grid>
                 </Grid>

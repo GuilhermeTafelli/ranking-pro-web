@@ -10,6 +10,8 @@ import CustomTextAreaWithLabel from '../components/input/CustomTextAreaWithLabel
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
 import history from '../history'
+import { orderTypes } from '../services/Utils'
+
 const useStyles = makeStyles((theme) => ({
     main: {
         background: "#F5F6FA",
@@ -61,21 +63,6 @@ export default function SubmitOrder() {
     const classes = useStyles()
     const formRef = useRef(null);
     const [type, setType] = useState(null)
-
-
-    const orderTypes = [
-        { name: "Solicitar Medalha 3 mil", value: "MEDAL_3_REVENUES" },
-        { name: "Solicitar Medalha 5 mil", value: "MEDAL_5_REVENUES" },
-        { name: "Solicitar Medalha 10 mil", value: "MEDAL_10_REVENUES" },
-        { name: "Solicitar Medalha 20 mil", value: "MEDAL_20_REVENUES" },
-        { name: "Solicitar Medalha 30 mil", value: "MEDAL_30_REVENUES" },
-        { name: "Solicitar Medalha Primeiro Parceiro", value: "MEDAL_FIRST_PARTNER" },
-        { name: "Solicitar Medalha Primeiro Contrato", value: "MEDAL_FIRST_CONTRACT" },
-        { name: "Solicitar Medalha Primeiro Feedback em video", value: "MEDAL_FIRST_VIDEO_FEEDBACK" },
-        { name: "Solicitar Registro de novo cliente", value: "REGISTRY_NEW_CLIENT" },
-        { name: "Solicitar Atualização de faturamento mensal", value: "UPDATE_MONTHLY_INVOICING" },
-
-    ]
 
     async function handleSubmit(data) {
 
@@ -148,6 +135,7 @@ export default function SubmitOrder() {
                             </Grid>
                             {type === "UPDATE_MONTHLY_INVOICING" && <Grid item className={classes.input} xs={12}>
                                 <CustomInput
+                                    type="number"
                                     name="faturamento"
                                     label="Faturamento Mensal*"
                                 />

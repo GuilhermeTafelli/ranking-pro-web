@@ -198,7 +198,11 @@ export default function CustomMenu() {
                 </ListItem>
                 <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")} key="Menu">
                     <ListItemIcon><img src={RankIcon} /></ListItemIcon>
-                    <ListItemText primary="Rank" />
+                    <ListItemText primary="Rank Social Media" />
+                </ListItem>
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking/score")} key="Menu">
+                    <ListItemIcon><img src={RankIcon} /></ListItemIcon>
+                    <ListItemText primary="Rank Maratona" />
                 </ListItem>
                 <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
                     <ListItemIcon><img src={ForumIcon} /></ListItemIcon>
@@ -251,7 +255,10 @@ export default function CustomMenu() {
 
                                 </Grid>
                             </a>
-                            <a className={classes.menuItem} href="/ranking">
+                            <div className="dropdown" style={{ float: "right" }}>
+
+                                <div className="dropbtn">
+                                <a className={classes.menuItem} href="/ranking">
                                 <Grid container spacing={1} className={classes.menuItemContainer}>
                                     <Grid item>
                                         <img src={RankIcon} />
@@ -262,6 +269,13 @@ export default function CustomMenu() {
 
                                 </Grid>
                             </a>
+                                </div>
+                                <div className="dropDownContent">
+                                    <a href="/ranking">Social Media</a>
+                                    <a href="/ranking/score">Maratona</a>
+                                </div>
+                            </div>
+                           
                             <a className={classes.menuItem} href="/">
                                 <Grid container spacing={1} className={classes.menuItemContainer}>
                                     <Grid item>
@@ -290,8 +304,9 @@ export default function CustomMenu() {
                                     <img className={classes.profilePhoto} src={user.profilePhotoLink} />
                                 </div>
                                 <div className="dropDownContent">
-                                    <a>Perfil</a>
+                                    {/* <a>Perfil</a> */}
                                     <a href="/orders">Solicitações</a>
+                                    <a href="/gamification/code">Minhas senhas</a>
                                     <a onClick={handleSessionClick}>Sair</a>
                                 </div>
                             </div>

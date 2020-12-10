@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "18px"
     },
     rankingItem: {
-        padding: "0px 20px",
+        padding: "10px 20px",
         [theme.breakpoints.down("xs")]: {
-            paddingRight: "0px",
+            padding: "10px 10px",
         },
         backgroundColor: "#FFF",
         margin: "10px 0px",
@@ -102,6 +102,9 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "center"
     },
     rankingItemInfoText: {
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "22px",
+        },
         fontSize: "30px",
         fontFamily: "branding-bold",
         color: "#373737",
@@ -115,11 +118,6 @@ const useStyles = makeStyles((theme) => ({
         overflowY: "auto",
     },
     sectionDesktop: {
-        [theme.breakpoints.down("xs")]: {
-            display: "none"
-        },
-        flexGrow: 1,
-        width: "20%"
     },
     rankingList: {
         listStyleType: "none",
@@ -149,10 +147,20 @@ const useStyles = makeStyles((theme) => ({
     item: {
         padding: "0px",
         margin: "0px"
-    }
+    },
+    rankingRevenues: {
+        backgroundColor: "#D4D4D4",
+        borderRadius: "31px",
+        border: "none",
+        padding: "10px 26px",
+        fontFamily: "branding-semibold",
+        color: "#858585",
+        fontSize: "20px",
+        marginBottom: "30px"
+      },
 }));
 
-export default function Ranking() {
+export default function RankingScore() {
     const classes = useStyles();
 
     const dispatch = useDispatch()
@@ -160,11 +168,10 @@ export default function Ranking() {
     const [mySocialMedia, setMySocialMedia] = useState(false);
 
     const [loading, setLoading] = useState(false);
-    const [items, setItems] = useState([]);
 
     useEffect(async () => {
         setLoading(true)
-        const response = await api.get("/socials-media/ranking")
+        const response = await api.get("/socials-media/ranking/score")
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(response.data.socialsMedia)
         await setMySocialMedia(response.data.mySocialMedia)
@@ -181,8 +188,9 @@ export default function Ranking() {
         history.push("/socials-media/" + item.id)
     }
 
-    function formatMonthlyInvoicing(value) {
-        return "R$ " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+
+    function formatScore(value) {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     }
 
     return (
@@ -192,7 +200,7 @@ export default function Ranking() {
             </Backdrop>
             <CustomMenu />
             {content && <div className={classes.main}>
-                <Grid container className={classes.mainContainer} md={8}>
+                <Grid container className={classes.mainContainer} md={6}>
                     {mySocialMedia &&
                         <Grid container xs={12}>
                             <Grid item xs={12}>
@@ -214,26 +222,10 @@ export default function Ranking() {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item className={classes.rankingItemRevenuesContainer}>
-                                    <Grid item >
-                                        <h4 className={classes.rankingItemTitle}>Faturamento</h4>
-                                        <h2 className={classes.rankingItemRevenuesText}>{mySocialMedia.monthlyInvoicing ? formatMonthlyInvoicing(mySocialMedia.monthlyInvoicing) : "-"}</h2>
-                                    </Grid>
-                                </Grid>
+
                                 <Grid item className={classes.sectionDesktop}>
                                     <Grid container className={classes.sectionDesktopContainer}>
-                                        <Grid item className={classes.infosContainer}>
-                                            <h4 className={classes.rankingItemInfoTitle}>Clientes</h4>
-                                            <h2 className={classes.rankingItemInfoText}>{mySocialMedia.customers ? mySocialMedia.customers : "-"}</h2>
-                                        </Grid>
-                                        <Grid item className={classes.infosContainer}>
-                                            <h4 className={classes.rankingItemInfoTitle}>Clientes em Teste</h4>
-                                            <h2 className={classes.rankingItemInfoText}>{mySocialMedia.testCustomers ? mySocialMedia.testCustomers : "-"}</h2>
-                                        </Grid>
-                                        <Grid item className={classes.infosContainer}>
-                                            <h4 className={classes.rankingItemInfoTitle}>Medalhas</h4>
-                                            <h2 className={classes.rankingItemInfoText}>{mySocialMedia.medals ? mySocialMedia.medals : "-"}</h2>
-                                        </Grid>
+                                        <h2 className={classes.rankingItemInfoText}>{mySocialMedia.score ? formatScore(mySocialMedia.score) + " pontos" : "-"}</h2>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -262,26 +254,9 @@ export default function Ranking() {
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        <Grid item className={classes.rankingItemRevenuesContainer}>
-                                            <Grid item >
-                                                <h4 className={classes.rankingItemTitle}>Faturamento</h4>
-                                                <h2 className={classes.rankingItemRevenuesText}>{item.monthlyInvoicing ? formatMonthlyInvoicing(item.monthlyInvoicing) : "-"}</h2>
-                                            </Grid>
-                                        </Grid>
                                         <Grid item className={classes.sectionDesktop}>
                                             <Grid container className={classes.sectionDesktopContainer}>
-                                                <Grid item className={classes.infosContainer}>
-                                                    <h4 className={classes.rankingItemInfoTitle}>Clientes</h4>
-                                                    <h2 className={classes.rankingItemInfoText}>{item.customers ? item.customers : "-"}</h2>
-                                                </Grid>
-                                                <Grid item className={classes.infosContainer}>
-                                                    <h4 className={classes.rankingItemInfoTitle}>Clientes em Teste</h4>
-                                                    <h2 className={classes.rankingItemInfoText}>{item.testCustomers ? item.testCustomers : "-"}</h2>
-                                                </Grid>
-                                                <Grid item className={classes.infosContainer}>
-                                                    <h4 className={classes.rankingItemInfoTitle}>Medalhas</h4>
-                                                    <h2 className={classes.rankingItemInfoText}>{item.medals ? item.medals : "-"}</h2>
-                                                </Grid>
+                                                <h2 className={classes.rankingItemInfoText}>{item.score ? formatScore(item.score) + " pontos" : "-"}</h2>
                                             </Grid>
                                         </Grid>
                                     </Grid>

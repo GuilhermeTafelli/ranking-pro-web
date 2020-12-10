@@ -200,24 +200,32 @@ export default function Profile() {
     const [content, setContent] = useState(null);
     const [loading, setLoading] = useState(false);
     const { socialMediaId } = useParams();
+    const [dataDash, setDataDash] = useState(null)
 
     useEffect(async () => {
+
+        
         setLoading(true)
+        
         const response = await api.get("/users/socials-media/" + socialMediaId)
+        
         await new Promise((resolve) => setTimeout(resolve, 500))
+        
+        const data = {
+            labels: ["Dez"],
+            datasets: [
+                {
+                    backgroundColor: '#3052DE',
+                    data: [response.data.monthlyInvoicing]
+                }
+            ]
+        };
+        
+        setDataDash(data)
+        
         await setContent(response.data)
         await setLoading(false)
     }, []);
-
-    const data = {
-        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', "Ago", "Set", "Out", "Nov", "Dez"],
-        datasets: [
-            {
-                backgroundColor: '#3052DE',
-                data: [65, 59, 80, 81, 56, 55, 40, 10, 9, 10, 10, 10]
-            }
-        ]
-    };
 
     return (
         <React.Fragment>
@@ -247,14 +255,13 @@ export default function Profile() {
                             <h3 className={classes.title}>Informações</h3>
                             <Grid container item className={classes.containerInformation}>
                                 <Grid container className={classes.containerItemInformation} xs={6}>
-                                    <img src={AgeIcon} />
+                                    <img src={AgeIcon}/>
                                     <p className={classes.infromationText}>{content.age} anos</p>
                                 </Grid>
                                 <Grid container className={classes.containerItemInformation} xs={6}>
                                     <img src={LocationIcon} />
                                     <p className={classes.infromationText}>{content.city}</p>
                                 </Grid>
-
                                 <Grid container className={classes.containerItemInformation} xs={12}>
                                     <img src={EmailIcon} />
                                     <p className={classes.infromationText}>{content.email}</p>
@@ -263,25 +270,25 @@ export default function Profile() {
                             <h3 className={classes.title}>Redes Sociais</h3>
                             <Grid container className={classes.socialNetworkContainer} spacing={1}>
                                 {content.facebook && <Grid item>
-                                    <a href={content.facebook}><img src={FacebookIcon} /></a>
+                                    <a target="_blank" rel="external" href={content.facebook}><img src={FacebookIcon} /></a>
                                 </Grid>}
                                 {content.instagram && <Grid item>
-                                    <a href={content.instagram}><img src={InstagramIcon} /></a>
+                                    <a target="_blank" rel="external" href={content.instagram}><img src={InstagramIcon} /></a>
                                 </Grid>}
                                 {content.whatsApp && <Grid item>
-                                    <a href={content.whatsApp}><img src={WhatsAppIcon} /></a>
+                                    <a target="_blank" rel="external" href={content.whatsApp}><img src={WhatsAppIcon} /></a>
                                 </Grid>}
                                 {content.linkedIn && <Grid item>
-                                    <a href={content.linkedIn}><img src={LinkedInIcon} /></a>
+                                    <a target="_blank" rel="external" href={content.linkedIn}><img src={LinkedInIcon} /></a>
                                 </Grid>}
                                 {content.twitter && <Grid item>
-                                    <a href={content.twitter}><img src={TwitterIcon} /></a>
+                                    <a target="_blank" rel="external" href={content.twitter}><img src={TwitterIcon} /></a>
                                 </Grid>}
                                 {content.tikTok && <Grid item>
-                                    <a href={content.tikTok}><img src={TikTokIcon} /></a>
+                                    <a target="_blank" rel="external" href={content.tikTok}><img src={TikTokIcon} /></a>
                                 </Grid>}
                                 {content.youTube && <Grid item>
-                                    <a href={content.youTube}><img src={YoutubeIcon} /></a>
+                                    <a target="_blank" rel="external" href={content.youTube}><img src={YoutubeIcon} /></a>
                                 </Grid>}
                             </Grid>
                         </Grid>
@@ -296,21 +303,21 @@ export default function Profile() {
                         <Grid container className={classes.cardItem} xs={4}>
                             <Grid item className={classes.cardClients} xs={12}>
                                 <h3 className={classes.cardClientsTitle}>Clientes</h3>
-                                <h4 className={classes.cardClientsValue}>{content.currentContracts ? content.currentContracts : "-"}</h4>
+                                <h4 className={classes.cardClientsValue}>{content.customers ? content.customers : "-"}</h4>
                             </Grid>
                         </Grid>
                         <Grid container className={classes.cardItem} xs={4}>
                             <Grid item className={classes.cardWorks} xs={12}>
-                                <h3 className={classes.cardWorksTitle}>Trabalhos feitos </h3>
-                                <h4 className={classes.cardWorksValue}>{content.worksDone ? content.worksDone : "-"}</h4>
+                                <h3 className={classes.cardWorksTitle}>Clientes em teste</h3>
+                                <h4 className={classes.cardWorksValue}>{content.testCustomers ? content.testCustomers : "-"}</h4>
                             </Grid>
                         </Grid>
                         <Grid container spacing={1} className={classes.profileItem}>
                             <Grid item xs={12}>
                                 <h3 className={classes.title}>Medalhas</h3>
                             </Grid>
-                            <Tooltip title="Primeiro parceiro" aria-label="primeiro parceiro">
-                                {content.medals && content.medals.includes("MEDAL_FIRST_PARTNER")
+                            <Tooltip title="Primeiro cliente em teste" aria-label="primeiro clientes em teste">
+                                {content.medals && content.medals.includes("MEDAL_FIRST_CUSTOMER_TEST")
                                     ?
                                     <Grid item>
                                         <img src={MedalFirstPartner} />
@@ -418,7 +425,7 @@ export default function Profile() {
                                 <h3 className={classes.title}>Média de Faturamento</h3>
                             </Grid>
                             <Bar
-                                data={data}
+                                data={dataDash}
                                 width={100}
 
                                 options={{
@@ -465,11 +472,11 @@ export default function Profile() {
                     </Grid>
 
                     <Grid container item className={classes.profileContainer} md={4}>
-                        <Grid container className={classes.profileItem}>
+                        {/* <Grid container className={classes.profileItem}>
                             <Grid item xs={12}>
                                 <h3 className={classes.title}>Avaliações</h3>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                         <Grid container className={classes.profileItem}>
                             <Grid item xs={12}>
                                 <h3 className={classes.title}>Nichos</h3>

@@ -21,6 +21,10 @@ import Order from "./pages/admin/Order"
 import Privacy from "./pages/policies/Privacy"
 import Terms from "./pages/policies/Terms"
 import Teste from "./pages/Teste"
+import VerifyGamificationCode from "./pages/VerifyGamificationCode"
+import MyGamificationCodes from "./pages/MyGamificationCodes"
+
+import RankingScore from "./pages/RankingScore"
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -74,6 +78,8 @@ function Routes() {
 
         <Route exact path="/socials-media/:socialMediaId" component={Profile} />
         <Route exact path="/ranking" component={Ranking} />
+        <Route exact path="/ranking/score" component={RankingScore} />
+
         <Route exact path="/" component={Home} />
         <Route exact path="/menu" component={CustomMenu} />
 
@@ -81,6 +87,10 @@ function Routes() {
 
         <Route exact path="/signUp" component={SignUp} />
         <PrivateRoute exact path="/orders" component={MyOrders} />
+        <PrivateRoute exact path="/gamification/code" component={MyGamificationCodes} />
+
+        <PrivateRoute exact path="/verify/gamification/code" component={VerifyGamificationCode} />
+
         <PrivateRoute exact path="/submitOrder" component={SubmitOrder} />
         <PrivateRoute exact path="/mentoria3ls" component={RegisterOnEvent} />
       </Switch>

@@ -87,37 +87,11 @@ export default function Ranking() {
 
     useEffect(async () => {
         setLoading(true)
-        const response = await api.get("/users/orders")
+        const response = await api.get("/socials-media/gamification/code")
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(response.data)
         await setLoading(false)
     }, []);
-
-    function handleClickItem(item) {
-        history.push("/socials-media/" + item.id)
-    }
-
-    function formatId(id) {
-        var newId = "ID-" + "0".repeat(5 - id.length) + id
-        return newId
-    }
-
-    function statusColor(status) {
-        if (status === "OPEN") return "#3052DE"
-        if (status === "CLOSED") return "#ff0000"
-        if (status === "DONE") return "#00D656"      
-
-    }
-
-    function formatStatus(status) {
-        if (status === "OPEN") return "Aberta"
-        if (status === "CLOSED") return "Fechada"
-        if (status === "DONE") return "Concluída"
-    }
-
-    function formatOrderName(orderType){
-        return orderTypes.find(type => type.value == orderType).name
-    }
     
     return (
         <React.Fragment>
@@ -129,28 +103,25 @@ export default function Ranking() {
                 <Grid container className={classes.mainContainer} md={8}>
                     <Grid className={classes.titleContainer} container item xs={12}>
                         <Grid item>
-                            <h1 className={classes.title}>Solicitações</h1>
+                            <h1 className={classes.title}>Senhas</h1>
 
                         </Grid>
                         <Grid item>
                                 <a
-                                    href="/submitOrder"
+                                    href="/verify/gamification/code"
                                     className={classes.submit}
                                 >
-                                    Nova solicitação
+                                    Validar Senha
                                 </a>
                             </Grid>
                     </Grid>
                     {content.map(item => (
                         <Grid container item className={classes.orderItem} xs={12}>
                             <Grid item xs={3}>
-                                <p className={classes.text}>{formatId(String(item.id))}</p>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <p className={classes.textType} >{formatOrderName(item.type)}</p>
+                                <p className={classes.text}>{item.code}</p>
                             </Grid>
                             <Grid item xs={3}>
-                                <p className={classes.status} style={{ color: statusColor(item.status) }}>{formatStatus(item.status)}</p>
+                                <p className={classes.status}>{item.score+" pontos"}</p>
                             </Grid>
                         </Grid>
                     ))}
