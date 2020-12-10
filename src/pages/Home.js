@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
     main: {
         background: "#F5F6FA",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        paddingBottom: "50px"
     },
     rankingTitle: {
         [theme.breakpoints.down("md")]: {

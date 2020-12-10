@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "50px",
         fontFamily: "branding-bold",
         color: "#373737",
+        textDecoration: "none"
     },
     menuItem: {
         textDecoration: "none",
@@ -192,7 +193,7 @@ export default function CustomMenu() {
                     <ListItemIcon><img src={HomeIcon} /></ListItemIcon>
                     <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/class")} key="Menu">
                     <ListItemIcon><img src={ClassIcon} /></ListItemIcon>
                     <ListItemText primary="Cursos" />
                 </ListItem>
@@ -204,7 +205,7 @@ export default function CustomMenu() {
                     <ListItemIcon><img src={RankIcon} /></ListItemIcon>
                     <ListItemText primary="Rank Maratona" />
                 </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/")} key="Menu">
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/forum")} key="Menu">
                     <ListItemIcon><img src={ForumIcon} /></ListItemIcon>
                     <ListItemText primary="Forúm" />
                 </ListItem>
@@ -230,7 +231,7 @@ export default function CustomMenu() {
                             </IconButton>
                         </div>
                         <Grid item>
-                            <h1 className={classes.title}>3L's</h1>
+                            <a href="/" className={classes.title}>3L's</a>
                         </Grid>
                         <Grid item className={classes.sectionDesktop}>
                             <a className={classes.menuItem} href="/">
@@ -244,7 +245,7 @@ export default function CustomMenu() {
 
                                 </Grid>
                             </a>
-                            <a className={classes.menuItem} href="/">
+                            <a className={classes.menuItem} href="/class">
                                 <Grid container spacing={1} className={classes.menuItemContainer}>
                                     <Grid item>
                                         <img src={ClassIcon} />
@@ -276,7 +277,7 @@ export default function CustomMenu() {
                                 </div>
                             </div>
                            
-                            <a className={classes.menuItem} href="/">
+                            <a className={classes.menuItem} href="/forum">
                                 <Grid container spacing={1} className={classes.menuItemContainer}>
                                     <Grid item>
                                         <img src={ForumIcon} />

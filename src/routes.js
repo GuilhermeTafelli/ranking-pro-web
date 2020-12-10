@@ -20,6 +20,7 @@ import Home from "./pages/Home"
 import Order from "./pages/admin/Order"
 import Privacy from "./pages/policies/Privacy"
 import Terms from "./pages/policies/Terms"
+import Building from "./pages/Building"
 import VerifyGamificationCode from "./pages/VerifyGamificationCode"
 import MyGamificationCodes from "./pages/MyGamificationCodes"
 
@@ -83,6 +84,8 @@ function Routes() {
         <Route exact path="/menu" component={CustomMenu} />
 
         <Route exact path="/resetPassword" component={ResetPassword} />
+        <Route exact path="/forum" component={Building} />
+        <Route exact path="/class" component={Building} />
 
         <Route exact path="/signUp" component={SignUp} />
         <PrivateRoute exact path="/orders" component={MyOrders} />
