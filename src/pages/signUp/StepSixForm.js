@@ -108,12 +108,12 @@ export default function StepSixForm() {
 
             const requestSocialMedia = {
                 userId: response.data.user.id,
-                instagram: state.instagram ? "instagram.com/" + state.instagram : null,
-                facebook: state.facebook ? "facebook.com/" + state.facebook : null,
-                youtube: state.youtube ? "youtube.com/user/" + state.youtube : null,
-                linkedin: state.linkedin ? "linkedin.com/in/" + state.linkedin : null,
-                twitter: state.twitter ? "twitter.com/" + state.twitter : null,
-                tiktok: state.tiktok ? "tiktok.com/" + state.tiktok : null,
+                instagram: state.instagram ? "https://instagram.com/" + state.instagram : null,
+                facebook: state.facebook ? "https://facebook.com/" + state.facebook : null,
+                youtube: state.youtube ? "https://youtube.com/user/" + state.youtube : null,
+                linkedin: state.linkedin ? "https://linkedin.com/in/" + state.linkedin : null,
+                twitter: state.twitter ? "https://twitter.com/" + state.twitter : null,
+                tiktok: state.tiktok ? "https://tiktok.com/" + state.tiktok : null,
                 aboutMe: state.aboutMe,
                 skills: state.skills.values,
                 niches: state.niches.values,
