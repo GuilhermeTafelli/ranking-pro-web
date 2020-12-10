@@ -197,10 +197,10 @@ export default function CustomMenu() {
                     <ListItemIcon><img src={ClassIcon} /></ListItemIcon>
                     <ListItemText primary="Cursos" />
                 </ListItem>
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")} key="Menu">
+                {/* <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking")} key="Menu">
                     <ListItemIcon><img src={RankIcon} /></ListItemIcon>
                     <ListItemText primary="Rank Social Media" />
-                </ListItem>
+                </ListItem> */}
                 <ListItem className={classes.menuListItem} button onClick={() => history.push("/ranking/score")} key="Menu">
                     <ListItemIcon><img src={RankIcon} /></ListItemIcon>
                     <ListItemText primary="Rank Maratona" />
@@ -259,7 +259,7 @@ export default function CustomMenu() {
                             <div className="dropdown" style={{ float: "right" }}>
 
                                 <div className="dropbtn">
-                                <a className={classes.menuItem} href="/ranking">
+                                <a className={classes.menuItem} href="/ranking/score">
                                 <Grid container spacing={1} className={classes.menuItemContainer}>
                                     <Grid item>
                                         <img src={RankIcon} />
@@ -272,7 +272,7 @@ export default function CustomMenu() {
                             </a>
                                 </div>
                                 <div className="dropDownContent">
-                                    <a href="/ranking">Social Media</a>
+                                    {/* <a href="/ranking">Social Media</a> */}
                                     <a href="/ranking/score">Maratona</a>
                                 </div>
                             </div>
@@ -306,7 +306,7 @@ export default function CustomMenu() {
                                 </div>
                                 <div className="dropDownContent">
                                     {/* <a>Perfil</a> */}
-                                    <a href="/orders">Solicitações</a>
+                                    {/* <a href="/orders">Solicitações</a> */}
                                     <a href="/gamification/code">Minhas senhas</a>
                                     <a onClick={handleSessionClick}>Sair</a>
                                 </div>
