@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
   footer: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
     height: "5vh",
     [theme.breakpoints.down("sm")]: {
       justifyContent:"center"

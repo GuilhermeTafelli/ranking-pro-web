@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
   footer: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
     height: "5vh",
     [theme.breakpoints.down("sm")]: {
       justifyContent: "center",
@@ -196,7 +196,7 @@ export default function SignUp() {
             </a>
           </Grid>
           <Grid container item className={classes.mainContainer} xs={12} sm={10} md={7} lg={3}>
-            {state.step == 1 && <StepOneForm handleAlertOpen={handleAlertOpen}/>}
+            {state.step == 1 && <StepOneForm handleAlertOpen={handleAlertOpen} />}
             {state.step == 2 && <StepTwoForm />}
             {state.step == 3 && <StepThreeForm />}
             {state.step == 4 && <StepFourForm />}
@@ -208,7 +208,7 @@ export default function SignUp() {
       </Grid>
       <div className={classes.footer}>
         <div>
-        <a href="/terms" className={classes.footerText}>{"Termos & Condições"}</a><a href="privacy" className={classes.footerText} >{"Políticas de Privacidade"}</a>
+          <a href="/terms" className={classes.footerText}>{"Termos & Condições"}</a><a href="privacy" className={classes.footerText} >{"Políticas de Privacidade"}</a>
         </div>
       </div>
     </React.Fragment>
