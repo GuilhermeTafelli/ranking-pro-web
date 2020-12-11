@@ -48,7 +48,7 @@ export default function CustomInput({ name, label, ...rest }) {
     return (
       <div className={classes.main}>
         <label className={classes.label} for="input" >{label}</label>
-        <input id="input" className={classes.input} ref={inputRef} defaultValue={defaultValue} {...rest} />
+        <input id="input" maxlength="255" className={classes.input} ref={inputRef} defaultValue={defaultValue} {...rest} />
         { error && <span className={classes.error}>{error}</span> }
       </div>
     )

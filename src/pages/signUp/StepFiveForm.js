@@ -119,7 +119,6 @@ export default function StepFiveForm() {
             )
 
         } catch (err) {
-            console.log(err)
         }
     }
 

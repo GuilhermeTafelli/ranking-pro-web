@@ -144,7 +144,6 @@ export default function VerifyGamificationCode() {
     }
 
     const handleAlertOpen = (message) => {
-        console.log("enter")
         setAlert(
             {
                 open: true,
@@ -174,12 +173,10 @@ export default function VerifyGamificationCode() {
 
             const response = await api.post("/socials-media/gamification/code", request)
             setSuccess({ score: response.data.score, code: data.senha })
-            console.log(response, "enter")
 
 
 
         } catch (err) {
-            console.log(err)
             const validationErrors = {};
             if (err instanceof Yup.ValidationError) {
                 err.inner.forEach(error => {

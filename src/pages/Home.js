@@ -244,7 +244,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     homeContainerItem: {
-        alignItems: "center",
+        alignItems: "centergetRanking",
         flexDirection: "column"
     },
     welcomeTitle: {
@@ -327,19 +327,14 @@ export default function Home() {
 
     useEffect(async () => {
         setLoading(true)
-        const response = await api.get("/socials-media/ranking")
-        console.log(response.data.socialsMedia.slice(0, 5))
+        const response = await api.get("/socials-media/ranking/paged")
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(response.data.socialsMedia)
-        console.log("1")
         await setLoading(false)
-        console.log("2")
     }, []);
 
     function formatMonthlyInvoicing(value) {
-        console.log("3")
         return "R$ " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-        console.log("4")
     }
 
     return (

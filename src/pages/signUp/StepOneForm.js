@@ -95,14 +95,19 @@ export default function StepOneForm(props) {
         }
     }
 
+    function validateFileSize(file) {
+        if (!file) return false
+        if (file.size > 2000000) return false
+        else return true
+    }
+
     async function handleSubmit(data) {
         try {
-
             formRef.current.setErrors({});
 
-
+            const validateFile = data.foto ? Yup.mixed().test("foto", "O arquivo deve conter no máximo 2MB", validateFileSize) : Yup.mixed().required()
             const schema = Yup.object().shape({
-                foto: Yup.string().required(),
+                foto: validateFile,
                 "data de nascimento": Yup.date().transform((value, rawValue) => { let correctDate = moment(rawValue, ['DD/MM/YYYY']).toDate(); return correctDate }).max(moment(new Date(2005, 1, 1)).toDate()),
                 sexo: Yup.string().required(),
                 cpf: Yup.string().required(),
@@ -114,13 +119,18 @@ export default function StepOneForm(props) {
             await schema.validate(data, {
                 abortEarly: false,
             });
-            const response = await api.get("/users/email/"+data.email)
-            console.log(response)
+            const response = await api.get("/users/email/" + data.email)
             if (response.data.exists) {
-                console.log("enter 1")
                 handleAlertOpen("E-mail já cadastrado, entre em contato com o suporte.")
-                return 
+                return
             }
+
+            const responseCpf = await api.get("/users/cpf/" + data.cpf)
+            if (responseCpf.data.exists) {
+                handleAlertOpen("CPF já cadastrado, entre em contato com o suporte.")
+                return
+            }
+
             const imageBase64 = await fileToBase64(data.foto)
 
             await dispatch(
@@ -145,6 +155,9 @@ export default function StepOneForm(props) {
                 });
                 formRef.current.setErrors(validationErrors);
             }
+            if (err.response) {
+                handleAlertOpen("Falha no cadastro! Favor entrar em contato com o suporte.")
+             }
         }
     }
 
@@ -226,20 +239,13 @@ export default function StepOneForm(props) {
                     </InputMask>
                 </Grid>
                 <Grid item className={classes.input} xs={12} sm={6}>
-                    <InputMask
-                        mask="(99) 9 9999-9999"
-                        maskChar=" "
-                        defaultValue={state.bday}
-                        disabled={false}
-                    >
-                        {() =>
-                            <CustomInput
-                                name="whatsApp"
-                                label="WhatsApp*"
-                                autoComplete="whatsapp"
-                                defaultValue={state.whatsApp}
-                            />}
-                    </InputMask>
+
+                    <CustomInput
+                        name="whatsApp"
+                        label="WhatsApp*"
+                        autoComplete="whatsapp"
+                        defaultValue={state.whatsApp}
+                    />
                 </Grid>
                 <Grid item className={classes.input} xs={12}>
                     <CustomInput
@@ -260,7 +266,7 @@ export default function StepOneForm(props) {
                 </button>
                 </Grid>
             </Grid>
-        </Form>
+        </Form >
 
     )
 }

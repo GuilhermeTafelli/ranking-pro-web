@@ -78,7 +78,6 @@ export default function AnswerOrderModal(props) {
 
     }
 
-    console.log(order.status)
 
     return (
         <>

@@ -168,7 +168,6 @@ export default function Ranking() {
         await new Promise((resolve) => setTimeout(resolve, 500))
         await setContent(response.data.socialsMedia)
         await setMySocialMedia(response.data.mySocialMedia)
-        console.log(response.data.mySocialMedia)
         await setLoading(false)
     }, []);
 

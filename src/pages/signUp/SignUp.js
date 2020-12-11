@@ -168,7 +168,6 @@ export default function SignUp() {
   };
 
   const handleAlertOpen = (message) => {
-    console.log("enter")
     setAlert(
       {
         open: true,
@@ -201,7 +200,7 @@ export default function SignUp() {
             {state.step == 3 && <StepThreeForm />}
             {state.step == 4 && <StepFourForm />}
             {state.step == 5 && <StepFiveForm />}
-            {state.step == 6 && <StepSixForm />}
+            {state.step == 6 && <StepSixForm handleAlertOpen={handleAlertOpen}/>}
           </Grid>
           <Grid container item className={classes.grow} sm={1}></Grid>
         </Grid>

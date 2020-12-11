@@ -53,7 +53,9 @@ const useStyles = makeStyles((theme) => ({
     
 }));
 
-export default function StepSixForm() {
+export default function StepSixForm(props) {
+
+    const { handleAlertOpen } = props
 
     const dispatch = useDispatch()
     const classes = useStyles()
@@ -79,7 +81,6 @@ export default function StepSixForm() {
                 abortEarly: false,
             });
 
-
             const request = {
                 fullName: state.name,
                 birthDate: state.bday,
@@ -98,16 +99,7 @@ export default function StepSixForm() {
                 password: data.senha
             }
 
-
-            const response = await api.post("/users", request)
-
-            login(response.data.token);
-            await dispatch({ type: 'LOGIN' })
-
-            setUser(response.data.user)
-
             const requestSocialMedia = {
-                userId: response.data.user.id,
                 instagram: state.instagram ? "https://instagram.com/" + state.instagram : null,
                 facebook: state.facebook ? "https://facebook.com/" + state.facebook : null,
                 youtube: state.youtube ? "https://youtube.com/user/" + state.youtube : null,
@@ -117,10 +109,16 @@ export default function StepSixForm() {
                 aboutMe: state.aboutMe,
                 skills: state.skills.values,
                 niches: state.niches.values,
-                whereYouFrom: state.whereYouFrom
+                whereYouFrom: state.whereYouFrom,
+                user: request
             }
 
             const responseSocialMedia = await api.post("/users/socials-media", requestSocialMedia)
+
+            login(responseSocialMedia.data.token);
+            await dispatch({ type: 'LOGIN' })
+
+            setUser(responseSocialMedia.data.user)
             history.push("/")
 
         } catch (err) {
@@ -130,6 +128,9 @@ export default function StepSixForm() {
                     validationErrors[error.path] = error.message;
                 });
                 formRef.current.setErrors(validationErrors);
+            }
+            if (err.response) {
+               handleAlertOpen("Falha no cadastro! Favor entrar em contato com o suporte.")
             }
         }
         setSubmitLoading(false)

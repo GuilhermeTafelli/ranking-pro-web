@@ -81,7 +81,6 @@ export default function Orders() {
     }, []);
 
     function handleClickItem(item) {
-        console.log(item)
         history.push("/admin/orders/"+item)
     }
 

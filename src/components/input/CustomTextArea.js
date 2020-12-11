@@ -35,7 +35,7 @@ export default function CustomTextArea({ name, label, ...rest }) {
   }, [fieldName, registerField]);
     return (
       <div>
-        <textarea id="input" className={classes.input} ref={inputRef} defaultValue={defaultValue} {...rest} />
+        <textarea id="input"  maxlength="255" className={classes.input} ref={inputRef} defaultValue={defaultValue} {...rest} />
         { error && <span className={classes.error}>{error}</span> }
       </div>
     )

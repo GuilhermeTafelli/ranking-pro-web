@@ -36,7 +36,6 @@ export default function CustomVerticalMenu (){
     const classes = useStyles()
     const dispatch = useDispatch()
     function handleSessionClick() {
-        console.log("teste")
         logout()
         dispatch({ type: 'LOGOUT' })
         history.push("/signIn")
