@@ -97,7 +97,7 @@ export default function StepOneForm(props) {
 
     function validateFileSize(file) {
         if (!file) return false
-        if (file.size > 2000000) return false
+        if (file.size > 5000000) return false
         else return true
     }
 
