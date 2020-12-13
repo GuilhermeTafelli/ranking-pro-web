@@ -73,7 +73,7 @@ export default function StepSixForm(props) {
             const schema = Yup.object().shape({
                 senha: Yup.string().required().matches(
                     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,}))/,
-                    "Deve conter no minimo 8 caracteres, sendo no minimo uma letra maiuscula, uma letra miniscula e um número"
+                    "Deve conter no mínimo 8 caracteres, sendo no mínimo uma letra maiúscula, uma letra minúscula e um número"
                 ),
             });
 

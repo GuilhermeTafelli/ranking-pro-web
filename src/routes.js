@@ -10,6 +10,7 @@ import Ranking from './pages/Ranking'
 import Profile from './pages/Profile'
 import CustomMenu from './components/customMenu/CustomMenu'
 import ResetPassword from "./pages/ResetPassword"
+import ResetPasswordValidate from "./pages/ResetPasswordValidate"
 
 import SubmitOrder from "./pages/SubmitOrder"
 import MyOrders from './pages/MyOrders'
@@ -84,6 +85,8 @@ function Routes() {
         <Route exact path="/menu" component={CustomMenu} />
 
         <Route exact path="/resetPassword" component={ResetPassword} />
+        <Route exact path="/resetPassword/email/:email/token/:token" component={ResetPasswordValidate} />
+
         <Route exact path="/forum" component={Building} />
         <Route exact path="/class" component={Building} />
 

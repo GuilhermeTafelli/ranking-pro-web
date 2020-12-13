@@ -16,6 +16,7 @@ import CustomInput from '../components/input/CustomInput'
 import Alert from '../components/Alert'
 import { ReactComponent as BackIcon } from '../static/back.svg'
 import * as Yup from 'yup';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -146,7 +147,8 @@ export default function ResetPassword() {
 	const [alert, setAlert] = useState(initalAlert);
 	const [success, setSuccess] = useState(false);
 	const formRef = useRef(null);
-
+	const { email, token } = useParams();
+	
 	async function handleSubmit(data) {
 
 		try {
@@ -156,23 +158,29 @@ export default function ResetPassword() {
 			formRef.current.setErrors({});
 
 			const schema = Yup.object().shape({
-				email: Yup.string().email().required(),
-			});
+				senha: Yup.string().required().matches(
+					/((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,}))/,
+					"Deve conter no mínimo 8 caracteres, sendo no mínimo uma letra maiúscula, uma letra minúscula e um número"
+				),
+				confirmar:  Yup.string().required().oneOf([Yup.ref('senha'), null], 'As senhas devem combinar')
+
+			})
 
 			await schema.validate(data, {
 				abortEarly: false,
 			});
 
 			const request = {
-				email: data.email
+				email: email,
+				token: token,
+				newPassword: data.senha
 			}
 
-			await api.post('/reset-password/token', request)
+			await api.post('/reset-password/', request)
 
-			setSuccess(true)
+			history.push("/")
 
 		} catch (err) {
-			console.log(err.e)
 			const validationErrors = {};
 			if (err instanceof Yup.ValidationError) {
 				err.inner.forEach(error => {
@@ -181,8 +189,7 @@ export default function ResetPassword() {
 				formRef.current.setErrors(validationErrors);
 			}
 			if (err.response) {
-				if (err.response.data && err.response.data.code == "USER_NOT_FOUND") handleAlertOpen("O usuário não foi encontrado!")
-				else handleAlertOpen("Opss! Estamos com alguns problemas. Procure o suporte!")
+				handleAlertOpen("Opss! Estamos com alguns problemas. Procure o suporte!")
 
 			}
 		}
@@ -224,30 +231,30 @@ export default function ResetPassword() {
 			</Snackbar>
 			<Grid container className={classes.main}>
 				<Grid container className={classes.resetPassowordContent}>
-					<Grid container item className={classes.containerBack} sm={1}>
-						<a className={classes.blackLink} onClick={handleBack} textDecoration="none" style={{ display: "flex" }}>
-							<BackIcon display="flex" />
-							<h5 className={classes.back}>Voltar</h5>
-						</a>
-					</Grid>
 					<Grid container item className={classes.mainContainer} sm={8} lg={4}>
-						{!success && <div className={classes.paper}>
-							<h1 className={classes.title}>Esqueci minha senha</h1>
+						<div className={classes.paper}>
+							<h1 className={classes.title}>Redefinir Senha</h1>
 							<Form ref={formRef} className={classes.form} onSubmit={handleSubmit} >
 								<Grid container className={classes.formContainer}>
 									<Grid item xs={12}>
 										<p className={classes.description}>
-											Coloque o e-mail de sua conta, que iremos enviar um e-mail para você recuperar sua senha.
+											Sua senha deve conter no mínimo 8 caracteres, sendo no mínimo uma letra maiúscula, uma letra minúscula e um número
                                     </p>
 									</Grid>
 									<Grid item xs={12}>
 										<CustomInput
-											name="email"
-											label="E-mail"
-											autoComplete="email"
-											autoFocus
+											name="senha"
+											label="Senha"
+											type="password"
 										/>
 
+									</Grid>
+									<Grid item xs={12}>
+										<CustomInput
+											name="confirmar"
+											label="Confirmar Senha"
+											type="password"
+										/>
 									</Grid>
 									<Grid container className={classes.buttonsContainer}>
 										<Grid item>
@@ -263,22 +270,7 @@ export default function ResetPassword() {
 								</Grid>
 							</Form>
 						</div>
-						}
-						{success && <div className={classes.paper}>
-							<h1 className={classes.title}>E-mail enviado</h1>
-							<Form ref={formRef} className={classes.form} onSubmit={handleSubmit} >
-								<Grid container className={classes.formContainer}>
-									<Grid item xs={12}>
-										<p className={classes.description}>
-											Enviamos um e-mail para o endereço informado. Clique no link e cadastre uma nova senha (Se você não receber o e-mail, basta voltar e reenviar)
-                                    </p>
-									</Grid>
-								</Grid>
-							</Form>
-						</div>
-						}
 					</Grid>
-					<Grid container item className={classes.teste} sm={1}></Grid>
 				</Grid>
 			</Grid>
 			<div className={classes.footer}>

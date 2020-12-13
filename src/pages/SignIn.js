@@ -187,9 +187,9 @@ export default function SignIn() {
                   </button>
                 </Grid>
               </Grid>
-              {/* <Grid container item className={classes.forgotPasswordContainer} xs={12}>
+              <Grid container item className={classes.forgotPasswordContainer} xs={12}>
                 <a href="/resetPassword" className={classes.forgotPassword}>Esqueceu a senha? Clique aqui</a>
-              </Grid> */}
+              </Grid>
             </Grid>
           </Form>
         </div>
