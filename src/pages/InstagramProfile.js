@@ -224,10 +224,10 @@ export default function InstagramProfile() {
 
             </Grid>
             <Grid container className={classes.profileDescriptionContainer}>
-
+{/* 
                 <button className={classes.download} onClick={() => exportComponentAsPNG(componentRef)}>
                     Download
-                    </button>
+                    </button> */}
             </Grid>
 
         </Grid>

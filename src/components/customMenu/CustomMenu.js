@@ -216,7 +216,7 @@ export default function CustomMenu() {
                     <ListItemText primary="Forúm" />
                 </ListItem>
 
-                <ListItem className={classes.menuListItem} button onClick={() => history.push("/forum")} key="Menu">
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/simulations/instagram")} key="Menu">
                     <ListItemIcon><img src={ToolsIcon} /></ListItemIcon>
                     <ListItemText primary="Simulador de Perfil do Instagram" />
                 </ListItem>
