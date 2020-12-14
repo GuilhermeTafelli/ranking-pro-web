@@ -178,7 +178,7 @@ export default function ResetPassword() {
 
 			await api.post('/reset-password/', request)
 
-			history.push("/")
+			history.push("/signIn")
 
 		} catch (err) {
 			const validationErrors = {};
@@ -188,8 +188,15 @@ export default function ResetPassword() {
 				});
 				formRef.current.setErrors(validationErrors);
 			}
+
 			if (err.response) {
-				handleAlertOpen("Opss! Estamos com alguns problemas. Procure o suporte!")
+				if (err.response.data && err.response.data.code == "USER_NOT_FOUND") handleAlertOpen("Usuário inválido!")
+				else if (err.response.data && (err.response.data.code == "INVALID_TOKEN" || err.response.data.code == "INVALID_TOKEN" )) handleAlertOpen("Token inválido ou expirado")	
+				else handleAlertOpen("Opss! Estamos com alguns problemas. Procure o suporte!")
+            }
+            if (err.response) {
+            }
+			if (err.response) {
 
 			}
 		}
