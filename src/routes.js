@@ -17,6 +17,7 @@ import MyOrders from './pages/MyOrders'
 import Orders from "./pages/admin/Orders"
 import AdminHome from "./pages/admin/Home"
 import Home from "./pages/Home"
+import InstagramProfile from "./pages/InstagramProfile"
 
 import Order from "./pages/admin/Order"
 import Privacy from "./pages/policies/Privacy"
@@ -26,6 +27,8 @@ import VerifyGamificationCode from "./pages/VerifyGamificationCode"
 import MyGamificationCodes from "./pages/MyGamificationCodes"
 
 import RankingScore from "./pages/RankingScore"
+import MyInstagramProfileSimulations from "./pages/MyInstagramProfileSimulations"
+import CreateInstagramProfileSimulation from "./pages/CreateInstagramProfileSimulation"
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -83,6 +86,11 @@ function Routes() {
 
         <Route exact path="/" component={Home} />
         <Route exact path="/menu" component={CustomMenu} />
+
+        <Route exact path="/simulations/instagram" component={MyInstagramProfileSimulations} />
+        <Route exact path="/simulations/instagram/:id" component={InstagramProfile} />
+        <Route exact path="/simulations/new/instagram" component={CreateInstagramProfileSimulation} />
+
 
         <Route exact path="/resetPassword" component={ResetPassword} />
         <Route exact path="/resetPassword/email/:email/token/:token" component={ResetPasswordValidate} />

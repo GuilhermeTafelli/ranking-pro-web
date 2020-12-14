@@ -1,22 +1,22 @@
 .dropbtn {
     border: none;
     cursor: pointer;
-    height: auto;
-    width: auto;
+    vertical-align: middle;
     background-color: #FFF;
-    padding: 0px;
   }
   
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: flex;
     align-items: center;
+    vertical-align: middle;
 }
   
 .dropDownContent {
   display: none;
   position: absolute;
   right: 0;
+  top: 60px;
   background-color: #f9f9f9;
   border-radius: 10px;
   min-width: 160px;

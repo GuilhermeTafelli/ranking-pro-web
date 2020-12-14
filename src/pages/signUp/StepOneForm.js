@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import { Form } from '@unform/web';
 import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from '../../components/input/CustomInput'
-import CustomInputAdornment from '../../components/input/CustomInputAdornment'
 import CustomSelect from '../../components/input/CustomSelect'
 import InputMask from 'react-input-mask'
 import IconButton from '@material-ui/core/IconButton'

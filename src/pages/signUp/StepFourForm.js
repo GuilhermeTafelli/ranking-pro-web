@@ -161,7 +161,7 @@ export default function StepFourForm() {
                 </Grid>
                 <Grid container item className={classes.input} xs={12}>
                     <Grid item xs={12}>
-                        <h2 className={classes.inputTitle}>Quais são suas habiliades?</h2>
+                        <h2 className={classes.inputTitle}>Quais são suas habilidades?</h2>
                     </Grid>
                     <Grid container item className={classes.inputSkillsContainer}>
                         <Grid item>

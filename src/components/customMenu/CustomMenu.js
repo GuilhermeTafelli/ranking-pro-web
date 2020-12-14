@@ -16,6 +16,8 @@ import history from '../../history'
 import { useSelector, useDispatch } from 'react-redux'
 import HomeIcon from '../../static/home.svg'
 import RankIcon from '../../static/rank.svg'
+import ToolsIcon from '../../static/tools.svg'
+
 import ClassIcon from '../../static/class.svg'
 import ForumIcon from '../../static/forum.svg'
 
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     menuItemContainer: {
-        alignItems: "center"
+        alignItems: "center",
     },
     menuItemText: {
         fontSize: "18px",
@@ -116,9 +118,13 @@ const useStyles = makeStyles((theme) => ({
         height: "60px",
         width: "60px",
         borderRadius: "21px",
+        verticalAlign: "middle"
     },
     containerAuthMobile: {
         padding: "20px"
+    },
+    icons: {
+        verticalAlign: "middle"
     }
 }));
 
@@ -209,6 +215,11 @@ export default function CustomMenu() {
                     <ListItemIcon><img src={ForumIcon} /></ListItemIcon>
                     <ListItemText primary="Forúm" />
                 </ListItem>
+
+                <ListItem className={classes.menuListItem} button onClick={() => history.push("/forum")} key="Menu">
+                    <ListItemIcon><img src={ToolsIcon} /></ListItemIcon>
+                    <ListItemText primary="Simulador de Perfil do Instagram" />
+                </ListItem>
             </List>
             <Divider />
         </SwipeableDrawer>
@@ -237,7 +248,7 @@ export default function CustomMenu() {
                             <a className={classes.menuItem} href="/">
                                 <Grid container spacing={1} className={classes.menuItemContainer}>
                                     <Grid item>
-                                        <img src={HomeIcon} />
+                                        <img className={classes.icon} src={HomeIcon} />
                                     </Grid>
                                     <Grid item>
                                         <p className={classes.menuItemText}>Home</p>
@@ -248,7 +259,7 @@ export default function CustomMenu() {
                             <a className={classes.menuItem} href="/class">
                                 <Grid container spacing={1} className={classes.menuItemContainer}>
                                     <Grid item>
-                                        <img src={ClassIcon} />
+                                        <img className={classes.icon} src={ClassIcon} />
                                     </Grid>
                                     <Grid item>
                                         <p className={classes.menuItemText}>Cursos</p>
@@ -257,26 +268,25 @@ export default function CustomMenu() {
                                 </Grid>
                             </a>
                             <div className="dropdown" style={{ float: "right" }}>
-
                                 <div className="dropbtn">
-                                <a className={classes.menuItem} href="/ranking/score">
-                                <Grid container spacing={1} className={classes.menuItemContainer}>
-                                    <Grid item>
-                                        <img src={RankIcon} />
-                                    </Grid>
-                                    <Grid item>
-                                        <p className={classes.menuItemText}>Rank</p>
-                                    </Grid>
+                                    <a className={classes.menuItem} href="/ranking/score">
+                                        <Grid container spacing={1} className={classes.menuItemContainer}>
+                                            <Grid item>
+                                                <img src={RankIcon} />
+                                            </Grid>
+                                            <Grid item>
+                                                <p className={classes.menuItemText}>Rank</p>
+                                            </Grid>
 
-                                </Grid>
-                            </a>
+                                        </Grid>
+                                    </a>
                                 </div>
                                 <div className="dropDownContent">
                                     {/* <a href="/ranking">Social Media</a> */}
                                     <a href="/ranking/score">Maratona</a>
                                 </div>
                             </div>
-                           
+
                             <a className={classes.menuItem} href="/forum">
                                 <Grid container spacing={1} className={classes.menuItemContainer}>
                                     <Grid item>
@@ -285,9 +295,26 @@ export default function CustomMenu() {
                                     <Grid item>
                                         <p className={classes.menuItemText}>Forúm</p>
                                     </Grid>
-
                                 </Grid>
                             </a>
+                            <div className="dropdown" style={{ float: "right" }}>
+
+                                <div className="dropbtn">
+                                    <a className={classes.menuItem} href="/ranking/score">
+                                        <Grid container spacing={1} className={classes.menuItemContainer}>
+                                            <Grid item>
+                                                <img src={ToolsIcon} />
+                                            </Grid>
+                                            <Grid item>
+                                                <p className={classes.menuItemText}>Ferramentas</p>
+                                            </Grid>
+                                        </Grid>
+                                    </a>
+                                </div>
+                                <div className="dropDownContent">
+                                    <a href="/simulations/instagram">Simular Perfil do Instagram</a>
+                                </div>
+                            </div>
                         </Grid>
 
                         {!isAuth &&

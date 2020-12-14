@@ -69,7 +69,10 @@ const useStyles = makeStyles((theme) => ({
         border: "none",
         padding: "10px 15px",
         boxShadow: "0 0 6px rgba(0, 0, 0, 0.09)",
-        textDecoration: "none"
+        textDecoration: "none",
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "15px",
+        },
     },
     titleContainer: {
         justifyContent: "space-between",
@@ -119,9 +122,6 @@ export default function Ranking() {
                         <Grid container item className={classes.orderItem} xs={12}>
                             <Grid item xs={3}>
                                 <p className={classes.text}>{item.code}</p>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <p className={classes.status}>{item.score+" pontos"}</p>
                             </Grid>
                         </Grid>
                     ))}

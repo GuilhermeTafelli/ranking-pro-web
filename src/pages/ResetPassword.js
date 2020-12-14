@@ -172,7 +172,6 @@ export default function ResetPassword() {
 			setSuccess(true)
 
 		} catch (err) {
-			console.log(err.e)
 			const validationErrors = {};
 			if (err instanceof Yup.ValidationError) {
 				err.inner.forEach(error => {
