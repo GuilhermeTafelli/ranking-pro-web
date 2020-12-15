@@ -15,7 +15,9 @@ import Badge from '@material-ui/core/Badge'
 import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar'
 import FileInput from '../components/input/FileInput'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import CustomMenu from '../components/customMenu/CustomMenu'
+
 const useStyles = makeStyles((theme) => ({
     main: {
         background: "#F5F6FA",
@@ -109,21 +111,28 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateInstagramProfileSimulation() {
 
     const classes = useStyles()
-    const formRef = useRef(null);
-    const [type, setType] = useState(null)
-    const [file, setFile] = React.useState(null);
+    const formRef = useRef(null)
+    const [file, setFile] = useState(null)
+    const [submitLoading, setSubmitLoading] = useState(false);
     const [highlights1, setHighlights1] = useState(null)
     const [highlights2, setHighlights2] = useState(null)
     const [highlights3, setHighlights3] = useState(null)
     const [highlights4, setHighlights4] = useState(null)
 
+    function validateFileSize(file) {
+        if (!file) return false
+        if (file.size > 5000000) return false
+        else return true
+    }
+
     async function handleSubmit(data) {
 
         try {
 
+            setSubmitLoading(true)
             formRef.current.setErrors({});
 
-            const validateFile = data.foto ? Yup.mixed().test("foto", "O arquivo deve conter no máximo 2MB", validateFileSize) : Yup.mixed().required()
+            const validateFile = data.foto ? Yup.mixed().test("foto", "O arquivo deve conter no máximo 5MB", validateFileSize) : Yup.mixed().required()
             const schema = Yup.object().shape({
                 foto: validateFile,
                 "nome da simulação": Yup.string().required(),
@@ -134,17 +143,16 @@ export default function CreateInstagramProfileSimulation() {
                 bio: Yup.string().required(),
             });
 
-
             await schema.validate(data, {
                 abortEarly: false,
             });
 
             var highlights = []
 
-            const profilePhotoBase64 =  await fileToBase64(data.foto)
+            const profilePhotoBase64 = await fileToBase64(data.foto)
 
-            if(data["destaque 1"]){
-                const highlights1PhotoBase64 =  await fileToBase64(data["destaque 1"])
+            if (data["destaque 1"]) {
+                const highlights1PhotoBase64 = await fileToBase64(data["destaque 1"])
                 highlights.push(
                     {
                         image: highlights1PhotoBase64,
@@ -152,8 +160,8 @@ export default function CreateInstagramProfileSimulation() {
                     }
                 )
             }
-            if(data["destaque 2"]){
-                const highlights2PhotoBase64 =  await fileToBase64(data["destaque 2"])
+            if (data["destaque 2"]) {
+                const highlights2PhotoBase64 = await fileToBase64(data["destaque 2"])
                 highlights.push(
                     {
                         image: highlights2PhotoBase64,
@@ -161,8 +169,8 @@ export default function CreateInstagramProfileSimulation() {
                     }
                 )
             }
-            if(data["destaque 3"]){
-                const highlights3PhotoBase64 =  await fileToBase64(data["destaque 3"])
+            if (data["destaque 3"]) {
+                const highlights3PhotoBase64 = await fileToBase64(data["destaque 3"])
                 highlights.push(
                     {
                         image: highlights3PhotoBase64,
@@ -170,8 +178,8 @@ export default function CreateInstagramProfileSimulation() {
                     }
                 )
             }
-            if(data["destaque 4"]){
-                const highlights4PhotoBase64 =  await fileToBase64(data["destaque 4"])
+            if (data["destaque 4"]) {
+                const highlights4PhotoBase64 = await fileToBase64(data["destaque 4"])
                 highlights.push(
                     {
                         image: highlights4PhotoBase64,
@@ -194,7 +202,7 @@ export default function CreateInstagramProfileSimulation() {
 
             const response = await api.post("/social-medias/instagram/simulations", request)
 
-            history.push("/simulations/instagram/"+response.data.id)
+            history.push("/simulations/instagram/" + response.data.id)
         } catch (err) {
             const validationErrors = {};
             if (err instanceof Yup.ValidationError) {
@@ -204,6 +212,8 @@ export default function CreateInstagramProfileSimulation() {
                 formRef.current.setErrors(validationErrors);
             }
         }
+
+        setSubmitLoading(false)
     }
 
     const handleChange = function loadFile(event) {
@@ -237,15 +247,11 @@ export default function CreateInstagramProfileSimulation() {
         }
     }
 
-    function validateFileSize(file) {
-        if (!file) return false
-        if (file.size > 5000000) return false
-        else return true
-    }
+
 
     return (
         <React.Fragment>
-            <CustomMenu/>
+            <CustomMenu />
             <div className={classes.main}>
                 <Grid container className={classes.mainContainer} md={4}>
                     <Grid item>
@@ -451,7 +457,7 @@ export default function CreateInstagramProfileSimulation() {
                                     label="Título do Destaque 4"
                                 />
                             </Grid>
-                            
+
                         </Grid>
                         <Grid container item className={classes.buttonsContainer}>
                             <Grid item>
@@ -459,7 +465,8 @@ export default function CreateInstagramProfileSimulation() {
                                     type="submit"
                                     className={classes.submit}
                                 >
-                                    Simular
+                                    {!submitLoading && "Simular"}
+                                    {submitLoading && <CircularProgress color="inherit" />}
                                 </button>
                             </Grid>
                         </Grid>

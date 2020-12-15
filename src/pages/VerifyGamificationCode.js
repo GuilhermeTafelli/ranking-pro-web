@@ -9,6 +9,8 @@ import history from '../history'
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '../components/Alert'
 import CustomMenu from '../components/customMenu/CustomMenu';
+import CircularProgress from '@material-ui/core/CircularProgress'
+
 const useStyles = makeStyles((theme) => ({
     main: {
         background: "#F5F6FA",
@@ -128,6 +130,7 @@ export default function VerifyGamificationCode() {
     const formRef = useRef(null);
     const [alert, setAlert] = useState(initalAlert);
     const [success, setSuccess] = useState(false);
+    const [submitLoading, setSubmitLoading] = useState(false);
 
     const handleAlertClose = (event, reason) => {
 
@@ -155,6 +158,7 @@ export default function VerifyGamificationCode() {
     async function handleSubmit(data) {
 
         try {
+            submitLoading(true)
 
             formRef.current.setErrors({});
 
@@ -190,8 +194,8 @@ export default function VerifyGamificationCode() {
             if (err.response) {
                 if (err.response.data && err.response.data.code == "GAMIFICATION_CODE_ALREDY_REGISTERED") handleAlertOpen("Senha já registrada!")
             }
-
         }
+        submitLoading(false)
     }
 
     return (
@@ -223,7 +227,8 @@ export default function VerifyGamificationCode() {
                                     type="submit"
                                     className={classes.submit}
                                 >
-                                    Validar
+                                    {!submitLoading && "Validar"}
+                                    {submitLoading && <CircularProgress color="inherit" />}
                                 </button>
                             </Grid>
                         </Grid>
@@ -250,7 +255,7 @@ export default function VerifyGamificationCode() {
                                     className={classes.newCode}
                                     onClick={handleNewCode}
                                 >
-                                Nova senha
+                                    Nova senha
                                 </button>
                             </Grid>
                             <Grid item>

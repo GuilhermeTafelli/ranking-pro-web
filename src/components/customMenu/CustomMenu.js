@@ -300,7 +300,7 @@ export default function CustomMenu() {
                             <div className="dropdown" style={{ float: "right" }}>
 
                                 <div className="dropbtn">
-                                    <a className={classes.menuItem} href="/ranking/score">
+                                    <a className={classes.menuItem} href="/simulations/instagram">
                                         <Grid container spacing={1} className={classes.menuItemContainer}>
                                             <Grid item>
                                                 <img src={ToolsIcon} />
