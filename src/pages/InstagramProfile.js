@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     },
     mainContainer: {
         justifyContent: "flex-start",
-        width: "320px",
+        width: "330px",
         background: "#fafafa",
         padding: "10px 10px 10px 10px",
         borderRadius: "5px",
