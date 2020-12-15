@@ -87,9 +87,9 @@ function Routes() {
         <Route exact path="/" component={Home} />
         <Route exact path="/menu" component={CustomMenu} />
 
-        <Route exact path="/simulations/instagram" component={MyInstagramProfileSimulations} />
-        <Route exact path="/simulations/instagram/:id" component={InstagramProfile} />
-        <Route exact path="/simulations/new/instagram" component={CreateInstagramProfileSimulation} />
+        <PrivateRoute exact path="/simulations/instagram" component={MyInstagramProfileSimulations} />
+        <PrivateRoute exact path="/simulations/instagram/:id" component={InstagramProfile} />
+        <PrivateRoute exact path="/simulations/new/instagram" component={CreateInstagramProfileSimulation} />
 
 
         <Route exact path="/resetPassword" component={ResetPassword} />
