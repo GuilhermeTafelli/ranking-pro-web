@@ -158,7 +158,7 @@ export default function VerifyGamificationCode() {
     async function handleSubmit(data) {
 
         try {
-            submitLoading(true)
+            setSubmitLoading(true)
 
             formRef.current.setErrors({});
 
