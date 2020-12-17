@@ -195,7 +195,7 @@ export default function VerifyGamificationCode() {
                 if (err.response.data && err.response.data.code == "GAMIFICATION_CODE_ALREDY_REGISTERED") handleAlertOpen("Senha já registrada!")
             }
         }
-        submitLoading(false)
+        setSubmitLoading(false)
     }
 
     return (
