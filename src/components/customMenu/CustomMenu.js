@@ -334,7 +334,7 @@ export default function CustomMenu() {
                                 <div className="dropDownContent">
                                     {/* <a>Perfil</a> */}
                                     {/* <a href="/orders">Solicitações</a> */}
-                                    <a href="/gamification/code">Minhas senhas</a>
+                                    <a href="/new/gamification/code">Minhas senhas</a>
                                     <a onClick={handleSessionClick}>Sair</a>
                                 </div>
                             </div>

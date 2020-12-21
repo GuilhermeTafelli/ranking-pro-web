@@ -111,7 +111,7 @@ export default function Ranking() {
                         </Grid>
                         <Grid item>
                                 <a
-                                    href="/verify/gamification/code"
+                                    href="/new/verify/gamification/code"
                                     className={classes.submit}
                                 >
                                     Validar Senha
