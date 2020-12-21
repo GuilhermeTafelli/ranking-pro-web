@@ -3,10 +3,6 @@ import { Form } from '@unform/web';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
-import * as Yup from 'yup';
-import api from '../../services/Api'
-import { setUser, login } from '../../services/Auth'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import CheckboxInput from '../../components/input/CheckboxInput'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
