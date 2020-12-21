@@ -100,9 +100,9 @@ function Routes() {
 
         <Route exact path="/signUp" component={SignUp} />
         <PrivateRoute exact path="/orders" component={MyOrders} />
-        <PrivateRoute exact path="/gamification/code" component={MyGamificationCodes} />
-
-        <PrivateRoute exact path="/verify/gamification/code" component={VerifyGamificationCode} />
+        
+        <PrivateRoute exact path="/new/gamification/code" component={MyGamificationCodes} />
+        <PrivateRoute exact path="/new/verify/gamification/code" component={VerifyGamificationCode} />
 
         <PrivateRoute exact path="/submitOrder" component={SubmitOrder} />
         <PrivateRoute exact path="/mentoria3ls" component={RegisterOnEvent} />
