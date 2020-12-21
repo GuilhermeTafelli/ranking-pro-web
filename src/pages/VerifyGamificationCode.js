@@ -261,7 +261,7 @@ export default function VerifyGamificationCode() {
                             <Grid item>
                                 <button
                                     type="submit"
-                                    onClick={() => history.push("/gamification/code")}
+                                    onClick={() => history.push("/new/gamification/code")}
                                     className={classes.myCodes}
                                 >
                                     Minhas senhas
